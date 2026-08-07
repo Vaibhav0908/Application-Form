@@ -1,0 +1,312 @@
+body {
+    background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
+    font-family: "Segoe UI", sans-serif;
+}
+
+.form-card {
+    background: rgb(239, 239, 239);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.main-container {
+    margin: 40px auto;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.section-title {
+    color: #667eea;
+    font-weight: 700;
+    border-left: 5px solid #667eea;
+    padding-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    height: 35px;
+}
+
+textarea.form-control {
+    height: 100px;
+}
+
+.form-date{
+    border-radius: 10px;
+    height: 35px;
+    border: none;
+    padding: 5px;
+}
+
+.upload-box {
+    border: 2px dashed #667eea;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 50px;
+    background: #667eea;
+    color: white;
+    border: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #4d6bf2;
+    transform: translateY(-3px);
+}
+
+.add-more {
+    padding: 15px;
+    border: none;
+    transition: 0.3s;
+    border-radius: 50px;
+}
+
+.add-more:hover {
+    background: #4d6bf2;
+    transform: translateY(-3px);
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #111827;
+    color: white;
+    position: fixed;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin: 15px 0;
+}
+
+.menu a {
+    color: #cbd5e1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #2563eb;
+    color: white;
+}
+
+.menu i {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+
+.main {
+    margin-left: 250px;
+    width: 100%;
+}
+
+
+.navbar {
+    background: white;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.search {
+    width: 300px;
+}
+
+.search input {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    background: #f1f5f9;
+    border-radius: 8px;
+    outline: none;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 15px;
+}
+
+.profile img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+
+.content {
+    padding: 30px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* .card {
+    background: white;
+    padding: 25px;
+    height: 180px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+} */
+
+
+
+.card {
+    background: #fff;
+    padding: 25px;
+    height: 180px;
+    width: 100%;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(13, 110, 253, 0.2);
+}
+
+.select-card:hover{
+    box-shadow: 0 20px 40px rgb(40, 152, 81, 0.2);
+}
+
+.reject-card:hover{
+    box-shadow: 0 20px 40px rgb(239, 68, 68, 0.2);
+}
+
+.pending-card:hover{
+    box-shadow: 0 20px 40px rgb(245, 158, 11, 0.2);
+}
+
+.card h3 {
+    color: #64748b;
+    font-size: 16px;
+}
+
+.card h2 {
+    margin-top: 15px;
+    color: #111827;
+}
+
+.icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.blue {
+    background: #2563eb;
+}
+.green {
+    background: #16a34a;
+}
+.orange {
+    background: #f59e0b;
+}
+.red {
+    background: #ef4444;
+}
+
+.table-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    height: 300px;
+    overflow: scroll;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background: #b2d5f8;
+}
+
+tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.status {
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: white;
+    font-size: 13px;
+}
+
+.table-heading {
+    top: -20px;
+    position: sticky;
+}
+
+h2 {
+    font-weight: bolder;
+}

@@ -272,8 +272,8 @@ textarea.form-control {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    height: 300px;
-    overflow: scroll;
+    /* height: 300px; */
+    /* overflow: scroll; */
 }
 
 table {

@@ -27,6 +27,18 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('candidates', 'total_candi', 'total_pendings', 'total_selections', 'total_rejections'));
     }
 
+    public function applications()
+    {
+        $candidates = Candidate::with([
+            'familyDetails',
+            'educationDetails',
+            'professionalDetails',
+            'officeworkDetails'
+        ])->get();
+
+        return view('applications', compact('candidates'));
+    }
+
     public function showCandidate($id)
     {
         $candidate = Candidate::with([

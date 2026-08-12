@@ -100,7 +100,7 @@
                                             class="status bg-success">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
                                     </td>
 
-                                    @elseif (optional($candidate->officeworkDetails)->interview_status == 'On Hold')
+                                @elseif (optional($candidate->officeworkDetails)->interview_status == 'On Hold')
                                     <td><span
                                             class="status bg-dark">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
                                     </td>
@@ -313,7 +313,7 @@
             </div>
 
             <div class="card-body p-4">
-                @if (!$candidate->officeworkDetails || empty($candidate->officeworkDetails->interview_status) || $candidate->officeworkDetails->interview_status == "Pending")
+                @if (!$candidate->officeworkDetails || empty($candidate->officeworkDetails->interview_status) || $candidate->officeworkDetails->interview_status == "Pending" || $candidate->officeworkDetails->interview_status == "On Hold")
                         <form action="{{ route('office.form', $candidate->id) }}" method="POST">
                             @csrf
                             <div class="row g-4">
@@ -447,7 +447,13 @@
                                             <option>Pending</option>
                                             <option>Select</option>
                                             <option>Reject</option>
-                                            <option>On Hold</option>
+                                            <option>Hold</option>
+                                            <option>OnBording</option>
+                                            <option>Virtual Round</option>
+                                            <option>Face To Face Interview</option>
+                                            <option>First Round</option>
+                                            <option>Second Round</option>
+                                            <option>Final Round</option>
                                         </select>
                                     </div>
                                     <div class="">

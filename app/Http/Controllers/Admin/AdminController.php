@@ -16,7 +16,7 @@ class AdminController extends Controller
             'educationDetails',
             'professionalDetails',
             'officeworkDetails'
-        ])->latest()->get();
+        ])->get();
 
         $total_candi = Candidate::count();
 
@@ -34,7 +34,7 @@ class AdminController extends Controller
             'educationDetails',
             'professionalDetails',
             'officeworkDetails'
-        ])->get();
+        ])->latest()->get();
 
         return view('applications', compact('candidates'));
     }

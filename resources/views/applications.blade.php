@@ -5,6 +5,7 @@
     <div class="table-box">
         <table>
             <tr class="table-heading">
+                <th>Sr. No.</th>
                 <th>Name</th>
                 <th>Role/Position</th>
                 <th>Status</th>
@@ -15,6 +16,7 @@
             <div class="candidate-details">
                 @foreach ($candidates as $cand)
                     <tr>
+                        <td>{{ $cand->id }}</td>
                         <td>
                             <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank" style="text-decoration: dotted;">
                                 {{ $cand->full_name }}
@@ -36,7 +38,7 @@
                                 </td>
                             @endif
                         @else
-                            <td><span class="status pending">Pending</span></td>
+                            <td><span class="status bg-warning">Pending</span></td>
                         @endif
 
 

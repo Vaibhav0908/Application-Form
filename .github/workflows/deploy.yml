@@ -8,16 +8,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Get latest code
         uses: actions/checkout@v4
 
       - name: Deploy to InfinityFree
-        uses: airvzxf/ftp-deployment-action@v2
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: "./"
-          remote_dir: "/htdocs/"
-          ftp_ssl_allow: "true"
-          ssl_verify_certificate: "false"
+
+          server-dir: /htdocs/
+
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.env
+            **/node_modules/**
+            **/vendor/**
+            storage/app/public/documents/** 

@@ -1,0 +1,29 @@
+name: Deploy Laravel to InfinityFree
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test FTP deployment
+        uses: airvzxf/ftp-deployment-action@v2
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+
+          local_dir: "./"
+          remote_dir: "/htdocs/"
+
+          ftp_ssl_allow: "true"
+
+          exclude: ".git/**,.github/**,.env,storage/app/public/documents/**"
+          exclude_delete: ".env,storage/app/public/documents/**"
+
+          dry_run: "true"

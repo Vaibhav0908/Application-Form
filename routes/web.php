@@ -25,6 +25,9 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/Applications', [AdminController::class, 'applications'])
         ->name('applications');
 
+    Route::get('/Employees', [AdminController::class, 'employees'])
+        ->name('employee');
+
     Route::get('/admin/candidate/{id}', [AdminController::class, 'showCandidate'])
         ->name('admin.candidate.show');
 

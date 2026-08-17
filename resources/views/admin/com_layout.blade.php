@@ -114,7 +114,7 @@
                             </li>
 
                             <li>
-                                <a href="#">
+                                <a href="{{ route('employee') }}">
                                     <i class="bi bi-person-vcard"></i>
                                     <span>Employees</span>
                                 </a>
@@ -136,14 +136,14 @@
                             </li>
 
                             <li>
-                                <a href="#">
+                                <a href="" data-bs-toggle="modal" data-bs-target="#settingsModal">
                                     <i class="bi bi-gear"></i>
                                     <span>Settings</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{ route('admin.logout') }}">
+                                <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
                                     <i class="bi bi-box-arrow-right"></i>
                                     <span>Logout</span>
                                 </a>
@@ -157,7 +157,7 @@
             </div>
 
             <div class="col-md-10 m-0 p-0">
-                <div class="col-md-12 m-0 p-0">
+                <div class="col-md-12 m-0 p-0 sticky-top">
 
                     <div class="navbar d-flex justify-content-space-between">
 
@@ -187,8 +187,123 @@
         </div>
 
     </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">
+                        <i class="bi bi-gear me-2"></i>
+                        Settings
+                    </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="list-group">
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-person me-2"></i>
+                            Profile Settings
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-key me-2"></i>
+                            Change Password
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-palette me-2"></i>
+                            Appearance
+                            <select name="" id="" class="form-select">
+                                <option value="">Ligh</option>
+                                <option value="">Dark</option>
+                            </select>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+                    </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    Are you sure, you want to Log Out?
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <a href="{{ route('admin.logout') }}" class="btn btn-success">
+
+                        <span>Yes</span>
+                    </a>
+
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        No
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+        menuToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("show");
+            sidebarOverlay.classList.toggle("show");
+        });
+
+        sidebarOverlay.addEventListener("click", function () {
+            sidebar.classList.remove("show");
+            sidebarOverlay.classList.remove("show");
+        });
+    </script>
 </body>
 
 </html>

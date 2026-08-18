@@ -57,6 +57,6 @@ class Candidate extends Model
 
     public function officeworkDetails(): HasOne
     {
-        return $this->hasOne(Office_useDetail::class, 'candidate_id');
+        return $this->hasOne(Office_useDetail::class, 'candidate_id')->latestOfMany();
     }
 }

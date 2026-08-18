@@ -100,7 +100,7 @@
                                             class="status bg-success">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
                                     </td>
 
-                                @elseif (optional($candidate->officeworkDetails)->interview_status == 'On Hold')
+                                @elseif (optional($candidate->officeworkDetails)->interview_status == 'Hold')
                                     <td><span
                                             class="status bg-dark">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
                                     </td>
@@ -313,8 +313,7 @@
             </div>
 
             <div class="card-body p-4">
-                @if (!$candidate->officeworkDetails || empty($candidate->officeworkDetails->interview_status) || $candidate->officeworkDetails->interview_status == "Pending" || $candidate->officeworkDetails->interview_status == "On Hold")
-                        <form action="{{ route('office.form', $candidate->id) }}" method="POST">
+                <!-- <form action="{{ route('office.form', $candidate->id) }}" method="POST">
                             @csrf
                             <div class="row g-4">
                                 <div class="col-md-6">
@@ -350,6 +349,7 @@
                                             <option>Poor</option>
                                         </select>
                                     </div>
+
                                     <div class="mb-3">
                                         <label class="form-label fw-semibold">Interpersonal Skill</label>
                                         <select class="form-select" name="interpersonal_skill">
@@ -485,95 +485,305 @@
                             Save Evaluation
                         </button>
                     </div>
-                    </form>
+                    </form> -->
 
-                @else
-                <div class="row g-4">
 
-                    <div class="col-md-6">
+                @php
+                    $office = $candidate->officeworkDetails;
+                @endphp
 
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Experience Rating</label>
-                            <span>{{ optional($candidate->officeworkDetails)->experience_rating }}</span>
+                <form action="{{ route('office.form', $candidate->id) }}" method="POST">
+                    @csrf
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Experience Rating</label>
+                                <select class="form-select" name="experience_rating" required>
+                                    <option value="" disabled {{ !$office?->experience_rating ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+
+                                    <option value="Excellent" {{ $office?->experience_rating == 'Excellent' ? 'selected' : '' }}>
+                                        Excellent
+                                    </option>
+
+                                    <option value="Good" {{ $office?->experience_rating == 'Good' ? 'selected' : '' }}>
+                                        Good
+                                    </option>
+
+                                    <option value="Average" {{ $office?->experience_rating == 'Average' ? 'selected' : '' }}>
+                                        Average
+                                    </option>
+
+                                    <option value="Poor" {{ $office?->experience_rating == 'Poor' ? 'selected' : '' }}>
+                                        Poor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Communication Skill</label>
+                                <select class="form-select" name="communication_skills" required>
+                                    <option value="" disabled {{ !$office?->communication_skills ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+
+                                    <option value="Excellent" {{ $office?->communication_skills == 'Excellent' ? 'selected' : '' }}>
+                                        Excellent
+                                    </option>
+
+                                    <option value="Good" {{ $office?->communication_skills == 'Good' ? 'selected' : '' }}>
+                                        Good
+                                    </option>
+
+                                    <option value="Average" {{ $office?->communication_skills == 'Average' ? 'selected' : '' }}>
+                                        Average
+                                    </option>
+
+                                    <option value="Poor" {{ $office?->communication_skills == 'Poor' ? 'selected' : '' }}>
+                                        Poor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Computer Skill</label>
+                                <select class="form-select" name="computer_skills" required>
+                                    <option value="" disabled {{ !$office?->computer_skills ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+                                    <option value="Excellent" {{ $office?->computer_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->computer_skills == 'Good' ? 'selected' : '' }}>Good
+                                    </option>
+                                    <option value="Average" {{ $office?->computer_skills == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->computer_skills == 'Poor' ? 'selected' : '' }}>Poor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Interpersonal Skill</label>
+                                <select class="form-select" name="interpersonal_skill" required>
+                                    <option value="" disabled {{ !$office?->interpersonal_skill ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+                                    <option value="Excellent" {{ $office?->interpersonal_skill == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->interpersonal_skill == 'Good' ? 'selected' : '' }}>
+                                        Good
+                                    </option>
+                                    <option value="Average" {{ $office?->interpersonal_skill == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->interpersonal_skill == 'Poor' ? 'selected' : '' }}>
+                                        Poor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Learning Ability</label>
+                                <select class="form-select" name="learning_ability" required>
+                                    <option value="" disabled {{ !$office?->learning_ability ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+                                    <option value="Excellent" {{ $office?->learning_ability == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->learning_ability == 'Good' ? 'selected' : '' }}>Good
+                                    </option>
+                                    <option value="Average" {{ $office?->learning_ability == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->learning_ability == 'Poor' ? 'selected' : '' }}>Poor
+                                    </option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Communication Skill</label>
-                            <span>{{ optional($candidate->officeworkDetails)->communication_skills }}</span>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Presentation Skill</label>
+                                <select class="form-select" name="presentation_skill" required>
+                                    <option value="" disabled {{ !$office?->presentation_skill ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+                                    <option value="Excellent" {{ $office?->presentation_skill == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->presentation_skill == 'Good' ? 'selected' : '' }}>
+                                        Good
+                                    </option>
+                                    <option value="Average" {{ $office?->presentation_skill == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->presentation_skill == 'Poor' ? 'selected' : '' }}>
+                                        Poor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Technical Skill</label>
+                                <select class="form-select" name="technical_skill" required>
+                                    <option value="" disabled {{ !$office?->technical_skill ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+                                    <option value="Excellent" {{ $office?->technical_skill == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->technical_skill == 'Good' ? 'selected' : '' }}>Good
+                                    </option>
+                                    <option value="Average" {{ $office?->technical_skill == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->technical_skill == 'Poor' ? 'selected' : '' }}>Poor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Attitude</label>
+                                <select class="form-select" name="attitude" required>
+                                    <option value="" disabled {{ !$office?->attitude ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+                                    <option value="Excellent" {{ $office?->attitude == 'Excellent' ? 'selected' : '' }}>
+                                        Excellent</option>
+                                    <option value="Good" {{ $office?->attitude == 'Good' ? 'selected' : '' }}>Good
+                                    </option>
+                                    <option value="Average" {{ $office?->attitude == 'Average' ? 'selected' : '' }}>
+                                        Average</option>
+                                    <option value="Poor" {{ $office?->attitude == 'Poor' ? 'selected' : '' }}>Poor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Confidence</label>
+                                <select class="form-select" name="confidence" required>
+                                    <option value="" disabled {{ !$office?->confidence ? 'selected' : '' }}>
+                                        Select Rating
+                                    </option>
+                                    <option value="Excellent" {{ $office?->confidence == 'Excellent' ? 'selected' : '' }}>
+                                        Excellent</option>
+                                    <option value="Good" {{ $office?->confidence == 'Good' ? 'selected' : '' }}>Good
+                                    </option>
+                                    <option value="Average" {{ $office?->confidence == 'Average' ? 'selected' : '' }}>
+                                        Average</option>
+                                    <option value="Poor" {{ $office?->confidence == 'Poor' ? 'selected' : '' }}>Poor
+                                    </option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Computer Skill</label>
-                            <span>{{ optional($candidate->officeworkDetails)->computer_skills }}</span>
+                        <hr class="p-1">
+
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Interview Date</label>
+                                <input type="date" class="form-control" value="{{ $office?->interview_date }}"
+                                    name="interview_date" required>
+                            </div>
+
+                            <div class="">
+                                <label class="form-label fw-semibold">Interviewed By</label>
+                                <select class="form-select" name="interviewed_by" required>
+                                    <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
+                                        Select Interviewer
+                                    </option>
+
+                                    <option value="Swati Mam" {{ $office?->interviewed_by == 'Swati Mam' ? 'selected' : '' }}>
+                                        Swati Mam
+                                    </option>
+
+                                    <option value="Sneha Mam" {{ $office?->interviewed_by == 'Sneha Mam' ? 'selected' : '' }}>
+                                        Sneha Mam
+                                    </option>
+
+                                    <option value="Akriti Mam" {{ $office?->interviewed_by == 'Akriti Mam' ? 'selected' : '' }}>
+                                        Akriti Mam
+                                    </option>
+
+                                    <option value="Diksha Mam" {{ $office?->interviewed_by == 'Diksha Mam' ? 'selected' : '' }}>
+                                        Diksha Mam
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Interview Status</label>
+                                <select class="form-select" name="interview_status" required>
+
+                                    <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
+                                        Select Status
+                                    </option>
+
+                                    <option value="Pending" {{ $office?->interview_status == 'Pending' ? 'selected' : '' }}>
+                                        Pending
+                                    </option>
+
+                                    <option value="Select" {{ $office?->interview_status == 'Select' ? 'selected' : '' }}>
+                                        Select
+                                    </option>
+
+                                    <option value="Reject" {{ $office?->interview_status == 'Reject' ? 'selected' : '' }}>
+                                        Reject
+                                    </option>
+
+                                    <option value="Hold" {{ $office?->interview_status == 'Hold' ? 'selected' : '' }}>
+                                        Hold
+                                    </option>
+
+                                    <option value="OnBording" {{ $office?->interview_status == 'OnBording' ? 'selected' : '' }}>
+                                        OnBording
+                                    </option>
+
+                                    <option value="Virtual Round" {{ $office?->interview_status == 'Virtual Round' ? 'selected' : '' }}>
+                                        Virtual Round
+                                    </option>
+
+                                    <option value="Face To Face Interview" {{ $office?->interview_status == 'Face To Face Interview' ? 'selected' : '' }}>
+                                        Face To Face Interview
+                                    </option>
+
+                                    <option value="First Round" {{ $office?->interview_status == 'First Round' ? 'selected' : '' }}>
+                                        First Round
+                                    </option>
+
+                                    <option value="Second Round" {{ $office?->interview_status == 'Second Round' ? 'selected' : '' }}>
+                                        Second Round
+                                    </option>
+
+                                    <option value="Final Round" {{ $office?->interview_status == 'Final Round' ? 'selected' : '' }}>
+                                        Final Round
+                                    </option>
+
+                                </select>
+                            </div>
+                            <div class="">
+                                <label class="form-label fw-semibold">Salary Offered</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control" name="salary_offered"
+                                        placeholder="Enter Salary" value="{{ $office?->salary_offered }}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Interview Remarks</label>
+                                <textarea class="form-control" rows="4" name="interview_remarks"
+                                    placeholder="Enter interview remarks..." required>{{ $office?->interview_remarks }}</textarea>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Interpersonal Skill</label>
-                            <span>{{ optional($candidate->officeworkDetails)->interpersonal_skills }}</span>
-                        </div>
+                        <div class="text-end p-2">
+                            <button type="reset" class="btn btn-outline-secondary px-4">
+                                Reset
+                            </button>
 
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Learning Ability</label>
-                            <span>{{ optional($candidate->officeworkDetails)->learning_ability }}</span>
+                            <button type="submit" class="btn btn-primary px-4 ms-2">
+                                <i class="bi bi-check-circle me-1"></i>
+                                Save Evaluation
+                            </button>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Interview Date</label>
-                            <span>{{ optional($candidate->officeworkDetails)->interview_date }}</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Interview Status</label>
-                            <span>{{ optional($candidate->officeworkDetails)->interview_status }}</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Salary Offered</label>
-                            <span>{{ optional($candidate->officeworkDetails)->salary_offered }}</span>
-                        </div>
-
                     </div>
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Presentation Skill</label>
-                            <span>{{  optional($candidate->officeworkDetails)->presentation_skills }}</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Technical Skill</label>
-                            <span>{{  optional($candidate->officeworkDetails)->technical_skills }}</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Attitude</label>
-                            <span>{{  optional($candidate->officeworkDetails)->attitude }}</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Confidence</label>
-                            <span>{{  optional($candidate->officeworkDetails)->confidence }}</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Interviewed By</label>
-                            <span>{{  optional($candidate->officeworkDetails)->interviewed_by }}</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Interview Remarks</label>
-                            <span>{{  optional($candidate->officeworkDetails)->interview_remarks }}</span>
-                        </div>
-                    </div>
-                </div>
-            @endif
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="alert alert-info m-0" role="alert">
-        <i class="bi bi-info-circle me-2"></i>
-        Please fill in all evaluation details carefully before submitting the office work assessment form.
-    </div>
+        <div class="alert alert-info m-0" role="alert">
+            <i class="bi bi-info-circle me-2"></i>
+            Please fill in all evaluation details carefully before submitting the office work assessment form.
+        </div>
 
 </body>
 

@@ -114,7 +114,8 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('employee') }}">
+                                <a href="{{ route('employee') }}"
+                                    class="{{ request()->routeIs('employee') ? 'active' : '' }}">
                                     <i class="bi bi-person-vcard"></i>
                                     <span>Employees</span>
                                 </a>

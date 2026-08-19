@@ -1,6 +1,10 @@
 name: Deploy Laravel to InfinityFree
 
 on:
+  push:
+    branches:
+      - main
+
   workflow_dispatch:
 
 jobs:
@@ -27,4 +31,4 @@ jobs:
             **/.env
             **/node_modules/**
             **/vendor/**
-            storage/app/public/documents/** 
+            storage/app/public/documents/**

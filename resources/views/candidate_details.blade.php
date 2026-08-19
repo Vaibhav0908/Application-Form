@@ -348,7 +348,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Communication Skill</label>
-                                <select class="form-select" name="communication_skills" required>
+                                <select class="form-select" name="communication_skill" required>
                                     <option value="" disabled {{ !$office?->communication_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -373,7 +373,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Computer Skill</label>
-                                <select class="form-select" name="computer_skills" required>
+                                <select class="form-select" name="computer_skill" required>
                                     <option value="" disabled {{ !$office?->computer_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -389,15 +389,15 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interpersonal Skill</label>
                                 <select class="form-select" name="interpersonal_skill" required>
-                                    <option value="" disabled {{ !$office?->interpersonal_skill ? 'selected' : '' }}>
+                                    <option value="" disabled {{ !$office?->interpersonal_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
-                                    <option value="Excellent" {{ $office?->interpersonal_skill == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->interpersonal_skill == 'Good' ? 'selected' : '' }}>
+                                    <option value="Excellent" {{ $office?->interpersonal_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->interpersonal_skills == 'Good' ? 'selected' : '' }}>
                                         Good
                                     </option>
-                                    <option value="Average" {{ $office?->interpersonal_skill == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->interpersonal_skill == 'Poor' ? 'selected' : '' }}>
+                                    <option value="Average" {{ $office?->interpersonal_skills == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->interpersonal_skills == 'Poor' ? 'selected' : '' }}>
                                         Poor
                                     </option>
                                 </select>
@@ -423,15 +423,15 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Presentation Skill</label>
                                 <select class="form-select" name="presentation_skill" required>
-                                    <option value="" disabled {{ !$office?->presentation_skill ? 'selected' : '' }}>
+                                    <option value="" disabled {{ !$office?->presentation_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
-                                    <option value="Excellent" {{ $office?->presentation_skill == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->presentation_skill == 'Good' ? 'selected' : '' }}>
+                                    <option value="Excellent" {{ $office?->presentation_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->presentation_skills == 'Good' ? 'selected' : '' }}>
                                         Good
                                     </option>
-                                    <option value="Average" {{ $office?->presentation_skill == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->presentation_skill == 'Poor' ? 'selected' : '' }}>
+                                    <option value="Average" {{ $office?->presentation_skills == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->presentation_skills == 'Poor' ? 'selected' : '' }}>
                                         Poor
                                     </option>
                                 </select>
@@ -440,14 +440,14 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Technical Skill</label>
                                 <select class="form-select" name="technical_skill" required>
-                                    <option value="" disabled {{ !$office?->technical_skill ? 'selected' : '' }}>
+                                    <option value="" disabled {{ !$office?->technical_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
-                                    <option value="Excellent" {{ $office?->technical_skill == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->technical_skill == 'Good' ? 'selected' : '' }}>Good
+                                    <option value="Excellent" {{ $office?->technical_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
+                                    <option value="Good" {{ $office?->technical_skills == 'Good' ? 'selected' : '' }}>Good
                                     </option>
-                                    <option value="Average" {{ $office?->technical_skill == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->technical_skill == 'Poor' ? 'selected' : '' }}>Poor
+                                    <option value="Average" {{ $office?->technical_skills == 'Average' ? 'selected' : '' }}>Average</option>
+                                    <option value="Poor" {{ $office?->technical_skills == 'Poor' ? 'selected' : '' }}>Poor
                                     </option>
                                 </select>
                             </div>
@@ -499,7 +499,7 @@
 
                             <div class="">
                                 <label class="form-label fw-semibold">Interviewed By</label>
-                                <select class="form-select" name="interviewed_by" required>
+                                <select class="form-select" name="interview_by" required>
                                     <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
                                         Select Interviewer
                                     </option>

@@ -30,7 +30,6 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <span>Interview for the position<sup class="text-danger">*</sup>
-                            <!-- <input type="text" name="designation" class="form-control" /></span> -->
                             <select name="designation" class="form-control" required>
                                 <option selected disabled>--Please Select--</option>
                                 <option>Frontend Developer</option>
@@ -51,13 +50,19 @@
 
                     <div class="col-md-6 mb-3">
                         <label>Refrence<sup class="text-danger">*</sup></label>
-                        <input type="text" name="refrence" class="form-control" pattern="[a-zA-Z. ]+" required />
+                         <select name="refrence" class="form-control" required>
+                            <option selected disabled>--Please Select--</option>
+                                @foreach ($recruiters as $rec)
+                                    <option value="{{ $rec->id }}">{{ $rec->name }}</option>
+                                @endforeach
+                                <option value="last">NA</option>
+                         </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label>Where You Found Us<sup class="text-danger">*</sup></label><br>
                         <select class="form-control" name="platforms" required>
-                            <option>--Please Select--</option>
+                            <option selected disabled>--Please Select--</option>
                             <option>Walking</option>
                             <option>Linkedeen</option>
                             <option>Naukri</option>
@@ -108,7 +113,7 @@
                         <label>Gender<sup class="text-danger">*</sup></label>
 
                         <select class="form-select" name="gender" required>
-                            <option>Select</option>
+                            <option selected disabled>--Please Select--</option>
                             <option>Male</option>
                             <option>Female</option>
                         </select>
@@ -118,7 +123,7 @@
                         <label>Marrital Status<sup class="text-danger">*</sup></label>
 
                         <select class="form-control" name="marrital_status" required>
-                            <option>--Please Select--</option>
+                            <option selected disabled>--Please Select--</option>
                             <option>Married</option>
                             <option>Unmarried</option>
                             <option>Single</option>
@@ -129,13 +134,13 @@
                     <div class="col-md-3 mb-3">
                         <label>City<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="city" class="form-control" pattern="[a-zA-Z. ]+" required />
+                        <input type="text" name="city" placeholder="Enter your city" class="form-control" pattern="[a-zA-Z. ]+" required />
                     </div>
 
                     <div class="col-md-3 mb-3">
                         <label>State<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="state" class="form-control" pattern="[a-zA-Z. ]+" required />
+                        <input type="text" name="state" placeholder="Enter your State" class="form-control" pattern="[a-zA-Z. ]+" required />
                     </div>
 
                     <div class="col-md-2 mb-3">
@@ -149,7 +154,7 @@
 
                         <!-- <input type="text" name="nationality" class="form-control" /> -->
                         <select class="form-control" name="nationality" required>
-                            <option>--Please Select--</option>
+                            <option selected disabled>--Please Select--</option>
                             <option>Indian</option>
                             <option>Overseas</option>
                         </select>
@@ -193,7 +198,7 @@
 
                             <!-- <input type="text" name="relation[]" class="form-control" /> -->
                             <select name="relation[]" class="form-control" required>
-                                <option>--Please Select--</option>
+                                <option selected disabled>--Please Select--</option>
                                 <option>Father</option>
                                 <option>Mother</option>
                                 <option>Brother</option>
@@ -255,7 +260,7 @@
 
                             <!-- <input type="number" name="passing_year[]" class="form-control" /> -->
                             <select name="passing_year[]" class="form-control" required>
-                                <option>--Please Select--</option>
+                                <option selected disabled>--Please Select--</option>
                                 <option>2026</option>
                                 <option>2025</option>
                                 <option>2024</option>
@@ -351,7 +356,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Will You Able To Relocate<sup class="text-danger">*</sup></label>
                         <select name="relocate" class="form-control" required>
-                            <option>--Please Select--</option>
+                            <option selected disabled>--Please Select--</option>
                             <option>Yes</option>
                             <option>No</option>
                             <option>Planning To Relocate</option>
@@ -375,7 +380,7 @@
 
                         <!-- <input type="text" placeholder="days" name="notice_period" class="form-control" /> -->
                         <select name="notice_period" class="form-control" required>
-                            <option>--Please Select--</option>
+                            <option selected disabled>--Please Select--</option>
                             <option>Immadiate Joiner</option>
                             <option>15 Days</option>
                             <option>1 Month</option>

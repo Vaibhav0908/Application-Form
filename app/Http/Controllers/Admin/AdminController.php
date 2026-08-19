@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\Office_useDetail;
+use App\Models\RecruiterDetail;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -70,5 +71,12 @@ class AdminController extends Controller
         ])->get();
 
         return view('employees', compact('employee'));
+    }
+
+    public function showControl()
+    {
+        $recruiter = RecruiterDetail::all();
+
+        return view('admin.control_panel', compact('recruiter'));
     }
 }

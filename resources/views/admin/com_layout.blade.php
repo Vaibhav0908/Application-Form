@@ -33,59 +33,8 @@
     <div class="container-fluid m-0 p-0">
         <div class="row m-0 p-0">
             <div class="col-2 m-0 p-0" style="z-index: 100;">
-
-                <!-- <div class="sidebar d-none d-md-block">
-
-                    <div class="logo">AdminPanel</div>
-
-                    <ul class="menu">
-                        <li>
-                            <a href="{{ route('admin.dashboard') }}" class="active"><i
-                                    class="bi bi-grid"></i>Dashboard</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="bi bi-people"></i>Users</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="bi bi-person-vcard"></i>Employees</a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('applications') }}"><i
-                                    class="bi bi-file-earmark-text"></i>Applications</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="bi bi-bar-chart"></i>Reports</a>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="bi bi-gear"></i>Settings</a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('admin.logout') }}"><i class="bi bi-box-arrow-right"></i>Logout</a>
-                        </li>
-                    </ul>
-                </div> -->
-
-                <!-- Mobile Navbar -->
-                <!-- <div class="mobile-navbar d-md-none">
-                    <div class="mobile-logo">
-                        AdminPanel
-                    </div>
-
-                    <button class="menu-toggle" id="menuToggle">
-                        <i class="bi bi-list"></i>
-                    </button>
-                </div> -->
-
-
                 <!-- Sidebar Overlay (Mobile) -->
                 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
 
                 <!-- Sidebar -->
                 <div class="sidebar-wrapper">
@@ -107,9 +56,10 @@
                             </li>
 
                             <li>
-                                <a href="#">
+                                <a href="{{ route('control_panel') }}" 
+                                class="{{ request()->routeIs('control_panel') ? 'active' : '' }}">
                                     <i class="bi bi-people"></i>
-                                    <span>Users</span>
+                                    <span>Control Panel</span>
                                 </a>
                             </li>
 

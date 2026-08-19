@@ -6,9 +6,13 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Office\OfficeworkController;
 use App\Http\Controllers\Admin\AdminAuthController;
 
+use App\Models\RecruiterDetail;
+
 Route::get('/', function () {
-    return view('index');
+    $recruiters = RecruiterDetail::where('status', 'Active')->get();
+    return view('index', compact('recruiters'));
 })->name('form');
+
 
 Route::post('/Applicant_details', [CandidateController::class, 'store'])
     ->name('candidate.store');
@@ -27,6 +31,9 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::get('/Employees', [AdminController::class, 'employees'])
         ->name('employee');
+
+    Route::get('/control_panel', [AdminController::class, 'showControl'])
+        ->name('control_panel');
 
     Route::get('/admin/candidate/{id}', [AdminController::class, 'showCandidate'])
         ->name('admin.candidate.show');

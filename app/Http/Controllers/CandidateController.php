@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Candidate;
 use App\Models\educationDetail;
 use App\Models\FamilyDetail;
-use App\Models\Office_useDetail;
 use App\Models\ProfessionalDetail;
+use App\Models\RecruiterDetail;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller

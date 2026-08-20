@@ -29,11 +29,6 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/Applications', [AdminController::class, 'applications'])
         ->name('applications');
 
-        Route::get('/', function () {
-    $recruiters = RecruiterDetail::where('status', 'Active')->get();
-    return view('index', compact('recruiters'));
-})->name('form');
-
     Route::get('/Employees', [AdminController::class, 'employees'])
         ->name('employee');
 

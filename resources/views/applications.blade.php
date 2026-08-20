@@ -18,7 +18,8 @@
                     <tr>
                         <td>{{ $cand->id }}</td>
                         <td>
-                            <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank" style="text-decoration: dotted;">
+                            <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
+                                style="text-decoration: dotted;">
                                 {{ $cand->full_name }}
                             </a>
                         </td>
@@ -43,9 +44,14 @@
 
 
                         <td>
-                            <p class="border border-muted rounded p-1 small">
-                                {{ optional($cand->officeworkDetails)->interview_remarks }}
-                            </p>
+                            @if (optional($cand->officeworkDetails)->interview_remarks != "")
+                                <p class="border border-muted rounded p-1 small">
+                                    {{ optional($cand->officeworkDetails)->interview_remarks }}
+                                </p>
+                                @else
+                                <p>NA</p>
+                            @endif
+
                         </td>
                         <td>{{$cand->reference_name}}</td>
                     </tr>

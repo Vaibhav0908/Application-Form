@@ -12,4 +12,8 @@ class RecruiterDetail extends Model
         'password',
         'status',
     ];
+
+    protected $hidden = [
+        'password',
+    ];
 }

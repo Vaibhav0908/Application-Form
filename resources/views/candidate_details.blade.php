@@ -111,19 +111,7 @@
                                 @endif
 
                             @else
-                                @if ($candidate->status == 'Pending')
-                                    <span class="badge bg-warning">
-                                        {{ ucfirst($candidate->status) }}
-                                    </span>
-                                @elseif($candidate->status == 'Select')
-                                    <span class="badge bg-success">
-                                        {{ ucfirst($candidate->status) }}
-                                    </span>
-                                @else
-                                    <span class="badge bg-danger">
-                                        {{ ucfirst($candidate->status) }}
-                                    </span>
-                                @endif
+                                <span class="status bg-warning">Pending</span>
                             @endif
                         </p>
                     </div>
@@ -292,7 +280,7 @@
                         <div class="col-md-6">
                             <p><strong>Salary/CTC:</strong> {{ $prof->salary_ctc }}</p>
                             <p><strong>Duration:</strong>
-                                {{ $prof->working_start_date }} - {{ $prof->working_end_date }}
+                                <span class="bg-white"> {{ $prof->working_start_date }}</span> - <span class="bg-white">{{ $prof->working_end_date }}</span>
                             </p>
                         </div>
                     </div>
@@ -503,22 +491,11 @@
                                     <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
                                         Select Interviewer
                                     </option>
-
-                                    <option value="Swati Mam" {{ $office?->interviewed_by == 'Swati Mam' ? 'selected' : '' }}>
-                                        Swati Mam
-                                    </option>
-
-                                    <option value="Sneha Mam" {{ $office?->interviewed_by == 'Sneha Mam' ? 'selected' : '' }}>
-                                        Sneha Mam
-                                    </option>
-
-                                    <option value="Akriti Mam" {{ $office?->interviewed_by == 'Akriti Mam' ? 'selected' : '' }}>
-                                        Akriti Mam
-                                    </option>
-
-                                    <option value="Diksha Mam" {{ $office?->interviewed_by == 'Diksha Mam' ? 'selected' : '' }}>
-                                        Diksha Mam
-                                    </option>
+                                    @foreach ($recruiters as $rec)
+                                        <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
+                                            {{ $rec->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -586,7 +563,8 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interview Remarks</label>
                                 <textarea class="form-control" rows="4" name="interview_remarks"
-                                    placeholder="Enter interview remarks..." required>{{ $office?->interview_remarks }}</textarea>
+                                    placeholder="Enter interview remarks..."
+                                    required>{{ $office?->interview_remarks }}</textarea>
                             </div>
                         </div>
 

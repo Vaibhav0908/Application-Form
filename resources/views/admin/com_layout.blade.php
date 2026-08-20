@@ -199,27 +199,19 @@
 
     <!-- Logout Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-
         <div class="modal-dialog modal-dialog-centered">
-
             <div class="modal-content">
-
                 <div class="modal-header">
                     <h5 class="modal-title" id="settingsModalLabel">
                         <i class="bi bi-box-arrow-right"></i>
                         Logout
                     </h5>
-
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-
                 <div class="modal-body">
-
                     Are you sure, you want to Log Out?
-
                 </div>
-
                 <div class="modal-footer">
 
                     <a href="{{ route('admin.logout') }}" class="btn btn-success">
@@ -230,14 +222,11 @@
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         No
                     </button>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script>

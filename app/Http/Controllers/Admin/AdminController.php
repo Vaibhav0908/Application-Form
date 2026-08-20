@@ -7,6 +7,7 @@ use App\Models\Candidate;
 use App\Models\Office_useDetail;
 use App\Models\RecruiterDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -55,10 +56,12 @@ class AdminController extends Controller
             'familyDetails',
             'educationDetails',
             'professionalDetails',
-            'officeworkDetails'
+            'officeworkDetails',
         ])->findOrFail($id);
 
-        return view('candidate_details', compact('candidate'));
+        $recruiters = RecruiterDetail::where('status', 'Active')->get();
+
+        return view('candidate_details', compact('candidate', 'recruiters'));
     }
 
     public function employees()
@@ -78,5 +81,16 @@ class AdminController extends Controller
         $recruiter = RecruiterDetail::all();
 
         return view('admin.control_panel', compact('recruiter'));
+    }
+
+    public function recruiter(Request $request)
+    {
+        RecruiterDetail::updateOrCreate([
+            'name' => $request->rec_name,
+            'email' => $request->rec_email,
+            'password' => $request->rec_password,
+            'status' => $request->rec_status
+        ]);
+        return redirect()->back()->with('success', 'Recruiter Data Added Successfully.');
     }
 }

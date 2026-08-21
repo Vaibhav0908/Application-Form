@@ -12,6 +12,31 @@
 </head>
 
 <body>
+    @if (session('success'))
+        <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">
+            {{ session('success') }}
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @elseif($errors->any())
+        <div id="errorAlert" class="alert alert-danger position-fixed top-0 end-0 z-3 m-3">
+
+            {{ $errors->first() }}
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert">
+            </button>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container main-container">
         <div class="header">
             <h1 class="">
@@ -50,13 +75,13 @@
 
                     <div class="col-md-6 mb-3">
                         <label>Refrence<sup class="text-danger">*</sup></label>
-                         <select name="refrence" class="form-control" required>
+                        <select name="refrence" class="form-control" required>
                             <option selected disabled>--Please Select--</option>
-                                @foreach ($recruiters as $rec)
-                                    <option value="{{ $rec->id }}">{{ $rec->name }}</option>
-                                @endforeach
-                                <option value="last">NA</option>
-                         </select>
+                            @foreach ($recruiters as $rec)
+                                <option value="{{ $rec->name }}">{{ $rec->name }}</option>
+                            @endforeach
+                            <option value="NA">NA</option>
+                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -134,13 +159,15 @@
                     <div class="col-md-3 mb-3">
                         <label>City<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="city" placeholder="Enter your city" class="form-control" pattern="[a-zA-Z. ]+" required />
+                        <input type="text" name="city" placeholder="Enter your city" class="form-control"
+                            pattern="[a-zA-Z. ]+" required />
                     </div>
 
                     <div class="col-md-3 mb-3">
                         <label>State<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="state" placeholder="Enter your State" class="form-control" pattern="[a-zA-Z. ]+" required />
+                        <input type="text" name="state" placeholder="Enter your State" class="form-control"
+                            pattern="[a-zA-Z. ]+" required />
                     </div>
 
                     <div class="col-md-2 mb-3">
@@ -474,6 +501,16 @@
 
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('successAlert')?.remove();
+        }, 5000);
+
+        setTimeout(() => {
+            document.getElementById('errorAlert')?.remove();
+        }, 5000);
+    </script>
 </body>
 
 </html>

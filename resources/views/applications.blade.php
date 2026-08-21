@@ -11,6 +11,8 @@
                 <th>Status</th>
                 <th>Remarks</th>
                 <th>HR</th>
+                <th>Created At</th>
+                <th>Last Update</th>
             </tr>
 
             <div class="candidate-details">
@@ -48,12 +50,31 @@
                                 <p class="border border-muted rounded p-1 small">
                                     {{ optional($cand->officeworkDetails)->interview_remarks }}
                                 </p>
-                                @else
+                            @else
                                 <p>NA</p>
                             @endif
 
                         </td>
-                        <td>{{$cand->reference_name}}</td>
+
+                        <td>
+                            @if ($cand->reference_name != "NA")
+                                {{$cand->reference_name}}
+                            @elseif($cand->reference_name == "NA" && optional($cand->officeworkDetails)->interviewed_by != "")
+                                {{ optional($cand->officeworkDetails)->interviewed_by }}
+                                @else
+                                NA
+                            @endif
+                        </td>
+
+                        <td>{{$cand->created_at}}</td>
+
+                        <td>
+                            @if (optional($cand->officeworkDetails)->updated_at != "")
+                                {{ optional($cand->officeworkDetails)->updated_at }}
+                            @else
+                                <p>NA</p>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </div>

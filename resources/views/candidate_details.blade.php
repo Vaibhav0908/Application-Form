@@ -49,6 +49,20 @@
 <body>
     <div class="container py-4">
 
+     @if (session('success'))
+            <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">
+                {{ session('success') }}
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <script>
+                setTimeout(() => {
+                    document.getElementById('successAlert')?.remove();
+                }, 5000);
+            </script>
+        @endif
+
         <div class="card shadow border-0 mb-4">
             <div class="card-header bg-primary text-white ">
                 <div class="row">
@@ -280,7 +294,8 @@
                         <div class="col-md-6">
                             <p><strong>Salary/CTC:</strong> {{ $prof->salary_ctc }}</p>
                             <p><strong>Duration:</strong>
-                                <span class="bg-white"> {{ $prof->working_start_date }}</span> - <span class="bg-white">{{ $prof->working_end_date }}</span>
+                                <span class="bg-white"> {{ $prof->working_start_date }}</span> - <span
+                                    class="bg-white">{{ $prof->working_end_date }}</span>
                             </p>
                         </div>
                     </div>
@@ -311,7 +326,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Experience Rating</label>
-                                <select class="form-select" name="experience_rating" required>
+                                <select class="form-select" name="experience_rating">
                                     <option value="" disabled {{ !$office?->experience_rating ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -336,7 +351,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Communication Skill</label>
-                                <select class="form-select" name="communication_skill" required>
+                                <select class="form-select" name="communication_skill">
                                     <option value="" disabled {{ !$office?->communication_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -361,7 +376,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Computer Skill</label>
-                                <select class="form-select" name="computer_skill" required>
+                                <select class="form-select" name="computer_skill">
                                     <option value="" disabled {{ !$office?->computer_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -376,7 +391,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interpersonal Skill</label>
-                                <select class="form-select" name="interpersonal_skill" required>
+                                <select class="form-select" name="interpersonal_skill">
                                     <option value="" disabled {{ !$office?->interpersonal_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -393,7 +408,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Learning Ability</label>
-                                <select class="form-select" name="learning_ability" required>
+                                <select class="form-select" name="learning_ability">
                                     <option value="" disabled {{ !$office?->learning_ability ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -410,7 +425,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Presentation Skill</label>
-                                <select class="form-select" name="presentation_skill" required>
+                                <select class="form-select" name="presentation_skill">
                                     <option value="" disabled {{ !$office?->presentation_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -427,7 +442,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Technical Skill</label>
-                                <select class="form-select" name="technical_skill" required>
+                                <select class="form-select" name="technical_skill">
                                     <option value="" disabled {{ !$office?->technical_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -442,7 +457,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Attitude</label>
-                                <select class="form-select" name="attitude" required>
+                                <select class="form-select" name="attitude">
                                     <option value="" disabled {{ !$office?->attitude ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -459,7 +474,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Confidence</label>
-                                <select class="form-select" name="confidence" required>
+                                <select class="form-select" name="confidence">
                                     <option value="" disabled {{ !$office?->confidence ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -482,12 +497,12 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interview Date</label>
                                 <input type="date" class="form-control" value="{{ $office?->interview_date }}"
-                                    name="interview_date" required>
+                                    name="interview_date">
                             </div>
 
                             <div class="">
                                 <label class="form-label fw-semibold">Interviewed By</label>
-                                <select class="form-select" name="interview_by" required>
+                                <select class="form-select" name="interview_by">
                                     <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
                                         Select Interviewer
                                     </option>
@@ -502,7 +517,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interview Status</label>
-                                <select class="form-select" name="interview_status" required>
+                                <select class="form-select" name="interview_status">
 
                                     <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
                                         Select Status
@@ -555,7 +570,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text">₹</span>
                                     <input type="number" class="form-control" name="salary_offered"
-                                        placeholder="Enter Salary" value="{{ $office?->salary_offered }}" required>
+                                        placeholder="Enter Salary" value="{{ $office?->salary_offered }}">
                                 </div>
                             </div>
                         </div>
@@ -563,8 +578,7 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interview Remarks</label>
                                 <textarea class="form-control" rows="4" name="interview_remarks"
-                                    placeholder="Enter interview remarks..."
-                                    required>{{ $office?->interview_remarks }}</textarea>
+                                    placeholder="Enter interview remarks...">{{ $office?->interview_remarks }}</textarea>
                             </div>
                         </div>
 

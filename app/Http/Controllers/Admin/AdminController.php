@@ -22,7 +22,10 @@ class AdminController extends Controller
 
         $total_candi = Candidate::count();
 
-        $total_pendings = Office_useDetail::where('interview_status', 'Pending')->count();
+        $total_office_status = Office_useDetail::distinct('candidate_id')->count('candidate_id');
+        $total_candidates = Candidate::count();
+        $total_pendings = $total_candidates - $total_office_status;
+
         $total_selections = Office_useDetail::where('interview_status', 'Select')->count();
         $total_rejections = Office_useDetail::where('interview_status', 'Reject')->count();
         $total_hold = Office_useDetail::where('interview_status', 'Hold')->count();
@@ -33,9 +36,23 @@ class AdminController extends Controller
         $total_sec_r = Office_useDetail::where('interview_status', 'Second Round')->count();
         $total_final_r = Office_useDetail::where('interview_status', 'Final Round')->count();
 
-        return view('admin.dashboard', 
-        compact('candidates', 'total_candi', 'total_pendings', 'total_selections', 'total_rejections', 'total_hold', 
-        'total_on_board', 'total_virtuals', 'total_f_t_f', 'total_first_r', 'total_sec_r', 'total_final_r'));
+        return view(
+            'admin.dashboard',
+            compact(
+                'candidates',
+                'total_candi',
+                'total_pendings',
+                'total_selections',
+                'total_rejections',
+                'total_hold',
+                'total_on_board',
+                'total_virtuals',
+                'total_f_t_f',
+                'total_first_r',
+                'total_sec_r',
+                'total_final_r'
+            )
+        );
     }
 
     public function applications()
@@ -85,12 +102,27 @@ class AdminController extends Controller
 
     public function recruiter(Request $request)
     {
-        RecruiterDetail::updateOrCreate([
-            'name' => $request->rec_name,
-            'email' => $request->rec_email,
-            'password' => $request->rec_password,
-            'status' => $request->rec_status
+        $request->validate([
+            'rec_name' => 'required|string|max:255',
+            'rec_email' => 'required|email',
+            'rec_password' => 'required',
+            'rec_status' => 'required|in:Active,Deactive',
         ]);
-        return redirect()->back()->with('success', 'Recruiter Data Added Successfully.');
+
+        RecruiterDetail::updateOrCreate(
+            [
+                'email' => $request->rec_email,
+            ],
+            [
+                'name' => $request->rec_name,
+                'password' => $request->rec_password,
+                'status' => $request->rec_status,
+            ]
+        );
+
+        return redirect()->back()->with(
+            'success',
+            'Recruiter Data Saved Successfully.'
+        );
     }
 }

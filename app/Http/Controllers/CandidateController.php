@@ -12,13 +12,21 @@ class CandidateController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'passport' => 'required|mimes:jpg,jpeg,png|max:2048',
-            'resume' => 'required|mimes:pdf|max:2048',
-            'aadhar' => 'required|mimes:jpg,jpeg,pdf|max:2048',
-            'degree' => 'required|mimes:jpg,jpeg,pdf|max:2048',
-            'passbook' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
-        ]);
+        $request->validate(
+            [
+                'passport' => 'required|mimes:jpg,jpeg,png|max:2048',
+                'resume' => 'required|mimes:pdf|max:2048',
+                'aadhar' => 'required|mimes:jpg,jpeg,pdf|max:2048',
+                'degree' => 'required|mimes:jpg,jpeg,pdf|max:2048',
+                'passbook' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
+            ],
+            [
+                'email' => 'required|email|unique:candidates,email',
+            ],
+            [
+                'email.unique' => 'This email is already used.',
+            ]
+        );
         $candidate = Candidate::create([
             'full_name' => $request->candidate_name,
             'email' => $request->email,

@@ -44,7 +44,7 @@ textarea.form-control {
     height: 100px;
 }
 
-.form-date{
+.form-date {
     border-radius: 10px;
     height: 35px;
     border: none;
@@ -174,7 +174,6 @@ textarea.form-control {
     border-radius: 50%;
 }
 
-
 .content {
     padding: 30px;
     width: 100%;
@@ -203,19 +202,19 @@ textarea.form-control {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-.appl_card:hover{
+.appl_card:hover {
     box-shadow: 0 20px 40px rgba(13, 110, 253, 0.2);
 }
 
-.select-card:hover{
+.select-card:hover {
     box-shadow: 0 20px 40px rgb(40, 152, 81, 0.2);
 }
 
-.reject-card:hover{
+.reject-card:hover {
     box-shadow: 0 20px 40px rgb(239, 68, 68, 0.2);
 }
 
-.pending-card:hover{
+.pending-card:hover {
     box-shadow: 0 20px 40px rgb(245, 158, 11, 0.2);
 }
 
@@ -241,26 +240,29 @@ textarea.form-control {
     margin-bottom: 20px;
 }
 
-
 .table-box {
     background: white;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     height: 575px;
-    overflow: scroll;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 table {
     width: 100%;
+    min-width: 1000px;
     border-collapse: collapse;
 }
 
 th,
 td {
     padding: 15px;
-    text-align: left;
+    white-space: nowrap;
 }
+
 
 th {
     background: #b2d5f8;
@@ -286,25 +288,11 @@ h2 {
     font-weight: bolder;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 /* ================================
    SIDEBAR
 ================================ */
 
-
-
 .sidebar {
-    
     background: #212529;
     color: #fff;
     padding: 20px 10px;
@@ -353,7 +341,6 @@ h2 {
     min-width: 20px;
 }
 
-
 /* ================================
    MOBILE NAVBAR
 ================================ */
@@ -387,29 +374,23 @@ h2 {
     cursor: pointer;
 }
 
-
 /* ================================
    SIDEBAR OVERLAY
 ================================ */
 
 .sidebar-overlay {
     display: none;
-
     position: fixed;
     inset: 0;
-
     background: rgba(0, 0, 0, 0.5);
-
     z-index: 1090;
 }
-
 
 /* ================================
    TABLET
 ================================ */
 
 @media (max-width: 991.98px) and (min-width: 768px) {
-
     .sidebar-wrapper {
         width: 22%;
     }
@@ -428,33 +409,25 @@ h2 {
         font-size: 14px;
         gap: 8px;
     }
-
 }
-
 
 /* ================================
    MOBILE
 ================================ */
 
 @media (max-width: 767.98px) {
-
     .sidebar-wrapper {
         width: 0;
     }
 
     .sidebar {
         position: fixed;
-
         top: 0;
         left: -280px;
-
         width: 260px;
         height: 100vh;
-
         z-index: 1100;
-
         transition: left 0.3s ease;
-
         overflow-y: auto;
     }
 
@@ -465,5 +438,4 @@ h2 {
     .sidebar-overlay.show {
         display: block;
     }
-
 }

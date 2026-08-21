@@ -8,7 +8,22 @@
 </style>
 
 @section('content')
-    <div class="row align-items-center mt-5 mx-4 mx-md-5">
+
+    @if (session('success'))
+        <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">
+            {{ session('success') }}
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <script>
+            setTimeout(() => {
+                document.getElementById('successAlert')?.remove();
+            }, 5000);
+        </script>
+    @endif
+
+    <div class="row align-items-center py-1 mt-5 mx-4 mx-md-5">
         <div class="col-12 col-md-6">
             <h2 class="text-primary fw-bold mb-0">
                 Recruiters Panel
@@ -58,7 +73,7 @@
                             <td><span class="status bg-success">{{$rec->status}}</span></td>
                         @elseif($rec->status == "Deactive")
                             <td><span class="status bg-danger">{{$rec->status}}</span></td>
-                            @else
+                        @else
                             <td><span class="">{{$rec->status}}</span></td>
                         @endif
 
@@ -76,7 +91,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="settingsModalLabel">
-                        <!-- <i class="bi bi-box-arrow-right"></i> -->
                         Fill the HR Details
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -85,16 +99,15 @@
                 <div class="modal-body">
                     <form action="{{ route("recruiter_save") }}" method="post">
                         @csrf
-                        <label for="">Name</label>
+                        <label for="">Name: </label>
                         <input type="text" name="rec_name" class="form-control" required>
-                        <label for="">Email</label>
+                        <label for="">Email: </label>
                         <input type="email" name="rec_email" class="form-control" required>
-                        <label for="">Password</label>
+                        <label for="">Password: </label>
                         <input type="password" name="rec_password" class="form-control" required>
-                        <label for="">Status</label>
-                        <input type="radio" name="rec_status" value="Active">Active
-                        <input type="radio" name="rec_status" value="Deactive">Deactive
-
+                        <label for="">Status: </label> <br>
+                        <input type="radio" name="rec_status" value="Active"><span class="text-primary">Active</span>
+                        <input type="radio" name="rec_status" value="Deactive"><span class="text-danger">Deactive</span>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">
@@ -108,6 +121,9 @@
             </div>
         </div>
     </div>
+
+
+
 
 
 

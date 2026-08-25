@@ -5,6 +5,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Office\OfficeworkController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Recruiter\RecruiterAuthController;
 use App\Models\Interview_status;
 use App\Models\Nation;
 use App\Models\Platform;
@@ -29,9 +30,12 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])
     ->name('admin.login.submit');
 
 // recruiter login logout
-Route::get('/recruiters/login', function () {
-    return view('recruiters.login');
-})->name('recruiter.login');
+Route::get('/recruiters/login', [RecruiterAuthController::class, 'showLogin'])
+    ->name('recruiter.login');
+
+Route::post('/recruiters/login', [RecruiterAuthController::class, 'login'])
+    ->name('recruiter.login.submit');
+
 
 // admin dashboard candidate-details office work
 Route::middleware('admin.auth')->group(function () {
@@ -64,6 +68,9 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::get('/admin/logout', [AdminAuthController::class, 'logout'])
         ->name('admin.logout');
+
+    Route::get('/recruiter/logout', [RecruiterAuthController::class, 'logout'])
+        ->name('recruiter.logout');
 
     Route::post('/admin/candidate/{id}/office-work', [OfficeworkController::class, 'store'])
         ->name('office.form');

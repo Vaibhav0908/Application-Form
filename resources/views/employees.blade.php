@@ -13,14 +13,31 @@
             </tr>
             <div class="candidate-details">
                 @foreach ($employee as $emp)
-                    @if (optional($emp->officeworkDetails)->interview_status == 'Select')
-                        <tr>
-                            <td>{{ $emp->id }}</td>
-                            <td>{{ $emp->full_name }}</td>
-                            <td>{{ $emp->applicant_designation }}</td>
-                            <td><span class="bg-success status">{{ optional($emp->officeworkDetails)->interview_status }}</span></td>
-                        </tr>
-                    @endif
+                        @if ($emp->reference_name == "NA" ? optional($emp->officeworkDetails)->interviewed_by == session('recruiter_name') : $emp->reference_name == session('recruiter_name'))
+                            @if (optional($emp->officeworkDetails)->interview_status == 'Select')
+                                <tr>
+                                    <td>{{ $emp->id }}</td>
+                                    <td>{{ $emp->full_name }}</td>
+                                    <td>{{ $emp->applicant_designation }}</td>
+                                    <td>
+                                        <span class="bg-success status">{{ optional($emp->officeworkDetails)->interview_status }}</span>
+                                    </td>
+                                </tr>
+
+                            @endif
+                        
+                        @elseif(session('admin_username'))
+                            @if (optional($emp->officeworkDetails)->interview_status == 'Select')
+                                <tr>
+                                    <td>{{ $emp->id }}</td>
+                                    <td>{{ $emp->full_name }}</td>
+                                    <td>{{ $emp->applicant_designation }}</td>
+                                    <td>
+                                        <span class="bg-success status">{{ optional($emp->officeworkDetails)->interview_status }}</span>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endif
                 @endforeach
             </div>
         </table>

@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
+    <title>
+        @if (session()->has('recruiter_name') == "")
+            Admin Dashboard
+        @else
+            Recruiter Dashboard
+        @endif
+    </title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
@@ -42,7 +48,11 @@
                     <div class="sidebar" id="sidebar">
 
                         <div class="logo">
-                            AdminPanel
+                            @if (session()->has('recruiter_name') == "")
+                                AdminPanel
+                            @else
+                                RecruiterPanel
+                            @endif
                         </div>
 
                         <ul class="menu">
@@ -55,13 +65,17 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="{{ route('control_panel') }}" 
-                                class="{{ request()->routeIs('control_panel') ? 'active' : '' }}">
-                                    <i class="bi bi-people"></i>
-                                    <span>Control Panel</span>
-                                </a>
-                            </li>
+                            @if (session('admin_username'))
+
+                                <li>
+                                    <a href="{{ route('control_panel') }}"
+                                        class="{{ request()->routeIs('control_panel') ? 'active' : '' }}">
+                                        <i class="bi bi-people"></i>
+                                        <span>Control Panel</span>
+                                    </a>
+                                </li>
+
+                            @endif
 
                             <li>
                                 <a href="{{ route('employee') }}"
@@ -113,7 +127,13 @@
                     <div class="navbar d-flex justify-content-space-between">
 
                         <div class="d-md-none justify-content-right m-0 p-0">
-                            <span>AdminPanel</span>
+                            <span>
+                                @if (session()->has('recruiter_name') == "")
+                                    AdminPanel
+                                @else
+                                    RecruiterPanel
+                                @endif
+                            </span>
 
                             <button class="menu-toggle text-dark" id="menuToggle">
                                 <i class="bi bi-list"></i>
@@ -121,7 +141,9 @@
                         </div>
 
                         <div class="profile">
-                            <span>Welcome, {{ session('admin_username') }}</span>
+                            <span>
+                                Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
+                            </span>
                             <div class="bg-dark p-2 border rounded-circle">
                                 <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                                     alt="admin_logo" />
@@ -214,8 +236,8 @@
                 </div>
                 <div class="modal-footer">
 
-                    <a href="{{ route('admin.logout') }}" class="btn btn-success">
-
+                    <a href="{{ session()->has('recruiter_id') ? route('recruiter.logout') : route('admin.logout') }}"
+                        class="btn btn-success">
                         <span>Yes</span>
                     </a>
 

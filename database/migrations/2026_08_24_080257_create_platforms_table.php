@@ -9,21 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('platforms', function (Blueprint $table) {
-            $table->id();
-            $table->string('platform_name')->nullable;
-            $table->string('status')->default('Active');
-            $table->timestamps();
-        });
-    }
+        public function up(): void
+        {
+            Schema::create('platforms', function (Blueprint $table) {
+                $table->id();
+                $table->string('platform_name')->nullable;
+                $table->string('status')->default('Active');
+                $table->timestamps();
+            });
+        }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('platforms');
-    }
+        /**
+         * Reverse the migrations.
+         */
+        public function down(): void
+        {
+            Schema::dropIfExists('platforms');
+        }
 };

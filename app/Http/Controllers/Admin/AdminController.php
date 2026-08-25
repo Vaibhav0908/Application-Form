@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\Interview_status;
+use App\Models\Nation;
 use App\Models\Office_useDetail;
+use App\Models\Platform;
 use App\Models\RecruiterDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -77,8 +80,9 @@ class AdminController extends Controller
         ])->findOrFail($id);
 
         $recruiters = RecruiterDetail::where('status', 'Active')->get();
+        $interview_status = Interview_status::where('status', 'Active')->get();
 
-        return view('candidate_details', compact('candidate', 'recruiters'));
+        return view('candidate_details', compact('candidate', 'recruiters', 'interview_status'));
     }
 
     public function employees()
@@ -96,8 +100,11 @@ class AdminController extends Controller
     public function showControl()
     {
         $recruiter = RecruiterDetail::all();
+        $platforms = Platform::all();
+        $nations = Nation::all();
+        $interview_status = Interview_status::all();
 
-        return view('admin.control_panel', compact('recruiter'));
+        return view('admin.control_panel', compact('recruiter', 'platforms', 'nations', 'interview_status'));
     }
 
     public function recruiter(Request $request)
@@ -123,6 +130,75 @@ class AdminController extends Controller
         return redirect()->back()->with(
             'success',
             'Recruiter Data Saved Successfully.'
+        );
+    }
+
+    public function nation(Request $request)
+    {
+        $request->validate([
+            'nat_name' => 'required|string|max:255',
+            'nat_status' => 'required|in:Active,Deactive',
+        ]);
+
+        Nation::updateOrCreate(
+            [
+                'id' => $request->id ?: null,
+            ],
+            [
+                'nation' => $request->nat_name,
+                'status' => $request->nat_status,
+            ]
+        );
+
+        return redirect()->back()->with(
+            'success',
+            'Nation Data Saved Successfully.'
+        );
+    }
+
+    public function platform(Request $request)
+    {
+        $request->validate([
+            'plat_name' => 'required|string|max:255',
+            'plat_status' => 'required|in:Active,Deactive',
+        ]);
+
+        Platform::updateOrCreate(
+            [
+                'id' => $request->id ?: null,
+            ],
+            [
+                'platform_name' => $request->plat_name,
+                'status' => $request->plat_status,
+            ]
+        );
+
+        return redirect()->back()->with(
+            'success',
+            'Platform Data Saved Successfully.'
+        );
+    }
+
+    public function inter_status(Request $request)
+    {
+        $request->validate([
+            'inter_name' => 'required|string|max:255',
+            'inter_status' => 'required|in:Active,Deactive',
+        ]);
+
+        Interview_status::updateOrCreate(
+            [
+                'id' => $request->id ?: null,
+            ],
+            [
+                'interview_status' => $request->inter_name,
+                'status' => $request->inter_status,
+            ]
+        );
+
+        return redirect()->back()->with(
+            'success',
+            'Interview Status Data Saved Successfully.'
         );
     }
 }

@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <span>Interview for the position<sup class="text-danger">*</sup>
-                            <select name="designation" class="form-control" required>
+                            <!-- <select name="designation" class="form-control" required>
                                 <option selected disabled>--Please Select--</option>
                                 <option>Frontend Developer</option>
                                 <option>Backend Developer</option>
@@ -66,7 +66,8 @@
                                 <option>Payrole</option>
                                 <option>Receiptionalist</option>
                                 <option>Office Work</option>
-                            </select>
+                            </select> -->
+                            <input type="text" class="form-control" name="designation" pattern="[a-zA-Z. ]+" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Date of Application<sup class="text-danger">*</sup></label>
@@ -88,10 +89,13 @@
                         <label>Where You Found Us<sup class="text-danger">*</sup></label><br>
                         <select class="form-control" name="platforms" required>
                             <option selected disabled>--Please Select--</option>
-                            <option>Walking</option>
+                            <!-- <option>Walking</option>
                             <option>Linkedeen</option>
                             <option>Naukri</option>
-                            <option>Others</option>
+                            <option>Others</option> -->
+                            @foreach ($platforms as $plat)
+                                <option value="{{ $plat->platform_name }}">{{ $plat->platform_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -181,9 +185,10 @@
 
                         <!-- <input type="text" name="nationality" class="form-control" /> -->
                         <select class="form-control" name="nationality" required>
-                            <option selected disabled>--Please Select--</option>
-                            <option>Indian</option>
-                            <option>Overseas</option>
+                            <option selected disabled>--Please Select--</option>nations
+                           @foreach ($nations as $nat)
+                                <option value="{{ $nat->nation }}">{{ $nat->nation }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -285,8 +290,8 @@
                         <div class="col-md-6 mb-3">
                             <label>Passing Year<sup class="text-danger">*</sup></label>
 
-                            <!-- <input type="number" name="passing_year[]" class="form-control" /> -->
-                            <select name="passing_year[]" class="form-control" required>
+                            <input type="number" name="passing_year[]" class="form-control" />
+                            <!-- <select name="passing_year[]" class="form-control" required>
                                 <option selected disabled>--Please Select--</option>
                                 <option>2026</option>
                                 <option>2025</option>
@@ -295,7 +300,7 @@
                                 <option>2022</option>
                                 <option>2021</option>
                                 <option>2020</option>
-                            </select>
+                            </select> -->
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -445,7 +450,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <!-- <div class="col-md-6 mb-3">
                         <div class="upload-box">
                             <i class="bi bi-image fs-1"></i>
                             <br />
@@ -479,7 +484,7 @@
                                 Allowed formats: JPG, JPEG, PDF (Max size: 2 MB)
                             </small>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
 

@@ -1,6 +1,32 @@
 @extends("admin.com_layout")
 
 @section('content')
+
+    <style>
+        .table-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            height: 575px;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+
+        .table-box table {
+            width: 100%;
+            min-width: 1000px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            white-space: nowrap;
+        }
+    </style>
+
     <h2 class="mt-5 mx-5">Applications</h2>
     <div class="table-box">
         <table>
@@ -61,7 +87,7 @@
                                 {{$cand->reference_name}}
                             @elseif($cand->reference_name == "NA" && optional($cand->officeworkDetails)->interviewed_by != "")
                                 {{ optional($cand->officeworkDetails)->interviewed_by }}
-                                @else
+                            @else
                                 NA
                             @endif
                         </td>

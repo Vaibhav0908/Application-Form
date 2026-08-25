@@ -49,7 +49,7 @@
 <body>
     <div class="container py-4">
 
-     @if (session('success'))
+        @if (session('success'))
             <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">
                 {{ session('success') }}
 
@@ -326,57 +326,19 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Experience Rating</label>
-                                <select class="form-select" name="experience_rating">
-                                    <option value="" disabled {{ !$office?->experience_rating ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-
-                                    <option value="Excellent" {{ $office?->experience_rating == 'Excellent' ? 'selected' : '' }}>
-                                        Excellent
-                                    </option>
-
-                                    <option value="Good" {{ $office?->experience_rating == 'Good' ? 'selected' : '' }}>
-                                        Good
-                                    </option>
-
-                                    <option value="Average" {{ $office?->experience_rating == 'Average' ? 'selected' : '' }}>
-                                        Average
-                                    </option>
-
-                                    <option value="Poor" {{ $office?->experience_rating == 'Poor' ? 'selected' : '' }}>
-                                        Poor
-                                    </option>
-                                </select>
+                                <textarea name="experience_rating"
+                                    class="form-control">{{ $office?->experience_rating ?? '' }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Communication Skill</label>
-                                <select class="form-select" name="communication_skill">
-                                    <option value="" disabled {{ !$office?->communication_skills ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-
-                                    <option value="Excellent" {{ $office?->communication_skills == 'Excellent' ? 'selected' : '' }}>
-                                        Excellent
-                                    </option>
-
-                                    <option value="Good" {{ $office?->communication_skills == 'Good' ? 'selected' : '' }}>
-                                        Good
-                                    </option>
-
-                                    <option value="Average" {{ $office?->communication_skills == 'Average' ? 'selected' : '' }}>
-                                        Average
-                                    </option>
-
-                                    <option value="Poor" {{ $office?->communication_skills == 'Poor' ? 'selected' : '' }}>
-                                        Poor
-                                    </option>
-                                </select>
+                                <textarea name="communication_skill"
+                                    class="form-control">{{ $office?->communication_skills ?? '' }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Computer Skill</label>
-                                <select class="form-select" name="computer_skill">
+                                <!-- <select class="form-select" name="computer_skill">
                                     <option value="" disabled {{ !$office?->computer_skills ? 'selected' : '' }}>
                                         Select Rating
                                     </option>
@@ -386,107 +348,47 @@
                                     <option value="Average" {{ $office?->computer_skills == 'Average' ? 'selected' : '' }}>Average</option>
                                     <option value="Poor" {{ $office?->computer_skills == 'Poor' ? 'selected' : '' }}>Poor
                                     </option>
-                                </select>
+                                </select> -->
+
+                                <textarea name="computer_skill"
+                                    class="form-control">{{ $office?->computer_skills ?? '' }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interpersonal Skill</label>
-                                <select class="form-select" name="interpersonal_skill">
-                                    <option value="" disabled {{ !$office?->interpersonal_skills ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-                                    <option value="Excellent" {{ $office?->interpersonal_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->interpersonal_skills == 'Good' ? 'selected' : '' }}>
-                                        Good
-                                    </option>
-                                    <option value="Average" {{ $office?->interpersonal_skills == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->interpersonal_skills == 'Poor' ? 'selected' : '' }}>
-                                        Poor
-                                    </option>
-                                </select>
+                                <textarea name="interpersonal_skill"
+                                    class="form-control">{{ $office?->interpersonal_skills ?? '' }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Learning Ability</label>
-                                <select class="form-select" name="learning_ability">
-                                    <option value="" disabled {{ !$office?->learning_ability ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-                                    <option value="Excellent" {{ $office?->learning_ability == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->learning_ability == 'Good' ? 'selected' : '' }}>Good
-                                    </option>
-                                    <option value="Average" {{ $office?->learning_ability == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->learning_ability == 'Poor' ? 'selected' : '' }}>Poor
-                                    </option>
-                                </select>
+                                <textarea name="learning_ability"
+                                    class="form-control">{{ $office?->learning_ability ?? '' }}</textarea>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Presentation Skill</label>
-                                <select class="form-select" name="presentation_skill">
-                                    <option value="" disabled {{ !$office?->presentation_skills ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-                                    <option value="Excellent" {{ $office?->presentation_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->presentation_skills == 'Good' ? 'selected' : '' }}>
-                                        Good
-                                    </option>
-                                    <option value="Average" {{ $office?->presentation_skills == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->presentation_skills == 'Poor' ? 'selected' : '' }}>
-                                        Poor
-                                    </option>
-                                </select>
+                                <textarea name="presentation_skill"
+                                    class="form-control">{{ $office?->presentation_skills ?? '' }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Technical Skill</label>
-                                <select class="form-select" name="technical_skill">
-                                    <option value="" disabled {{ !$office?->technical_skills ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-                                    <option value="Excellent" {{ $office?->technical_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->technical_skills == 'Good' ? 'selected' : '' }}>Good
-                                    </option>
-                                    <option value="Average" {{ $office?->technical_skills == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->technical_skills == 'Poor' ? 'selected' : '' }}>Poor
-                                    </option>
-                                </select>
+                                <textarea name="technical_skill"
+                                    class="form-control">{{ $office?->technical_skills ?? '' }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Attitude</label>
-                                <select class="form-select" name="attitude">
-                                    <option value="" disabled {{ !$office?->attitude ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-                                    <option value="Excellent" {{ $office?->attitude == 'Excellent' ? 'selected' : '' }}>
-                                        Excellent</option>
-                                    <option value="Good" {{ $office?->attitude == 'Good' ? 'selected' : '' }}>Good
-                                    </option>
-                                    <option value="Average" {{ $office?->attitude == 'Average' ? 'selected' : '' }}>
-                                        Average</option>
-                                    <option value="Poor" {{ $office?->attitude == 'Poor' ? 'selected' : '' }}>Poor
-                                    </option>
-                                </select>
+                                <textarea name="attitude" class="form-control">{{ $office?->attitude ?? '' }}</textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Confidence</label>
-                                <select class="form-select" name="confidence">
-                                    <option value="" disabled {{ !$office?->confidence ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-                                    <option value="Excellent" {{ $office?->confidence == 'Excellent' ? 'selected' : '' }}>
-                                        Excellent</option>
-                                    <option value="Good" {{ $office?->confidence == 'Good' ? 'selected' : '' }}>Good
-                                    </option>
-                                    <option value="Average" {{ $office?->confidence == 'Average' ? 'selected' : '' }}>
-                                        Average</option>
-                                    <option value="Poor" {{ $office?->confidence == 'Poor' ? 'selected' : '' }}>Poor
-                                    </option>
-                                </select>
+                                <textarea name="confidence"
+                                    class="form-control">{{ $office?->confidence ?? '' }}</textarea>
                             </div>
                         </div>
 
@@ -516,53 +418,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Interview Status</label>
-                                <select class="form-select" name="interview_status">
-
+                                <label class="form-label fw-semibold">Interview Status<sup
+                                        class="text-danger">*</sup></label>
+                                <select class="form-select" name="interview_status" required>
                                     <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
                                         Select Status
                                     </option>
 
-                                    <option value="Pending" {{ $office?->interview_status == 'Pending' ? 'selected' : '' }}>
-                                        Pending
-                                    </option>
-
-                                    <option value="Select" {{ $office?->interview_status == 'Select' ? 'selected' : '' }}>
-                                        Select
-                                    </option>
-
-                                    <option value="Reject" {{ $office?->interview_status == 'Reject' ? 'selected' : '' }}>
-                                        Reject
-                                    </option>
-
-                                    <option value="Hold" {{ $office?->interview_status == 'Hold' ? 'selected' : '' }}>
-                                        Hold
-                                    </option>
-
-                                    <option value="OnBording" {{ $office?->interview_status == 'OnBording' ? 'selected' : '' }}>
-                                        OnBording
-                                    </option>
-
-                                    <option value="Virtual Round" {{ $office?->interview_status == 'Virtual Round' ? 'selected' : '' }}>
-                                        Virtual Round
-                                    </option>
-
-                                    <option value="Face To Face Interview" {{ $office?->interview_status == 'Face To Face Interview' ? 'selected' : '' }}>
-                                        Face To Face Interview
-                                    </option>
-
-                                    <option value="First Round" {{ $office?->interview_status == 'First Round' ? 'selected' : '' }}>
-                                        First Round
-                                    </option>
-
-                                    <option value="Second Round" {{ $office?->interview_status == 'Second Round' ? 'selected' : '' }}>
-                                        Second Round
-                                    </option>
-
-                                    <option value="Final Round" {{ $office?->interview_status == 'Final Round' ? 'selected' : '' }}>
-                                        Final Round
-                                    </option>
-
+                                    @foreach ($interview_status as $int_status)
+                                        <option value="{{ $int_status->interview_status }}" @selected($office?->interview_status == $int_status->interview_status)>
+                                            {{ $int_status->interview_status }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="">

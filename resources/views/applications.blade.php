@@ -54,7 +54,6 @@
                             </td>
                             <td>{{ $cand->applicant_designation }}</td>
 
-
                             @if (optional($cand->officeworkDetails)->interview_status != '')
                                 @if (optional($cand->officeworkDetails)->interview_status == 'Pending')
                                     <td><span class="status bg-warning">{{ optional($cand->officeworkDetails)->interview_status }}</span>
@@ -71,7 +70,6 @@
                             @else
                                 <td><span class="status bg-warning">Pending</span></td>
                             @endif
-
 
                             <td>
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")

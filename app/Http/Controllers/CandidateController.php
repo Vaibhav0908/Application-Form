@@ -19,8 +19,6 @@ class CandidateController extends Controller
                 'aadhar' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
                 'degree' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
                 'passbook' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
-            ],
-            [
                 'email' => 'required|email|unique:candidates,email',
             ],
             [

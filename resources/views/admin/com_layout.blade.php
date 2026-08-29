@@ -58,11 +58,19 @@
                         <ul class="menu">
 
                             <li>
-                                <a href="{{ route('admin.dashboard') }}"
-                                    class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                                    <i class="bi bi-grid"></i>
-                                    <span>Dashboard</span>
-                                </a>
+                                @if (session('admin_username'))
+                                    <a href="{{ route('admin.dashboard') }}"
+                                        class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                                        <i class="bi bi-grid"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                @elseif(session('recruiter_name'))
+                                    <a href="{{ route('recruiters.dashboard') }}"
+                                        class="{{ request()->routeIs('recruiters.dashboard') ? 'active' : '' }}">
+                                        <i class="bi bi-grid"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                @endif
                             </li>
 
                             @if (session('admin_username'))

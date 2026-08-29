@@ -40,7 +40,7 @@ class RecruiterAuthController extends Controller
                 'recruiter_email' => $recruiter->email,
             ]);
 
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('recruiters.dashboard');
         }
 
         return back()

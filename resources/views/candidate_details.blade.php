@@ -326,69 +326,94 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Experience Rating</label>
-                                <textarea name="experience_rating"
-                                    class="form-control">{{ $office?->experience_rating ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="experience_rating"
+                                        class="form-control">{{ $office?->experience_rating ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->experience_rating ?? '' }}</p>
+                                @endif
+
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Communication Skill</label>
-                                <textarea name="communication_skill"
-                                    class="form-control">{{ $office?->communication_skills ?? '' }}</textarea>
+                                <label class="form-label fw-semibold">Communication Skill </label>
+                                @if (session('recruiter_name'))
+                                    <textarea name="communication_skill"
+                                        class="form-control">{{ $office?->communication_skills ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->communication_skills ?? '' }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Computer Skill</label>
-                                <!-- <select class="form-select" name="computer_skill">
-                                    <option value="" disabled {{ !$office?->computer_skills ? 'selected' : '' }}>
-                                        Select Rating
-                                    </option>
-                                    <option value="Excellent" {{ $office?->computer_skills == 'Excellent' ? 'selected' : '' }}>Excellent</option>
-                                    <option value="Good" {{ $office?->computer_skills == 'Good' ? 'selected' : '' }}>Good
-                                    </option>
-                                    <option value="Average" {{ $office?->computer_skills == 'Average' ? 'selected' : '' }}>Average</option>
-                                    <option value="Poor" {{ $office?->computer_skills == 'Poor' ? 'selected' : '' }}>Poor
-                                    </option>
-                                </select> -->
-
-                                <textarea name="computer_skill"
-                                    class="form-control">{{ $office?->computer_skills ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="computer_skill"
+                                        class="form-control">{{ $office?->computer_skills ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->computer_skills ?? '' }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interpersonal Skill</label>
-                                <textarea name="interpersonal_skill"
-                                    class="form-control">{{ $office?->interpersonal_skills ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="interpersonal_skill"
+                                        class="form-control">{{ $office?->interpersonal_skills ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->interpersonal_skills ?? '' }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Learning Ability</label>
-                                <textarea name="learning_ability"
-                                    class="form-control">{{ $office?->learning_ability ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="learning_ability"
+                                        class="form-control">{{ $office?->learning_ability ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->learning_ability ?? '' }}</p>
+                                @endif
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Presentation Skill</label>
-                                <textarea name="presentation_skill"
-                                    class="form-control">{{ $office?->presentation_skills ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="presentation_skill"
+                                        class="form-control">{{ $office?->presentation_skills ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->presentation_skills ?? '' }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Technical Skill</label>
-                                <textarea name="technical_skill"
-                                    class="form-control">{{ $office?->technical_skills ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="technical_skill"
+                                        class="form-control">{{ $office?->technical_skills ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->technical_skills ?? '' }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Attitude</label>
-                                <textarea name="attitude" class="form-control">{{ $office?->attitude ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="attitude" class="form-control">{{ $office?->attitude ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->attitude ?? '' }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Confidence</label>
-                                <textarea name="confidence"
-                                    class="form-control">{{ $office?->confidence ?? '' }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea name="confidence"
+                                        class="form-control">{{ $office?->confidence ?? '' }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->confidence ?? '' }}</p>
+                                @endif
                             </div>
                         </div>
 
@@ -398,67 +423,134 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interview Date</label>
-                                <input type="date" class="form-control" value="{{ $office?->interview_date }}"
-                                    name="interview_date">
+                                @if (session('recruiter_name'))
+                                    <input type="date" class="form-control" value="{{ $office?->interview_date }}"
+                                        name="interview_date">
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->interview_date ?? '' }}</p>
+                                @endif
                             </div>
 
                             <div class="">
                                 <label class="form-label fw-semibold">Interviewed By</label>
-                                <select class="form-select" name="interview_by">
-                                    <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
-                                        Select Interviewer
-                                    </option>
-                                    @foreach ($recruiters as $rec)
-                                        <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
-                                            {{ $rec->name }}
+                                @if(session('admin_username'))
+                                    @if ($candidate->reference_name == 'NA' && $candidate->officeworkDetails->interviewed_by == "" )
+                                        <select class="form-select" name="interview_by">
+                                            <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
+                                                Select Interviewer
+                                            </option>
+                                            @foreach ($recruiters as $rec)
+                                                <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
+                                                    {{ $rec->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name }}</p>
+                                    @endif
+                                @elseif(session('recruiter_name'))
+                                    <!-- <select class="form-select" name="interview_by">
+                                        <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
+                                            Select Interviewer
                                         </option>
-                                    @endforeach
-                                </select>
+                                        @foreach ($recruiters as $rec)
+                                            <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
+                                                {{ $rec->name }}
+                                            </option>
+                                        @endforeach
+                                    </select> -->
+                                    <p class="form-control">{{ $office?->interviewed_by ??  $candidate->reference_name}}</p>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interview Status<sup
                                         class="text-danger">*</sup></label>
-                                <select class="form-select" name="interview_status" required>
-                                    <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
-                                        Select Status
-                                    </option>
-
-                                    @foreach ($interview_status as $int_status)
-                                        <option value="{{ $int_status->interview_status }}" @selected($office?->interview_status == $int_status->interview_status)>
-                                            {{ $int_status->interview_status }}
+                                @if (session('recruiter_name'))
+                                    <select class="form-select" name="interview_status" required>
+                                        <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
+                                            Pending
                                         </option>
-                                    @endforeach
-                                </select>
+
+                                        @foreach ($interview_status as $int_status)
+                                            <option value="{{ $int_status->interview_status }}"
+                                                @selected($office?->interview_status == $int_status->interview_status)>
+                                                {{ $int_status->interview_status }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                @elseif(session('admin_username'))
+                                    @if ($candidate->reference_name == 'NA' && $candidate->officeworkDetails->interviewed_by == "" )
+                                        <select class="form-select" name="interview_status" required>
+                                            <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
+                                                Pending
+                                            </option>
+
+                                            @foreach ($interview_status as $int_status)
+                                                <option value="{{ $int_status->interview_status }}"
+                                                    @selected($office?->interview_status == $int_status->interview_status)>
+                                                    {{ $int_status->interview_status }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        <p class="form-control">{{ $office?->interview_status ?? '' }}</p>
+                                    @endif
+                                @endif
                             </div>
                             <div class="">
                                 <label class="form-label fw-semibold">Salary Offered</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control" name="salary_offered"
-                                        placeholder="Enter Salary" value="{{ $office?->salary_offered }}">
-                                </div>
+                                @if (session('recruiter_name'))
+                                    <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control" name="salary_offered"
+                                            placeholder="Enter Salary" value="{{ $office?->salary_offered }}">
+                                    </div>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->salary_offered ?? '' }}</p>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Interview Remarks</label>
-                                <textarea class="form-control" rows="4" name="interview_remarks"
-                                    placeholder="Enter interview remarks...">{{ $office?->interview_remarks }}</textarea>
+                                @if (session('recruiter_name'))
+                                    <textarea class="form-control" rows="4" name="interview_remarks"
+                                        placeholder="Enter interview remarks...">{{ $office?->interview_remarks }}</textarea>
+                                @elseif(session('admin_username'))
+                                    <p class="form-control">{{ $office?->interview_remarks ?? '' }}</p>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="text-end p-2">
-                            <button type="reset" class="btn btn-outline-secondary px-4">
-                                Reset
-                            </button>
+                        @if (session('admin_username'))
+                            @if ($candidate->reference_name == 'NA' && $candidate->officeworkDetails->interviewed_by == "" )
+                                <div class="text-end p-2">
+                                    <button type="reset" class="btn btn-outline-secondary px-4">
+                                        Reset
+                                    </button>
 
-                            <button type="submit" class="btn btn-primary px-4 ms-2">
-                                <i class="bi bi-check-circle me-1"></i>
-                                Save Evaluation
-                            </button>
-                        </div>
+                                    <button type="submit" class="btn btn-primary px-4 ms-2">
+                                        <i class="bi bi-check-circle me-1"></i>
+                                        Save Evaluation
+                                    </button>
+                                </div>
+                            @endif
+
+                        @elseif(session('recruiter_name'))
+                            <div class="text-end p-2">
+                                <button type="reset" class="btn btn-outline-secondary px-4">
+                                    Reset
+                                </button>
+
+                                <button type="submit" class="btn btn-primary px-4 ms-2">
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    Save Evaluation
+                                </button>
+                            </div>
+                        @endif
+
                     </div>
                 </form>
             </div>

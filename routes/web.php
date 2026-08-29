@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Office\OfficeworkController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Recruiter\RecruiterAuthController;
+use App\Http\Controllers\Recruiter\recruiterController;
 use App\Models\Interview_status;
 use App\Models\Nation;
 use App\Models\Platform;
@@ -65,6 +66,80 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');
+
+    Route::get('/recruiters/dashboard', [recruiterController::class, 'dashboard'])
+        ->name('recruiters.dashboard');
+
+    Route::get('/recruiters/edit/panel/{id}', function ($id) {
+        $recruiter = RecruiterDetail::findOrFail($id);
+        return view('recruiters.recruiters_edit', compact('recruiter'));
+    })->name('recruiters.edit_panel');
+
+    Route::post('/recruiters/edit_submit', [AdminController::class, 'recruiter'])
+        ->name('recruiters.edit_submit');
+
+    Route::get(
+        '/recruiters/delete/{id}',
+        function ($id) {
+            RecruiterDetail::where('id', $id)->delete();
+            return redirect(route('control_panel'))->with(
+                'success',
+                'Recruiter Data Deleted Successfully.'
+            );
+        }
+    )->name('recruiters.delete');
+
+
+    Route::get('/option/edit/panel/{type}/{id}', function ($type, $id) {
+        if ($type == 'platform') {
+            $platform = Platform::findOrFail($id);
+            return view('admin.options_edit', compact('platform'));
+        }
+
+        if ($type == 'nation') {
+            $nation = Nation::findOrFail($id);
+            return view('admin.options_edit', compact('nation'));
+        }
+        if ($type == 'int_status') {
+            $int_status = Interview_status::findOrFail($id);
+            return view('admin.options_edit', compact('int_status'));
+        }
+    })->name('option.edit_panel');
+
+    Route::post('/platform/edit_submit', [AdminController::class, 'platform'])
+        ->name('platform.edit_submit');
+
+    Route::post('/nation/edit_submit', [AdminController::class, 'nation'])
+        ->name('nation.edit_submit');
+
+
+
+    Route::get('/option/delete/{type}/{id}', function ($type, $id) {
+        if ($type == 'platform') {
+            Platform::where('id', $id)->delete();
+            return redirect(route('control_panel'))->with(
+                'success',
+                'Platform Deleted Successfully.'
+            );
+        }
+        if ($type == 'nation') {
+            Nation::where('id', $id)->delete();
+            return redirect(route('control_panel'))->with(
+                'success',
+                'Nation Deleted Successfully.'
+            );
+        }
+        if ($type == 'int_status') {
+            Interview_status::where('id', $id)->delete();
+            return redirect(route('control_panel'))->with(
+                'success',
+                'Interview Status Deleted Successfully.'
+            );
+        }
+    })->name('option.delete');
+
+
+
 
     Route::get('/admin/logout', [AdminAuthController::class, 'logout'])
         ->name('admin.logout');

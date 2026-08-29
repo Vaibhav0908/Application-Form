@@ -16,8 +16,8 @@ class CandidateController extends Controller
             [
                 'passport' => 'required|mimes:jpg,jpeg,png|max:2048',
                 'resume' => 'required|mimes:pdf|max:2048',
-                'aadhar' => 'required|mimes:jpg,jpeg,pdf|max:2048',
-                'degree' => 'required|mimes:jpg,jpeg,pdf|max:2048',
+                'aadhar' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
+                'degree' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
                 'passbook' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
             ],
             [
@@ -61,9 +61,9 @@ class CandidateController extends Controller
             FamilyDetail::create([
                 'candidate_id' => $candidate->id,
                 'member_name' => $name,
-                'relationship' => $request->relation[$key],
-                'mobile' => $request->family_mobile[$key],
-                'occupation' => $request->occupation[$key],
+                'relationship' => $request->relation[$key] ?? null,
+                'mobile' => $request->family_mobile[$key] ?? null,
+                'occupation' => $request->occupation[$key] ?? null,
                 'age' => $request->age[$key],
             ]);
         }
@@ -72,9 +72,9 @@ class CandidateController extends Controller
             educationDetail::create([
                 'candidate_id' => $candidate->id,
                 'qualification' => $quali,
-                'college_university' => $request->college[$key],
-                'passing_year' => $request->passing_year[$key],
-                'percentage_cgpa' => $request->percentage[$key],
+                'college_university' => $request->college[$key] ?? null,
+                'passing_year' => $request->passing_year[$key] ?? null,
+                'percentage_cgpa' => $request->percentage[$key] ?? null,
             ]);
         }
 
@@ -82,11 +82,11 @@ class CandidateController extends Controller
             ProfessionalDetail::create([
                 'candidate_id' => $candidate->id,
                 'company_name' => $comp,
-                'designation' => $request->pro_designation[$key],
-                'salary_ctc' => $request->salary[$key],
-                'currently_working' => $request->curr_working[$key],
-                'working_start_date' => $request->sart_time[$key],
-                'working_end_date' => $request->end_time[$key],
+                'designation' => $request->pro_designation[$key] ?? null,
+                'salary_ctc' => $request->salary[$key] ?? null,
+                'currently_working' => $request->curr_working[$key] ?? null,
+                'working_start_date' => $request->sart_time[$key] ?? null,
+                'working_end_date' => $request->end_time[$key] ?? null,
             ]);
         }
 

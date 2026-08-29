@@ -70,17 +70,20 @@
                                 </button>
                             </div>
                         </td>
+                        <td>
+                            @if ($rec->status == "Active")
+                                <span class="status bg-success">{{$rec->status}}</span>
+                            @elseif($rec->status == "Deactive")
+                                <span class="status bg-danger">{{$rec->status}}</span>
+                            @else
+                                <span class="">{{$rec->status}}</span>
+                            @endif
+                        </td>
 
-                        @if ($rec->status == "Active")
-                            <td><span class="status bg-success">{{$rec->status}}</span></td>
-                        @elseif($rec->status == "Deactive")
-                            <td><span class="status bg-danger">{{$rec->status}}</span></td>
-                        @else
-                            <td><span class="">{{$rec->status}}</span></td>
-                        @endif
-
-                        <td><button class="btn btn-primary">Edit</button> <button type="reset"
-                                class="btn btn-danger">Delete</button></td>
+                        <td>
+                            <a href="{{ route('recruiters.edit_panel', $rec->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('recruiters.delete', $rec->id) }}" class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
                 @endforeach
             </div>
@@ -166,8 +169,12 @@
                             @endif
                         </td>
 
-                        <td><button class="btn btn-primary">Edit</button> <button type="reset"
-                                class="btn btn-danger">Delete</button></td>
+                        <td>
+                            <a href="{{ route('option.edit_panel', ['type' => 'platform', 'id' => $plat->id]) }}"
+                                class="btn btn-primary">Edit</a>
+                            <a href="{{ route('option.delete', ['type' => 'platform', 'id' => $plat->id]) }}"
+                                class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
                 @endforeach
             </div>
@@ -250,8 +257,12 @@
                             @endif
                         </td>
 
-                        <td><button class="btn btn-primary">Edit</button> <button type="reset"
-                                class="btn btn-danger">Delete</button></td>
+                        <td>
+                            <a href="{{ route('option.edit_panel', ['type' => 'nation', 'id' => $nat->id]) }}"
+                                class="btn btn-primary">Edit</a>
+                            <a href="{{ route('option.delete', ['type' => 'nation', 'id' => $nat->id]) }}"
+                                class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
                 @endforeach
             </div>
@@ -336,8 +347,12 @@
                             @endif
                         </td>
 
-                        <td><button class="btn btn-primary">Edit</button> <button type="reset"
-                                class="btn btn-danger">Delete</button></td>
+                        <td>
+                            <a href="{{ route('option.edit_panel', [$type = 'int_status', $int_status->id]) }}"
+                                class="btn btn-primary">Edit</a>
+                            <a href="{{ route('option.delete', ['type' => 'int_status', 'id' => $int_status->id]) }}"
+                                class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
                 @endforeach
             </div>

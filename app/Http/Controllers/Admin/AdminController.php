@@ -23,8 +23,6 @@ class AdminController extends Controller
             'officeworkDetails'
         ])->get();
 
-        // admin total candidate applications and pending applications count
-
         $total_candi = Candidate::count();
 
         $total_office_status = Office_useDetail::distinct('candidate_id')
@@ -32,93 +30,15 @@ class AdminController extends Controller
 
         $total_adm_pendings = $total_candi - $total_office_status;
 
-
-        // ACTIVE INTERVIEW STATUSES
-
         $statuses = Interview_status::where('status', 'Active')
             ->get();
 
-
-        // RECRUITER
-
-        $recruiterName = session('recruiter_name');
-
-        $total_rec_appl = 0;
-        $total_rec_pendings = 0;
-
-        if ($recruiterName) {
-            $recruiterCandidates = Candidate::where(function ($query) use ($recruiterName) {
-
-                // Candidate directly referred by recruiter
-                $query->where(function ($q) use ($recruiterName) {
-
-                    $q->where('reference_name', $recruiterName);
-
-                })
-
-                    // Candidate has NA reference,
-                    // so check interviewer
-                    ->orWhere(function ($q) use ($recruiterName) {
-
-                        $q->where('reference_name', 'NA')
-                            ->whereHas('officeworkDetails', function ($office) use ($recruiterName) {
-
-                                $office->where(
-                                    'interviewed_by',
-                                    $recruiterName
-                                );
-                            });
-                    });
-
-            })->pluck('id');
-
-
-            // Total recruiter applications
-
-            $total_rec_appl = $recruiterCandidates->count();
-
-
-            // Recruiter's candidates that have office evaluation
-
-            $total_rec_office_status = Office_useDetail::whereIn(
-                'candidate_id',
-                $recruiterCandidates
-            )
-                ->distinct('candidate_id')
-                ->count('candidate_id');
-
-
-            // Recruiter's pending applications
-
-            $total_rec_pendings = $total_rec_appl - $total_rec_office_status;
-        }
-
-        // STATUS COUNTS
-
         if (session('admin_username')) {
-
-            // Admin sees all status counts
-
             $statusCounts = Office_useDetail::selectRaw(
                 'interview_status, COUNT(DISTINCT candidate_id) as total'
             )
                 ->groupBy('interview_status')
                 ->pluck('total', 'interview_status');
-
-        } elseif ($recruiterName) {
-
-            // Recruiter sees only their candidates' status counts
-
-            $statusCounts = Office_useDetail::whereIn(
-                'candidate_id',
-                $recruiterCandidates
-            )
-                ->selectRaw(
-                    'interview_status, COUNT(DISTINCT candidate_id) as total'
-                )
-                ->groupBy('interview_status')
-                ->pluck('total', 'interview_status');
-
         } else {
             $statusCounts = collect();
         }
@@ -130,8 +50,6 @@ class AdminController extends Controller
                 'total_candi',
                 'total_office_status',
                 'total_adm_pendings',
-                'total_rec_appl',
-                'total_rec_pendings',
                 'statuses',
                 'statusCounts'
             )
@@ -204,10 +122,11 @@ class AdminController extends Controller
                 'name' => $request->rec_name,
                 'password' => $request->rec_password,
                 'status' => $request->rec_status,
+                'email' => $request->rec_email,
             ]
         );
 
-        return redirect()->back()->with(
+        return redirect(route('control_panel'))->with(
             'success',
             'Recruiter Data Saved Successfully.'
         );
@@ -222,7 +141,7 @@ class AdminController extends Controller
 
         Nation::updateOrCreate(
             [
-                'id' => $request->id ?: null,
+                'id' => $request->id,
             ],
             [
                 'nation' => $request->nat_name,
@@ -230,7 +149,7 @@ class AdminController extends Controller
             ]
         );
 
-        return redirect()->back()->with(
+        return redirect(route('control_panel'))->with(
             'success',
             'Nation Data Saved Successfully.'
         );
@@ -245,7 +164,7 @@ class AdminController extends Controller
 
         Platform::updateOrCreate(
             [
-                'id' => $request->id ?: null,
+                'id' => $request->id,
             ],
             [
                 'platform_name' => $request->plat_name,
@@ -253,7 +172,7 @@ class AdminController extends Controller
             ]
         );
 
-        return redirect()->back()->with(
+        return redirect(route('control_panel'))->with(
             'success',
             'Platform Data Saved Successfully.'
         );
@@ -268,7 +187,7 @@ class AdminController extends Controller
 
         Interview_status::updateOrCreate(
             [
-                'id' => $request->id ?: null,
+                'id' => $request->id,
             ],
             [
                 'interview_status' => $request->inter_name,
@@ -276,7 +195,7 @@ class AdminController extends Controller
             ]
         );
 
-        return redirect()->back()->with(
+        return redirect(route('control_panel'))->with(
             'success',
             'Interview Status Data Saved Successfully.'
         );

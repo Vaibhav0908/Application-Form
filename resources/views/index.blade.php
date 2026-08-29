@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    @if ($errors->any())
+    <!-- @if ($errors->any())
         <div class="alert alert-danger">
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
@@ -36,7 +36,8 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif -->
+
     <div class="container main-container">
         <div class="header">
             <h1 class="">
@@ -55,18 +56,6 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <span>Interview for the position<sup class="text-danger">*</sup>
-                            <!-- <select name="designation" class="form-control" required>
-                                <option selected disabled>--Please Select--</option>
-                                <option>Frontend Developer</option>
-                                <option>Backend Developer</option>
-                                <option>PowerBI Developer</option>
-                                <option>Graphic Designer</option>
-                                <option>Digital Marketor</option>
-                                <option>Human Resource</option>
-                                <option>Payrole</option>
-                                <option>Receiptionalist</option>
-                                <option>Office Work</option>
-                            </select> -->
                             <input type="text" class="form-control" name="designation" pattern="[a-zA-Z. ]+" required>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -89,10 +78,6 @@
                         <label>Where You Found Us<sup class="text-danger">*</sup></label><br>
                         <select class="form-control" name="platforms" required>
                             <option selected disabled>--Please Select--</option>
-                            <!-- <option>Walking</option>
-                            <option>Linkedeen</option>
-                            <option>Naukri</option>
-                            <option>Others</option> -->
                             @foreach ($platforms as $plat)
                                 <option value="{{ $plat->platform_name }}">{{ $plat->platform_name }}</option>
                             @endforeach
@@ -182,8 +167,6 @@
 
                     <div class="col-md-2 mb-3">
                         <label>Nationality<sup class="text-danger">*</sup></label>
-
-                        <!-- <input type="text" name="nationality" class="form-control" /> -->
                         <select class="form-control" name="nationality" required>
                             <option selected disabled>--Please Select--</option>nations
                            @foreach ($nations as $nat)
@@ -227,8 +210,6 @@
 
                         <div class="col-md-6 mb-3">
                             <label>Relation<sup class="text-danger">*</sup></label>
-
-                            <!-- <input type="text" name="relation[]" class="form-control" /> -->
                             <select name="relation[]" class="form-control" required>
                                 <option selected disabled>--Please Select--</option>
                                 <option>Father</option>
@@ -289,18 +270,7 @@
 
                         <div class="col-md-6 mb-3">
                             <label>Passing Year<sup class="text-danger">*</sup></label>
-
                             <input type="number" name="passing_year[]" class="form-control" />
-                            <!-- <select name="passing_year[]" class="form-control" required>
-                                <option selected disabled>--Please Select--</option>
-                                <option>2026</option>
-                                <option>2025</option>
-                                <option>2024</option>
-                                <option>2023</option>
-                                <option>2022</option>
-                                <option>2021</option>
-                                <option>2020</option>
-                            </select> -->
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -409,8 +379,6 @@
 
                     <div class="col-md-6 mb-3">
                         <label>Notice Period<sup class="text-danger">*</sup></label>
-
-                        <!-- <input type="text" placeholder="days" name="notice_period" class="form-control" /> -->
                         <select name="notice_period" class="form-control" required>
                             <option selected disabled>--Please Select--</option>
                             <option>Immadiate Joiner</option>
@@ -455,7 +423,7 @@
                             <i class="bi bi-image fs-1"></i>
                             <br />
                             <label>Upload Aadhar Card<sup class="text-danger">*</sup></label>
-                            <input type="file" name="aadhar" class="form-control" accept=".jpg,.jpeg,.pdf" required />
+                            <input type="file" name="aadhar" class="form-control" accept=".jpg,.jpeg,.pdf"  />
                             <small class="text-muted d-block mt-2">
                                 Allowed formats: JPG, JPEG, PDF (Max size: 2 MB)
                             </small>
@@ -467,7 +435,7 @@
                             <i class="bi bi-file-earmark-arrow-up fs-1"></i>
                             <br />
                             <label>Upload Certificate/Degree<sup class="text-danger">*</sup></label>
-                            <input type="file" name="degree" class="form-control" accept=".jpg,.jpeg,.pdf" required />
+                            <input type="file" name="degree" class="form-control" accept=".jpg,.jpeg,.pdf" />
                             <small class="text-muted d-block mt-2">
                                 Allowed formats: JPG, JPEG, PDF (Max size: 2 MB)
                             </small>
@@ -479,7 +447,7 @@
                             <i class="bi bi-image fs-1"></i>
                             <br />
                             <label>Upload Passbook</label>
-                            <input type="file" name="passbook" class="form-control" accept=".jpg,.jpeg,.pdf" required />
+                            <input type="file" name="passbook" class="form-control" accept=".jpg,.jpeg,.pdf"  />
                             <small class="text-muted d-block mt-2">
                                 Allowed formats: JPG, JPEG, PDF (Max size: 2 MB)
                             </small>

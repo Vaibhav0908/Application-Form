@@ -434,7 +434,7 @@
                             <div class="">
                                 <label class="form-label fw-semibold">Interviewed By</label>
                                 @if(session('admin_username'))
-                                    @if ($candidate->reference_name == 'NA' && $candidate->officeworkDetails->interviewed_by == "" )
+                                    @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null )
                                         <select class="form-select" name="interview_by">
                                             <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
                                                 Select Interviewer
@@ -481,11 +481,11 @@
                                         @endforeach
                                     </select>
                                 @elseif(session('admin_username'))
-                                    @if ($candidate->reference_name == 'NA' && $candidate->officeworkDetails->interviewed_by == "" )
+                                    @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null )
                                         <select class="form-select" name="interview_status" required>
                                             <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
                                                 Pending
-                                            </option>
+                                            </option>       
 
                                             @foreach ($interview_status as $int_status)
                                                 <option value="{{ $int_status->interview_status }}"
@@ -525,7 +525,7 @@
                         </div>
 
                         @if (session('admin_username'))
-                            @if ($candidate->reference_name == 'NA' && $candidate->officeworkDetails->interviewed_by == "" )
+                            @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null )
                                 <div class="text-end p-2">
                                     <button type="reset" class="btn btn-outline-secondary px-4">
                                         Reset

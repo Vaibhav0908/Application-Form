@@ -56,7 +56,8 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <span>Interview for the position<sup class="text-danger">*</sup>
-                            <input type="text" class="form-control" name="designation" pattern="[a-zA-Z. ]+" required>
+                            <input type="text" class="form-control" name="designation" pattern="[a-zA-Z. ]+"
+                            oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Date of Application<sup class="text-danger">*</sup></label>
@@ -94,7 +95,7 @@
                         <label>Full Name<sup class="text-danger">*</sup></label>
 
                         <input type="text" name="candidate_name" class="form-control" placeholder="Enter Name"
-                            pattern="[a-zA-Z. ]+" required />
+                            pattern="[a-zA-Z. ]+" oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" required />
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -107,14 +108,16 @@
                         <label>Mobile Number<sup class="text-danger">*</sup></label>
 
                         <input type="text" name="mobile" class="form-control" placeholder="Mobile Number"
-                            pattern="[0-9]{10}" required />
+                            pattern="[0-9]{10}"  maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            title="Please enter a valid 10-digit mobile number." required />
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label>Alternate Mobile Number</label>
 
                         <input type="text" name="alt_mobile" class="form-control" placeholder="Mobile Number"
-                            pattern="[0-9]{10}" />
+                            pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            title="Please enter a valid 10-digit mobile number." />
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -149,27 +152,29 @@
                         <label>City<sup class="text-danger">*</sup></label>
 
                         <input type="text" name="city" placeholder="Enter your city" class="form-control"
-                            pattern="[a-zA-Z. ]+" required />
+                            pattern="[a-zA-Z. ]+" oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" required />
                     </div>
 
                     <div class="col-md-3 mb-3">
                         <label>State<sup class="text-danger">*</sup></label>
 
                         <input type="text" name="state" placeholder="Enter your State" class="form-control"
-                            pattern="[a-zA-Z. ]+" required />
+                            pattern="[a-zA-Z. ]+" oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" required />
                     </div>
 
                     <div class="col-md-2 mb-3">
                         <label>Pincode<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="pincode" class="form-control" pattern="[0-9]{6}" required />
+                        <input type="text" name="pincode" class="form-control" pattern="[0-9]{6}" 
+                            maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            title="Please enter a valid 6-digit number." required />
                     </div>
 
                     <div class="col-md-2 mb-3">
                         <label>Nationality<sup class="text-danger">*</sup></label>
                         <select class="form-control" name="nationality" required>
                             <option selected disabled>--Please Select--</option>nations
-                           @foreach ($nations as $nat)
+                            @foreach ($nations as $nat)
                                 <option value="{{ $nat->nation }}">{{ $nat->nation }}</option>
                             @endforeach
                         </select>
@@ -177,21 +182,22 @@
 
                     <div class="col-md-2 mb-3">
                         <label>Religion</label>
-                        <input type="text" name="religion" class="form-control" pattern="[a-zA-Z. ]+" />
+                        <input type="text" name="religion" class="form-control" pattern="[a-zA-Z. ]+" 
+                        oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" />
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label>Permanent Address<sup class="text-danger">*</sup></label>
 
                         <textarea name="permanent_address" class="form-control" pattern="[a-zA-Z0-9.,(){}[\]\-:; ]+"
-                            required></textarea>
+                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9.,(){}[\]\-:; ]/g, '')" required></textarea>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label>Current Address<sup class="text-danger">*</sup></label>
 
                         <textarea name="current_address" class="form-control" pattern="[a-zA-Z0-9.,(){}\-:; ]+"
-                            required></textarea>
+                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9.,(){}[\]\-:; ]/g, '')" required></textarea>
                     </div>
                 </div>
 
@@ -205,7 +211,7 @@
                             <label>Full Name<sup class="text-danger">*</sup></label>
 
                             <input type="text" name="family_name[]" class="form-control" placeholder="Enter Name"
-                                pattern="[a-zA-Z. ]+" required />
+                                pattern="[a-zA-Z. ]+" oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" required />
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -224,21 +230,23 @@
                         <div class="col-md-3 mb-3">
                             <label>Age<sup class="text-danger">*</sup></label>
 
-                            <input type="number" name="age[]" class="form-control" required />
+                            <input type="text" name="age[]" pattern="[0-9]{2}" class="form-control"
+                            maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required/>
                         </div>
 
                         <div class="col-md-3 mb-3">
                             <label>Mobile Number<sup class="text-danger">*</sup></label>
 
                             <input type="text" name="family_mobile[]" class="form-control" placeholder="Mobile Number"
-                                pattern="[0-9]{10}" required />
+                                pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                title="Please enter a valid 10-digit mobile number." required />
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label>Occupation<sup class="text-danger">*</sup></label>
 
                             <input type="text" name="occupation[]" class="form-control" pattern="[a-zA-Z. ]+"
-                                required />
+                                oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" required />
                         </div>
                     </div>
                     <hr />
@@ -258,25 +266,27 @@
                             <label>Qualification<sup class="text-danger">*</sup></label>
 
                             <input type="text" name="qualification[]" class="form-control" pattern="[a-zA-Z.{}[\]() ]+"
-                                required />
+                                oninput="this.value = this.value.replace(/[^a-zA-Z.{}[\]() ]/g, '')" required />
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label>University / College<sup class="text-danger">*</sup></label>
 
                             <input name="college[]" type="text" class="form-control" pattern="[a-zA-Z.{}[\]() ]+"
-                                required />
+                                oninput="this.value = this.value.replace(/[^a-zA-Z.{}[\]() ]/g, '')" required />
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label>Passing Year<sup class="text-danger">*</sup></label>
-                            <input type="number" name="passing_year[]" class="form-control" />
+                            <input type="text" name="passing_year[]" class="form-control" pattern="[0-9]{4}"
+                            maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label>Percentage / CGPA<sup class="text-danger">*</sup></label>
 
-                            <input type="text" name="percentage[]" class="form-control" pattern="[0-9.%]+" required />
+                            <input type="text" name="percentage[]" class="form-control" pattern="[0-9.%]+" 
+                              oninput="this.value = this.value.replace(/[^0-9.%]/g, '')" required />
                         </div>
                     </div>
                     <hr />
@@ -288,6 +298,7 @@
                     </button>
                 </div>
 
+                <p><sup class="text-danger">*</sup>Fresher can skip</p>
                 <h4 class="section-title">Professional Details</h4>
 
                 <div id="professionalContainer">
@@ -296,19 +307,22 @@
                         <div class="col-md-6 mb-3">
                             <label>Company</label>
 
-                            <input type="text" name="company[]" class="form-control" pattern="[a-zA-Z ]+" />
+                            <input type="text" name="company[]" class="form-control" pattern="[a-zA-Z ]+"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '')" />
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label>Designation</label>
 
-                            <input type="text" name="pro_designation[]" class="form-control" pattern="[a-zA-Z() ]+" />
+                            <input type="text" name="pro_designation[]" class="form-control" pattern="[a-zA-Z() ]+"
+                             oninput="this.value = this.value.replace(/[^a-zA-Z() ]/g, '')" />
                         </div>
 
                         <div class="col-lg-4 mb-3">
                             <label>Salary/CTC</label>
 
-                            <input type="text" name="salary[]" class="form-control" pattern="[0-9.]+" />
+                            <input type="text" name="salary[]" class="form-control" pattern="[0-9.]+"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
                         </div>
 
                         <div class="col-lg-4 mb-3">
@@ -352,7 +366,8 @@
                     <div class="col-md-6 mb-3">
                         <label>Total Experience<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="total_experience" class="form-control" pattern="[0-9]{1,2}" required />
+                        <input type="text" name="total_experience" class="form-control" pattern="[0-9]{1,2}"
+                        maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -368,13 +383,15 @@
                     <div class="col-md-3 mb-3">
                         <label>Last Salary/CTC<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="last_salary" class="form-control" pattern="[0-9.]+" required />
+                        <input type="text" name="last_salary" class="form-control" pattern="[0-9.]+"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
                     </div>
 
                     <div class="col-md-3 mb-3">
                         <label>Expected Salary/CTC<sup class="text-danger">*</sup></label>
 
-                        <input type="text" name="expected_salary" class="form-control" pattern="[0-9.]+" required />
+                        <input type="text" name="expected_salary" class="form-control" pattern="[0-9.]+"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
                     </div>
 
                     <div class="col-md-6 mb-3">

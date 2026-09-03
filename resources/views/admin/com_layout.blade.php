@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-        @if (session()->has('recruiter_name') == "")
+        @if (session('admin_username'))
             Admin Dashboard
-        @else
+        @elseif(session('recruiter_name'))
             Recruiter Dashboard
         @endif
     </title>
@@ -38,7 +38,7 @@
 <body>
     <div class="container-fluid m-0 p-0">
         <div class="row m-0 p-0">
-            <div class="col-2 m-0 p-0" style="z-index: 100;">
+            <div class="col-md-2 col-12 m-0 p-0">
                 <!-- Sidebar Overlay (Mobile) -->
                 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
@@ -48,7 +48,7 @@
                     <div class="sidebar" id="sidebar">
 
                         <div class="logo">
-                            @if (session()->has('recruiter_name') == "")
+                            @if (session('admin_username'))
                                 AdminPanel
                             @else
                                 RecruiterPanel
@@ -74,7 +74,6 @@
                             </li>
 
                             @if (session('admin_username'))
-
                                 <li>
                                     <a href="{{ route('control_panel') }}"
                                         class="{{ request()->routeIs('control_panel') ? 'active' : '' }}">
@@ -82,7 +81,6 @@
                                         <span>Control Panel</span>
                                     </a>
                                 </li>
-
                             @endif
 
                             <li>
@@ -129,40 +127,32 @@
                 </div>
             </div>
 
-            <div class="col-md-10 m-0 p-0">
-                <div class="col-md-12 m-0 p-0 sticky-top">
+            <div class="col-md-10 col-12 m-0 p-0">
+                <div class="col-12 m-0 p-0 sticky-top">
 
-                    <div class="navbar d-flex justify-content-space-between">
+                    <div class="right-side-block">
+                        <div class="navbar justify-content-end">
+                            <div class="d-md-none m-0 p-0">
+                                <button class="menu-toggle text-dark" id="menuToggle">
+                                    <i class="bi bi-list"></i>
+                                </button>
+                            </div>
 
-                        <div class="d-md-none justify-content-right m-0 p-0">
-                            <span>
-                                @if (session()->has('recruiter_name') == "")
-                                    AdminPanel
-                                @else
-                                    RecruiterPanel
-                                @endif
-                            </span>
-
-                            <button class="menu-toggle text-dark" id="menuToggle">
-                                <i class="bi bi-list"></i>
-                            </button>
-                        </div>
-
-                        <div class="profile">
-                            <span>
-                                Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
-                            </span>
-                            <div class="bg-dark p-2 border rounded-circle">
-                                <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                    alt="admin_logo" />
+                            <div class="profile d-flex justify-content-end">
+                                <span>
+                                    Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
+                                </span>
+                                <div class="bg-dark p-2 border rounded-circle">
+                                    <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                        alt="admin_logo" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-
-                <div class="col-12">
-                    @yield('content')
+                    <div class="col-12">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,26 +179,31 @@
                 <div class="modal-body">
 
                     <div class="list-group">
+                        <form action="" method="post">
+                            @csrf
 
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <i class="bi bi-person me-2"></i>
-                            Profile Settings
-                        </a>
+                            @if (session('admin_username'))
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-person me-2"></i>
+                                    Profile Settings
+                                </a>
 
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <i class="bi bi-key me-2"></i>
-                            Change Password
-                        </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <i class="bi bi-key me-2"></i>
+                                    Change Password
+                                </a>
+                            @endif
 
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <i class="bi bi-palette me-2"></i>
-                            Appearance
-                            <select name="" id="" class="form-select">
-                                <option value="">Ligh</option>
-                                <option value="">Dark</option>
-                            </select>
-                        </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <i class="bi bi-palette me-2"></i>
+                                Appearance
+                                <select name="" id="" class="form-select">
+                                    <option value="">Ligh</option>
+                                    <option value="">Dark</option>
+                                </select>
+                            </a>
 
+                        </form>
                     </div>
 
                 </div>

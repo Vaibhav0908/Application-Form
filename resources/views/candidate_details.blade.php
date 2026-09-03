@@ -141,89 +141,99 @@
                     </div>
 
                     <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="border rounded p-3 d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold">Resume</span>
-                                <div class="d-flex gap-2">
-                                    <a href="{{ asset('storage/' . $candidate->resume) }}"
-                                        class="btn btn-outline-primary btn-sm" target="_blank">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
-                                    <a href="{{ asset('storage/' . $candidate->resume) }}"
-                                        class="btn btn-success btn-sm" download>
-                                        <i class="bi bi-download"></i> Download
-                                    </a>
+                        @if ($candidate->resume)
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold">Resume</span>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ asset('storage/' . $candidate->resume) }}"
+                                            class="btn btn-outline-primary btn-sm" target="_blank">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                        <a href="{{ asset('storage/' . $candidate->resume) }}"
+                                            class="btn btn-success btn-sm" download>
+                                            <i class="bi bi-download"></i> Download
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
-                        <div class="col-md-6">
-                            <div class="border rounded p-3 d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold">Passport Photo</span>
-                                <div class="d-flex gap-2">
-                                    <a href="{{ asset('storage/' . $candidate->passport_photo) }}"
-                                        class="btn btn-outline-primary btn-sm" target="_blank">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
+                        @if ($candidate->passport_photo)
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold">Passport Photo</span>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ asset('storage/' . $candidate->passport_photo) }}"
+                                            class="btn btn-outline-primary btn-sm" target="_blank">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
 
-                                    <a href="{{ asset('storage/' . $candidate->passport_photo) }}"
-                                        class="btn btn-success btn-sm" download>
-                                        <i class="bi bi-download"></i> Download
-                                    </a>
+                                        <a href="{{ asset('storage/' . $candidate->passport_photo) }}"
+                                            class="btn btn-success btn-sm" download>
+                                            <i class="bi bi-download"></i> Download
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
-                        <div class="col-md-6">
-                            <div class="border rounded p-3 d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold">Degree / Certificate</span>
-                                <div class="d-flex gap-2">
-                                    <a href="{{ asset('storage/' . $candidate->degree_certificate) }}"
-                                        class="btn btn-outline-primary btn-sm" target="_blank">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
+                        @if ($candidate->degree_certificate)
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold">Degree / Certificate</span>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ asset('storage/' . $candidate->degree_certificate) }}"
+                                            class="btn btn-outline-primary btn-sm" target="_blank">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
 
-                                    <a href="{{ asset('storage/' . $candidate->degree_certificate) }}"
-                                        class="btn btn-success btn-sm" download>
-                                        <i class="bi bi-download"></i> Download
-                                    </a>
+                                        <a href="{{ asset('storage/' . $candidate->degree_certificate) }}"
+                                            class="btn btn-success btn-sm" download>
+                                            <i class="bi bi-download"></i> Download
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
-                        <div class="col-md-6">
-                            <div class="border rounded p-3 d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold">Aadhar Card</span>
-                                <div class="d-flex gap-2">
-                                    <a href="{{ asset('storage/' . $candidate->aadhar_card) }}"
-                                        class="btn btn-outline-primary btn-sm" target="_blank">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
+                        @if ($candidate->aadhar_card)
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold">Aadhar Card</span>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ asset('storage/' . $candidate->aadhar_card) }}"
+                                            class="btn btn-outline-primary btn-sm" target="_blank">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
 
-                                    <a href="{{ asset('storage/' . $candidate->aadhar_card) }}"
-                                        class="btn btn-success btn-sm" download>
-                                        <i class="bi bi-download"></i> Download
-                                    </a>
+                                        <a href="{{ asset('storage/' . $candidate->aadhar_card) }}"
+                                            class="btn btn-success btn-sm" download>
+                                            <i class="bi bi-download"></i> Download
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
-                        <div class="col-md-6">
-                            <div class="border rounded p-3 d-flex justify-content-between align-items-center">
-                                <span class="fw-semibold">Passbook</span>
-                                <div class="d-flex gap-2">
-                                    <a href="{{ asset('storage/' . $candidate->passbook) }}"
-                                        class="btn btn-outline-primary btn-sm" target="_blank">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
+                        @if ($candidate->passbook)
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold">Passbook</span>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ asset('storage/' . $candidate->passbook) }}"
+                                            class="btn btn-outline-primary btn-sm" target="_blank">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
 
-                                    <a href="{{ asset('storage/' . $candidate->passbook) }}"
-                                        class="btn btn-success btn-sm" download>
-                                        <i class="bi bi-download"></i> Download
-                                    </a>
+                                        <a href="{{ asset('storage/' . $candidate->passbook) }}"
+                                            class="btn btn-success btn-sm" download>
+                                            <i class="bi bi-download"></i> Download
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                     </div>
                 </div>
@@ -275,6 +285,7 @@
                     <hr>
                 @endforeach
             </div>
+
         </div>
 
         <div class="card shadow border-0 mb-4">
@@ -434,7 +445,7 @@
                             <div class="">
                                 <label class="form-label fw-semibold">Interviewed By</label>
                                 @if(session('admin_username'))
-                                    @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null )
+                                    @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null)
                                         <select class="form-select" name="interview_by">
                                             <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
                                                 Select Interviewer
@@ -450,16 +461,16 @@
                                     @endif
                                 @elseif(session('recruiter_name'))
                                     <!-- <select class="form-select" name="interview_by">
-                                        <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
-                                            Select Interviewer
-                                        </option>
-                                        @foreach ($recruiters as $rec)
-                                            <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
-                                                {{ $rec->name }}
-                                            </option>
-                                        @endforeach
-                                    </select> -->
-                                    <p class="form-control">{{ $office?->interviewed_by ??  $candidate->reference_name}}</p>
+                                                                <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
+                                                                    Select Interviewer
+                                                                </option>
+                                                                @foreach ($recruiters as $rec)
+                                                                    <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
+                                                                        {{ $rec->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select> -->
+                                    <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name}}</p>
                                 @endif
                             </div>
                         </div>
@@ -481,11 +492,11 @@
                                         @endforeach
                                     </select>
                                 @elseif(session('admin_username'))
-                                    @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null )
+                                    @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null)
                                         <select class="form-select" name="interview_status" required>
                                             <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
                                                 Pending
-                                            </option>       
+                                            </option>
 
                                             @foreach ($interview_status as $int_status)
                                                 <option value="{{ $int_status->interview_status }}"
@@ -525,7 +536,7 @@
                         </div>
 
                         @if (session('admin_username'))
-                            @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null )
+                            @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null)
                                 <div class="text-end p-2">
                                     <button type="reset" class="btn btn-outline-secondary px-4">
                                         Reset

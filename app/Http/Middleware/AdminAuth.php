@@ -10,12 +10,15 @@ class AdminAuth
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (
-            !session()->has('admin_id') &&
-            !session()->has('recruiter_id')
-        ) {
+        if (!session()->has('admin_id') && request()->routeIs('admin.dashboard')) 
+            {
             return redirect()->route('admin.login');
         }
+
+        elseif (!session()->has('recruiter_id') && request()->routeIs('recruiters.dashboard'))
+            {
+                return redirect()->route('recruiter.login');
+            }
 
         return $next($request);
     }

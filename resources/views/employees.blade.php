@@ -10,6 +10,7 @@
                 <th>Name</th>
                 <th>Role/Position</th>
                 <th>Status</th>
+                <th>Hiring Date</th>
             </tr>
             <div class="candidate-details">
                 @foreach ($employee as $emp)
@@ -22,6 +23,7 @@
                                     <td>
                                         <span class="bg-success status">{{ optional($emp->officeworkDetails)->interview_status }}</span>
                                     </td>
+                                    <td>{{ $emp->created_at }}</td>
                                 </tr>
 
                             @endif
@@ -35,6 +37,7 @@
                                     <td>
                                         <span class="bg-success status">{{ optional($emp->officeworkDetails)->interview_status }}</span>
                                     </td>
+                                    <td>{{ $emp->created_at }}</td>
                                 </tr>
                             @endif
                         @endif

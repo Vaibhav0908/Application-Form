@@ -32,7 +32,7 @@ class AdminAuthController extends Controller
                 'admin_username' => $admin->username,
             ]);
 
-            return redirect()->route('admin.dashboard', compact('admin'));
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors([

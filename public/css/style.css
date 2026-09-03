@@ -1,3 +1,5 @@
+/* form */
+
 body {
     background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
     font-family: "Segoe UI", sans-serif;
@@ -91,14 +93,9 @@ textarea.form-control {
     font-size: 14px;
 }
 
-.sidebar {
-    width: 250px;
-    height: 100vh;
-    background: #111827;
-    color: white;
-    position: fixed;
-    padding: 20px;
-}
+/* com_layout */
+
+
 
 .logo {
     font-size: 25px;
@@ -144,6 +141,7 @@ textarea.form-control {
 .navbar {
     background: white;
     height: 70px;
+    width: 100%;
     padding: 0 30px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
@@ -245,7 +243,6 @@ textarea.form-control {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    /* height: 575px; */
     width: 100%;
     overflow-x: auto;
     overflow-y: auto;
@@ -288,14 +285,14 @@ h2 {
     font-weight: bolder;
 }
 
-/* ================================
-   SIDEBAR
-================================ */
-
 .sidebar {
-    background: #212529;
-    color: #fff;
-    padding: 20px 10px;
+    height: 100vh;
+    width: 250px;
+    background: #111827;
+    color: white;
+    position: fixed;
+    padding: 20px;
+    z-index: 1090;
 }
 
 .logo {
@@ -341,31 +338,6 @@ h2 {
     min-width: 20px;
 }
 
-/* ================================
-   MOBILE NAVBAR
-================================ */
-
-.mobile-navbar {
-    height: 60px;
-    background: #212529;
-    color: #fff;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 15px;
-
-    position: sticky;
-    top: 0;
-    z-index: 1050;
-}
-
-.mobile-logo {
-    font-size: 20px;
-    font-weight: 600;
-}
-
 .menu-toggle {
     background: transparent;
     border: none;
@@ -374,10 +346,6 @@ h2 {
     cursor: pointer;
 }
 
-/* ================================
-   SIDEBAR OVERLAY
-================================ */
-
 .sidebar-overlay {
     display: none;
     position: fixed;
@@ -385,10 +353,6 @@ h2 {
     background: rgba(0, 0, 0, 0.5);
     z-index: 1090;
 }
-
-/* ================================
-   TABLET
-================================ */
 
 @media (max-width: 991.98px) and (min-width: 768px) {
     .sidebar-wrapper {
@@ -410,10 +374,6 @@ h2 {
         gap: 8px;
     }
 }
-
-/* ================================
-   MOBILE
-================================ */
 
 @media (max-width: 767.98px) {
     .sidebar-wrapper {

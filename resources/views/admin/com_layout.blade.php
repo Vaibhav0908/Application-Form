@@ -129,30 +129,27 @@
 
             <div class="col-md-10 col-12 m-0 p-0">
                 <div class="col-12 m-0 p-0 sticky-top">
+                    <div class="navbar justify-content-end">
+                        <div class="d-md-none m-0 p-0">
+                            <button class="menu-toggle text-dark" id="menuToggle">
+                                <i class="bi bi-list"></i>
+                            </button>
+                        </div>
 
-                    <div class="right-side-block">
-                        <div class="navbar justify-content-end">
-                            <div class="d-md-none m-0 p-0">
-                                <button class="menu-toggle text-dark" id="menuToggle">
-                                    <i class="bi bi-list"></i>
-                                </button>
-                            </div>
-
-                            <div class="profile d-flex justify-content-end">
-                                <span>
-                                    Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
-                                </span>
-                                <div class="bg-dark p-2 border rounded-circle">
-                                    <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                        alt="admin_logo" />
-                                </div>
+                        <div class="profile">
+                            <span>
+                                Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
+                            </span>
+                            <div class="bg-dark p-2 border rounded-circle">
+                                <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                    alt="admin_logo" />
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-12">
-                        @yield('content')
-                    </div>
+                <div class="col-12">
+                    @yield('content')
                 </div>
             </div>
         </div>

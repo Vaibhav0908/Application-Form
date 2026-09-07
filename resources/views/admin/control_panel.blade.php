@@ -81,8 +81,8 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('recruiters.edit_panel', $rec->id) }}" class="btn btn-primary">Edit</a>
-                            <a href="{{ route('recruiters.delete', $rec->id) }}" class="btn btn-danger">Delete</a>
+                            <a href="{{ route('recruiters.edit_panel', $rec->id) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+                            <a href="{{ route('recruiters.delete', $rec->id) }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -171,9 +171,9 @@
 
                         <td>
                             <a href="{{ route('option.edit_panel', ['type' => 'platform', 'id' => $plat->id]) }}"
-                                class="btn btn-primary">Edit</a>
+                                class="btn btn-primary"><i class="bi bi-pencil"></i></a>
                             <a href="{{ route('option.delete', ['type' => 'platform', 'id' => $plat->id]) }}"
-                                class="btn btn-danger">Delete</a>
+                                class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -259,9 +259,9 @@
 
                         <td>
                             <a href="{{ route('option.edit_panel', ['type' => 'nation', 'id' => $nat->id]) }}"
-                                class="btn btn-primary">Edit</a>
+                                class="btn btn-primary"><i class="bi bi-pencil"></i></a>
                             <a href="{{ route('option.delete', ['type' => 'nation', 'id' => $nat->id]) }}"
-                                class="btn btn-danger">Delete</a>
+                                class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -349,9 +349,9 @@
 
                         <td>
                             <a href="{{ route('option.edit_panel', [$type = 'int_status', $int_status->id]) }}"
-                                class="btn btn-primary">Edit</a>
+                                class="btn btn-primary"><i class="bi bi-pencil"></i></a>
                             <a href="{{ route('option.delete', ['type' => 'int_status', 'id' => $int_status->id]) }}"
-                                class="btn btn-danger">Delete</a>
+                                class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

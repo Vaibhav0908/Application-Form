@@ -39,14 +39,9 @@
     <div class="container-fluid m-0 p-0">
         <div class="row m-0 p-0">
             <div class="col-md-2 col-12 m-0 p-0">
-                <!-- Sidebar Overlay (Mobile) -->
                 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-                <!-- Sidebar -->
                 <div class="sidebar-wrapper">
-
-                    <div class="sidebar" id="sidebar">
-
+                    <div class="sidebar p-3" id="sidebar">
                         <div class="logo">
                             @if (session('admin_username'))
                                 AdminPanel
@@ -54,9 +49,7 @@
                                 RecruiterPanel
                             @endif
                         </div>
-
                         <ul class="menu">
-
                             <li>
                                 @if (session('admin_username'))
                                     <a href="{{ route('admin.dashboard') }}"
@@ -72,7 +65,6 @@
                                     </a>
                                 @endif
                             </li>
-
                             @if (session('admin_username'))
                                 <li>
                                     <a href="{{ route('control_panel') }}"
@@ -82,7 +74,6 @@
                                     </a>
                                 </li>
                             @endif
-
                             <li>
                                 <a href="{{ route('employee') }}"
                                     class="{{ request()->routeIs('employee') ? 'active' : '' }}">
@@ -90,7 +81,6 @@
                                     <span>Employees</span>
                                 </a>
                             </li>
-
                             <li>
                                 <a href="{{ route('applications') }}"
                                     class="{{ request()->routeIs('applications') ? 'active' : '' }}">
@@ -98,57 +88,51 @@
                                     <span>Applications</span>
                                 </a>
                             </li>
-
                             <li>
                                 <a href="#">
                                     <i class="bi bi-bar-chart"></i>
                                     <span>Reports</span>
                                 </a>
                             </li>
-
                             <li>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#settingsModal">
                                     <i class="bi bi-gear"></i>
                                     <span>Settings</span>
                                 </a>
                             </li>
-
                             <li>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
                                     <i class="bi bi-box-arrow-right"></i>
                                     <span>Logout</span>
                                 </a>
                             </li>
-
                         </ul>
-
                     </div>
-
                 </div>
             </div>
 
             <div class="col-md-10 col-12 m-0 p-0">
-                <div class="col-12 m-0 p-0 sticky-top">
-                    <div class="navbar justify-content-end">
-                        <div class="d-md-none m-0 p-0">
-                            <button class="menu-toggle text-dark" id="menuToggle">
-                                <i class="bi bi-list"></i>
-                            </button>
-                        </div>
+                <div class="col-12 m-0 p-0 ">
+                    <div class="navbar sticky-top">
+                        <div class="profile d-flex align-items-center">
+                            <div class="d-md-none d-flex align-items-center">
+                                <button class="menu-toggle text-dark" id="menuToggle">
+                                    <i class="bi bi-list"></i>
+                                </button>
+                            </div>
 
-                        <div class="profile">
-                            <span>
-                                Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
-                            </span>
-                            <div class="bg-dark p-2 border rounded-circle">
-                                <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                    alt="admin_logo" />
+                            <div class="d-flex align-items-center ms-auto">
+                                <span>
+                                    Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
+                                </span>
+
+                                <div class="ms-2">
+                                    <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                        alt="admin_logo" class="rounded-circle">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12">
                     @yield('content')
                 </div>
             </div>

@@ -38,9 +38,9 @@
 <body>
     <div class="container-fluid m-0 p-0">
         <div class="row m-0 p-0">
-            <div class="col-md-2 col-12 m-0 p-0">
+            <div class="col-md-2 m-0 p-0">
                 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-                <div class="sidebar-wrapper">
+                <!-- <div class="sidebar-wrapper px-3 py-3"> -->
                     <div class="sidebar p-3" id="sidebar">
                         <div class="logo">
                             @if (session('admin_username'))
@@ -108,11 +108,11 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
 
-            <div class="col-md-10 col-12 m-0 p-0">
-                <div class="col-12 m-0 p-0 ">
+            <div class="col-md-10 m-0 p-0">
+                <div class="col-12 m-0 p-0">
                     <div class="navbar sticky-top">
                         <div class="profile d-flex align-items-center">
                             <div class="d-md-none d-flex align-items-center">
@@ -133,6 +133,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 m-0 p-0">
                     @yield('content')
                 </div>
             </div>

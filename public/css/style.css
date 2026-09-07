@@ -50,6 +50,7 @@ textarea.form-control {
     border-radius: 10px;
     height: 35px;
     border: none;
+    background-color: white;
     padding: 5px;
 }
 
@@ -269,11 +270,11 @@ h2 {
 
 .sidebar {
     height: 100vh;
+    width: 260px;
     background: #111827;
     color: white;
     position: fixed;
-    /* padding: 20px; */
-    z-index: 1090;
+    z-index: 100000;
 }
 
 .logo {
@@ -335,13 +336,9 @@ h2 {
 }
 
 @media (max-width: 991.98px) and (min-width: 768px) {
-    /* .sidebar-wrapper {
-        width: 22%;
-    } */
-
-    /* .sidebar {
-        padding: 15px 8px;
-    } */
+    .sidebar {
+        width: 160px;
+    }
 
     .logo {
         font-size: 18px;
@@ -364,7 +361,6 @@ h2 {
         position: fixed;
         top: 0;
         left: -280px;
-        /* width: 260px; */
         height: 100vh;
         z-index: 1100;
         transition: left 0.3s ease;

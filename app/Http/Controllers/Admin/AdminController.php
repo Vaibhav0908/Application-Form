@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Candidate;
 use App\Models\Interview_status;
 use App\Models\Nation;
@@ -201,20 +202,37 @@ class AdminController extends Controller
         );
     }
 
-    public function profile_edit(Request $request){
-    $request->validate([
-            'inter_name' => 'required|string|max:255',
+    // public function com_lay(){
+    //     $admin = Admin::all();
+    //     return view('admin.com-layout', compact('admin'));
+    // }
+
+    public function profile_edit(Request $request)
+    {
+        $request->validate([
+            'admin_name' => 'required|string|max:255',
+            'admin_password' => 'nullable|string|min:6',
+            'admin_conf_pass' => 'same:admin_password',
         ]);
 
-        Interview_status::update(
-            [
-                'id' => $request->id,
-            ],
-            [
-                'interview_status' => $request->inter_name,
-                'status' => $request->inter_status,
-            ]
-        );
+        $admin = Admin::find($request->id);
+
+        if (!$admin) {
+            return redirect()->back()->with('error', 'Admin not found.');
+        }
+
+        // Update username
+        $admin->username = $request->admin_name;
+
+        // Update password only when a new password is entered
+        if (!empty($request->admin_password)) {
+            $admin->password = Hash::make($request->admin_password);
+        }
+
+        $admin->save();
+
+        // Update session username if you are using session
+        session(['admin_username' => $admin->username]);
 
         return redirect()->back()->with(
             'success',

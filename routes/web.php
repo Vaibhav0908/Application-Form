@@ -61,6 +61,9 @@ Route::middleware('admin.auth')->group(function () {
     Route::post('/interview_status', [AdminController::class, 'inter_status'])
         ->name('inter_status_save');
 
+        Route::post('/admin/edit', [AdminController::class, 'profile_edit'])
+        ->name('admin_profile_edit');
+
     Route::get('/admin/candidate/{id}', [AdminController::class, 'showCandidate'])
         ->name('admin.candidate.show');
 

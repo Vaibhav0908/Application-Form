@@ -32,15 +32,25 @@
             background: #f5f7fb;
             display: flex;
         }
+
+        .dark_body {
+            background: #111827 !important;
+            color: white !important;
+        }
+
+        .dark_body .card,
+        .dark_body .modal-content {
+            background: #1f2937;
+            color: white;
+        }
     </style>
 </head>
 
-<body>
+<body class="">
     <div class="container-fluid m-0 p-0">
         @if (session('success'))
             <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">
                 {{ session('success') }}
-
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
 
@@ -126,8 +136,8 @@
             </div>
 
             <div class="col-md-10 m-0 p-0">
-                <div class="col-12 m-0 p-0">
-                    <div class="navbar sticky-top">
+                <div class="col-12 m-0 p-0 sticky-top">
+                    <div class="navbar ">
                         <div class="profile d-flex align-items-center">
                             <div class="d-md-none d-flex align-items-center">
                                 <button class="menu-toggle text-dark" id="menuToggle">
@@ -142,13 +152,13 @@
 
                                 <div class="ms-2">
                                     @if (session('admin_username'))
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
                                             <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                                                 alt="admin_logo" class="rounded-circle bg-dark p-1">
                                         </a>
                                     @elseif('recruiter_name')
                                         <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                            alt="admin_logo" class="rounded-circle">
+                                            alt="admin_logo" class="rounded-circle bg-dark p-1">
                                     @endif
                                 </div>
                             </div>
@@ -183,7 +193,7 @@
                                 <i class="bi bi-palette me-2"></i>
                                 Appearance
                                 <select name="" id="" class="form-select">
-                                    <option value="">Ligh</option>
+                                    <option value="" id="darkModeBtn">Ligh</option>
                                     <option value="">Dark</option>
                                 </select>
                             </a>
@@ -214,22 +224,29 @@
                 </div>
                 <div class="modal-body">
                     <div class="list-group">
-                        <form action="" method="post">
+                        <form action="{{ route('admin_profile_edit')}}" method="post">
                             @csrf
-                            <label for="">Name: </label>
-                            <input type="text" name="rec_name" class="form-control">
-                            <label for="">Password: </label>
-                            <input type="password" name="rec_password" class="form-control">
-                            <label for="">Confirm Password: </label>
-                            <input type="password" name="rec_password" class="form-control">
-                        </form>
+                            <input type="hidden" name="id" value="{{ session('admin_id') }}">
+
+                            <label for="admin_name">Name:</label>
+                            <input type="text" id="admin_name" name="admin_name" class="form-control"
+                                value="{{ session('admin_username') }}" required>
+
+                            <label for="admin_password">Password:</label>
+                            <input type="password" id="admin_password" name="admin_password" class="form-control"
+                                placeholder="Enter new password">
+
+                            <label for="admin_conf_pass">Confirm Password:</label>
+                            <input type="password" id="admin_conf_pass" name="admin_conf_pass" class="form-control"
+                                placeholder="Confirm new password">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                        Update
                     </button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -280,6 +297,25 @@
             sidebar.classList.remove("show");
             sidebarOverlay.classList.remove("show");
         });
+
+
+        const darkModeBtn = document.getElementById('darkModeBtn');
+
+        // Apply saved mode
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark_body');
+        }
+
+        darkModeBtn.addEventListener('click', function () {
+            document.body.classList.toggle('dark_body');
+
+            if (document.body.classList.contains('dark_body')) {
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                localStorage.setItem('darkMode', 'false');
+            }
+        });
+
     </script>
 </body>
 

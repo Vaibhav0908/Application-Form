@@ -147,7 +147,6 @@ textarea.form-control {
 .profile {
     width: 100%;
     gap: 5px;
-    justify-content: space-between;
 }
 
 .profile img {

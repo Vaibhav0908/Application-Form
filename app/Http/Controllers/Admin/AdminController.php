@@ -200,4 +200,25 @@ class AdminController extends Controller
             'Interview Status Data Saved Successfully.'
         );
     }
+
+    public function profile_edit(Request $request){
+    $request->validate([
+            'inter_name' => 'required|string|max:255',
+        ]);
+
+        Interview_status::update(
+            [
+                'id' => $request->id,
+            ],
+            [
+                'interview_status' => $request->inter_name,
+                'status' => $request->inter_status,
+            ]
+        );
+
+        return redirect()->back()->with(
+            'success',
+            'Profile Updated Successfully.'
+        );
+    }
 }

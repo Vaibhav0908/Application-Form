@@ -37,78 +37,92 @@
 
 <body>
     <div class="container-fluid m-0 p-0">
+        @if (session('success'))
+            <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">
+                {{ session('success') }}
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <script>
+                setTimeout(() => {
+                    document.getElementById('successAlert')?.remove();
+                }, 5000);
+            </script>
+        @endif
+
         <div class="row m-0 p-0">
             <div class="col-md-2 m-0 p-0">
                 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-                <!-- <div class="sidebar-wrapper px-3 py-3"> -->
-                    <div class="sidebar p-3" id="sidebar">
-                        <div class="logo">
-                            @if (session('admin_username'))
-                                AdminPanel
-                            @else
-                                RecruiterPanel
-                            @endif
-                        </div>
-                        <ul class="menu">
-                            <li>
-                                @if (session('admin_username'))
-                                    <a href="{{ route('admin.dashboard') }}"
-                                        class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                                        <i class="bi bi-grid"></i>
-                                        <span>Dashboard</span>
-                                    </a>
-                                @elseif(session('recruiter_name'))
-                                    <a href="{{ route('recruiters.dashboard') }}"
-                                        class="{{ request()->routeIs('recruiters.dashboard') ? 'active' : '' }}">
-                                        <i class="bi bi-grid"></i>
-                                        <span>Dashboard</span>
-                                    </a>
-                                @endif
-                            </li>
-                            @if (session('admin_username'))
-                                <li>
-                                    <a href="{{ route('control_panel') }}"
-                                        class="{{ request()->routeIs('control_panel') ? 'active' : '' }}">
-                                        <i class="bi bi-people"></i>
-                                        <span>Control Panel</span>
-                                    </a>
-                                </li>
-                            @endif
-                            <li>
-                                <a href="{{ route('employee') }}"
-                                    class="{{ request()->routeIs('employee') ? 'active' : '' }}">
-                                    <i class="bi bi-person-vcard"></i>
-                                    <span>Employees</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('applications') }}"
-                                    class="{{ request()->routeIs('applications') ? 'active' : '' }}">
-                                    <i class="bi bi-file-earmark-text"></i>
-                                    <span>Applications</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="bi bi-bar-chart"></i>
-                                    <span>Reports</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#settingsModal">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Settings</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <span>Logout</span>
-                                </a>
-                            </li>
-                        </ul>
+
+                <div class="sidebar p-3" id="sidebar">
+                    <div class="logo">
+                        @if (session('admin_username'))
+                            AdminPanel
+                        @else
+                            RecruiterPanel
+                        @endif
                     </div>
-                <!-- </div> -->
+                    <ul class="menu">
+                        <li>
+                            @if (session('admin_username'))
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                                    <i class="bi bi-grid"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            @elseif(session('recruiter_name'))
+                                <a href="{{ route('recruiters.dashboard') }}"
+                                    class="{{ request()->routeIs('recruiters.dashboard') ? 'active' : '' }}">
+                                    <i class="bi bi-grid"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            @endif
+                        </li>
+                        @if (session('admin_username'))
+                            <li>
+                                <a href="{{ route('control_panel') }}"
+                                    class="{{ request()->routeIs('control_panel') ? 'active' : '' }}">
+                                    <i class="bi bi-people"></i>
+                                    <span>Control Panel</span>
+                                </a>
+                            </li>
+                        @endif
+                        <li>
+                            <a href="{{ route('employee') }}"
+                                class="{{ request()->routeIs('employee') ? 'active' : '' }}">
+                                <i class="bi bi-person-vcard"></i>
+                                <span>Employees</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('applications') }}"
+                                class="{{ request()->routeIs('applications') ? 'active' : '' }}">
+                                <i class="bi bi-file-earmark-text"></i>
+                                <span>Applications</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="bi bi-bar-chart"></i>
+                                <span>Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                                <i class="bi bi-gear"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
 
             <div class="col-md-10 m-0 p-0">
@@ -127,8 +141,15 @@
                                 </span>
 
                                 <div class="ms-2">
-                                    <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                        alt="admin_logo" class="rounded-circle">
+                                    @if (session('admin_username'))
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
+                                            <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                                alt="admin_logo" class="rounded-circle bg-dark p-1">
+                                        </a>
+                                    @elseif('recruiter_name')
+                                        <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                            alt="admin_logo" class="rounded-circle">
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -144,39 +165,20 @@
 
     <!-- Settings Modal -->
     <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-
         <div class="modal-dialog modal-dialog-centered">
-
             <div class="modal-content">
-
                 <div class="modal-header">
                     <h5 class="modal-title" id="settingsModalLabel">
                         <i class="bi bi-gear me-2"></i>
                         Settings
                     </h5>
-
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-
                 <div class="modal-body">
-
                     <div class="list-group">
                         <form action="" method="post">
                             @csrf
-
-                            @if (session('admin_username'))
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <i class="bi bi-person me-2"></i>
-                                    Profile Settings
-                                </a>
-
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <i class="bi bi-key me-2"></i>
-                                    Change Password
-                                </a>
-                            @endif
-
                             <a href="#" class="list-group-item list-group-item-action">
                                 <i class="bi bi-palette me-2"></i>
                                 Appearance
@@ -185,24 +187,51 @@
                                     <option value="">Dark</option>
                                 </select>
                             </a>
-
                         </form>
                     </div>
-
                 </div>
-
                 <div class="modal-footer">
-
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
-
                 </div>
-
             </div>
-
         </div>
+    </div>
 
+
+    <!-- Profile Update Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">
+                        <i class="bi bi-person me-2"></i>
+                        Edit Profile
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        <form action="" method="post">
+                            @csrf
+                            <label for="">Name: </label>
+                            <input type="text" name="rec_name" class="form-control">
+                            <label for="">Password: </label>
+                            <input type="password" name="rec_password" class="form-control">
+                            <label for="">Confirm Password: </label>
+                            <input type="password" name="rec_password" class="form-control">
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Logout Modal -->

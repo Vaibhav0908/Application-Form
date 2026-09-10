@@ -11,9 +11,14 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        Admin::create([
-            'username' => 'GGC',
-            'password' => Hash::make('GGC_World@Infinity'),
-        ]);
+        Admin::updateOrCreate(
+            ['id' => 2],
+            [
+                'username' => 'Sam',
+                'email' => 'sam12@gmail.com',
+                'password' => Hash::make('Sam12345'),
+                'admin_logo' => 'c:\Users\DELL\Pictures\stylish-barber-shop-logo-featuring-a-dashing-man-with-a-beard-and-mustache-vector.jpg',
+            ]
+        );
     }
 }

@@ -202,17 +202,14 @@ class AdminController extends Controller
         );
     }
 
-    // public function com_lay(){
-    //     $admin = Admin::all();
-    //     return view('admin.com-layout', compact('admin'));
-    // }
-
     public function profile_edit(Request $request)
     {
         $request->validate([
             'admin_name' => 'required|string|max:255',
+            'admin_email' => 'required|email|max:255',
             'admin_password' => 'nullable|string|min:6',
             'admin_conf_pass' => 'same:admin_password',
+            'admin_logo' => 'nullable|mimes:jpg,jpeg,png,jfif,webp|max:2048',
         ]);
 
         $admin = Admin::find($request->id);
@@ -224,15 +221,26 @@ class AdminController extends Controller
         // Update username
         $admin->username = $request->admin_name;
 
+        // Update logo only if a new logo was uploaded
+        if ($request->hasFile('admin_logo')) {
+            $admin->admin_logo = $request->file('admin_logo')
+                ->store('documents', 'public');
+        }
+
         // Update password only when a new password is entered
         if (!empty($request->admin_password)) {
             $admin->password = Hash::make($request->admin_password);
         }
 
+
         $admin->save();
 
-        // Update session username if you are using session
-        session(['admin_username' => $admin->username]);
+        // Update session
+        session([
+            'admin_username' => $admin->username,
+            'email' => $admin->email,
+            'admin_logo' => $admin->admin_logo,
+        ]);
 
         return redirect()->back()->with(
             'success',

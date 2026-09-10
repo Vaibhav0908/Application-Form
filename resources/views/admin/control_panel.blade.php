@@ -9,20 +9,6 @@
 
 @section('content')
 
-    @if (session('success'))
-        <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">
-            {{ session('success') }}
-
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-
-        <script>
-            setTimeout(() => {
-                document.getElementById('successAlert')?.remove();
-            }, 5000);
-        </script>
-    @endif
-
     <!--Required Recruiters Block -->
 
     <div class="row align-items-center py-1 mt-5 mx-4 mx-md-5">

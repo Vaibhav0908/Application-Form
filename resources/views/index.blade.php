@@ -45,7 +45,7 @@
                 Baramati and Pune <br />
                 <span class="h4"><i class="bi bi-person-workspace"></i> Job Application Form</span>
             </h1>
-            <p>Fill your details carefully</p>
+            <p>Fill the details carefully</p>
         </div>
 
         <div class="form-card">
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label>Refrence<sup class="text-danger">*</sup></label>
+                        <label>Reference<sup class="text-danger">*</sup></label>
                         <select name="refrence" class="form-control" required>
                             <option selected disabled>--Please Select--</option>
                             @foreach ($recruiters as $rec)
@@ -287,7 +287,7 @@
                     </button>
                 </div>
 
-                <p><sup class="text-danger">*</sup>Fresher can skip</p>
+                <p><sup class="text-danger">*</sup>Fresher's can skip</p>
                 <h4 class="section-title">Professional Details</h4>
 
                 <div id="professionalContainer">

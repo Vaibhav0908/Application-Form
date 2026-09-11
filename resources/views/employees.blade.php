@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <h2 class="mt-5 mx-5">Company Employees</h2>
+    <h2 class="text-primary mt-5 mx-5">Company Employees</h2>
     <div class="table-box">
         <table>
             <tr class="table-heading">

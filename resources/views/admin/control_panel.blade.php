@@ -67,8 +67,10 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('recruiters.edit_panel', $rec->id) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-                            <a href="{{ route('recruiters.delete', $rec->id) }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            <a href="{{ route('recruiters.edit_panel', $rec->id) }}" class="btn btn-primary"><i
+                                    class="bi bi-pencil"></i></a>
+                            <a href="{{ route('recruiters.delete', $rec->id) }}" class="btn btn-danger"><i
+                                    class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach

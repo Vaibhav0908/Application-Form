@@ -199,6 +199,9 @@
                             <button type="button" id="darkModeBtn" class="btn btn-dark">
                                 Dark
                             </button>
+                            <button type="button" id="lightModeBtn" class="btn btn-light border-dark">
+                                Light
+                            </button>
                             <!-- </select> -->
                         </a>
                         <!-- </form> -->
@@ -311,26 +314,30 @@
         });
 
 
+
         const darkModeBtn = document.getElementById('darkModeBtn');
+        const lightModeBtn = document.getElementById('lightModeBtn');
 
         // Apply saved mode
         if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark_body');
         }
 
-        darkModeBtn.addEventListener('click', function () {
-            document.body.classList.toggle('dark_body');
+        if (localStorage.getItem('darkMode') === 'false') {
+            document.body.classList.remove('dark_body');
+        }
 
-            if (document.body.classList.contains('dark_body')) {
-                localStorage.setItem('darkMode', 'true');
-            } else {
-                localStorage.setItem('darkMode', 'false');
-            }
+        darkModeBtn.addEventListener('click', function () {
+            document.body.classList.add('dark_body');
+            localStorage.setItem('darkMode', 'true');
+            localStorage.setItem('lightMode', 'false');
         });
 
-        // document.getElementById('darkModeBtn').addEventListener('click', function () {
-        //     document.body.classList.toggle('dark_body');
-        // });
+        lightModeBtn.addEventListener('click', function () {
+            document.body.classList.remove('dark_body');
+            localStorage.setItem('darkMode', 'false');
+            localStorage.setItem('lightMode', 'true');
+        });
 
     </script>
 </body>

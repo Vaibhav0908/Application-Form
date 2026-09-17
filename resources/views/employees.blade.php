@@ -15,6 +15,7 @@
             <div class="candidate-details">
                 @foreach ($employee as $emp)
                         @if ($emp->reference_name == "NA" ? optional($emp->officeworkDetails)->interviewed_by == session('recruiter_name') : $emp->reference_name == session('recruiter_name'))
+                        
                             @if (optional($emp->officeworkDetails)->interview_status == 'Select')
                                 <tr>
                                     <td>{{ $emp->id }}</td>

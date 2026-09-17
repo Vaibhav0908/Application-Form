@@ -44,7 +44,6 @@
         .dark_body .navbar {
             background: #1f2937;
             color: white;
-            /* color: #393a3a; */
         }
     </style>
 </head>
@@ -189,22 +188,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="list-group">
-                        <!-- <form action="" method="post"> -->
-                        <!-- @csrf -->
-                        <a href="#" class="list-group-item list-group-item-action">
+                        <a href="" class="list-group-item list-group-item-action">
                             <i class="bi bi-palette me-2"></i>
                             Appearance
-                            <!-- <select name="" id="" class="form-select"> -->
-                            <!-- <option value="">Ligh</option> -->
                             <button type="button" id="darkModeBtn" class="btn btn-dark">
                                 Dark
                             </button>
                             <button type="button" id="lightModeBtn" class="btn btn-light border-dark">
                                 Light
                             </button>
-                            <!-- </select> -->
                         </a>
-                        <!-- </form> -->
                     </div>
                 </div>
                 <div class="modal-footer">

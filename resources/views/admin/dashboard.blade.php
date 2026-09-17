@@ -38,7 +38,7 @@
         <div class="card">
           <div class="icon bg-dark"><i class="bi bi-trophy-fill"></i></div>
           <h3>{{ $status->interview_status }}</h3>
-          <h2 class="text-dark">{{ $statusCounts[$status->interview_status] ?? 0 }}</h2>
+          <h2 class="">{{ $statusCounts[$status->interview_status] ?? 0 }}</h2>
         </div>
       @endforeach
 

@@ -1,6 +1,7 @@
 @extends('admin.com_layout')
 
 @section('content')
+<div class="m-5">
     @if (isset($platform))
         <div class="modal-header">
             <h5 class="modal-title" id="settingsModalLabel">
@@ -56,13 +57,11 @@
         </div>
         </form>
 
-        @elseif (isset($int_status))
-        <div class="modal-header">
+    @elseif (isset($int_status))
+                <div class="modal-header">
                     <h5 class="modal-title" id="settingsModalLabel">
                         Edit the Interview Status Details
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('inter_status_save') }}" method="post">
@@ -84,5 +83,6 @@
                 </div>
         </form>
     @endif
+</div>
 
 @endsection

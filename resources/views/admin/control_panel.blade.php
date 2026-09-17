@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-12 col-md-6 text-md-end mt-3 mt-md-0">
-            <a href="" data-bs-toggle="modal" data-bs-target="#addrecModal" class="btn btn-primary">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#addrecModal" class="btn btn-primary">
                 <i class="bi bi-plus-lg"></i>
                 Add HR
             </a>
@@ -54,6 +54,7 @@
                                     onclick="togglePassword({{ $rec->id }}, this)">
                                     <i class="bi bi-eye"></i>
                                 </button>
+
                             </div>
                         </td>
                         <td>
@@ -65,12 +66,12 @@
                                 <span class="">{{$rec->status}}</span>
                             @endif
                         </td>
-
                         <td>
                             <a href="{{ route('recruiters.edit_panel', $rec->id) }}" class="btn btn-primary"><i
                                     class="bi bi-pencil"></i></a>
-                            <a href="{{ route('recruiters.delete', $rec->id) }}" class="btn btn-danger"><i
-                                    class="bi bi-trash"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                data-delete-url="{{ route('recruiters.delete', $rec->id) }}"
+                                class="btn btn-danger delete-btn"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -160,8 +161,9 @@
                         <td>
                             <a href="{{ route('option.edit_panel', ['type' => 'platform', 'id' => $plat->id]) }}"
                                 class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-                            <a href="{{ route('option.delete', ['type' => 'platform', 'id' => $plat->id]) }}"
-                                class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                data-delete-url="{{ route('option.delete', ['type' => 'platform', 'id' => $plat->id]) }}"
+                                class="btn btn-danger delete-btn"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -213,7 +215,7 @@
         </div>
 
         <div class="col-12 col-md-6 text-md-end mt-3 mt-md-0">
-            <a href="" data-bs-toggle="modal" data-bs-target="#addnatModal" class="btn btn-primary">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#addnatModal" class="btn btn-primary">
                 <i class="bi bi-plus-lg"></i>
                 Add Nations
             </a>
@@ -248,8 +250,9 @@
                         <td>
                             <a href="{{ route('option.edit_panel', ['type' => 'nation', 'id' => $nat->id]) }}"
                                 class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-                            <a href="{{ route('option.delete', ['type' => 'nation', 'id' => $nat->id]) }}"
-                                class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            <a href="#" data-delete-url="{{ route('option.delete', ['type' => 'nation', 'id' => $nat->id]) }}"
+                                data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger delete-btn"><i
+                                    class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -338,8 +341,10 @@
                         <td>
                             <a href="{{ route('option.edit_panel', [$type = 'int_status', $int_status->id]) }}"
                                 class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-                            <a href="{{ route('option.delete', ['type' => 'int_status', 'id' => $int_status->id]) }}"
-                                class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            <a href="#"
+                                data-delete-url="{{ route('option.delete', ['type' => 'int_status', 'id' => $int_status->id]) }}"
+                                data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger delete-btn"><i
+                                    class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -356,8 +361,7 @@
                     <h5 class="modal-title" id="settingsModalLabel">
                         Fill the Interview Status Details
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('inter_status_save') }}" method="post">
@@ -382,6 +386,34 @@
     </div>
 
 
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">
+                        <i class="bi bi-trash"></i>
+                        Delete
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure, you want to Delete?
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="confirmDeleteBtn" class="btn btn-success">
+                        <span>Yes</span>
+                    </a>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     <script>
@@ -399,5 +431,18 @@
                 icon.classList.add('bi-eye');
             }
         }
+
+
+
+
+        document.querySelectorAll('.delete-btn').forEach(function (button) {
+            button.addEventListener('click', function () {
+
+                let deleteUrl = this.dataset.deleteUrl;
+
+                document.getElementById('confirmDeleteBtn').href = deleteUrl;
+
+            });
+        });
     </script>
 @endsection

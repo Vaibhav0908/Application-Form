@@ -42,10 +42,10 @@
             </tr>
 
             <div class="candidate-details">
-                @foreach ($candidates as $cand)
+                @foreach ($candidates as $index => $cand)
                     @if ($cand->reference_name == "NA" ? optional($cand->officeworkDetails)->interviewed_by == session('recruiter_name') : $cand->reference_name == session('recruiter_name'))
                         <tr>
-                            <td>{{ $cand->id }}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td>
                                 <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
                                     style="text-decoration: dotted;">
@@ -103,7 +103,7 @@
                         </tr>
                     @elseif(session('admin_username'))
                         <tr>
-                            <td>{{ $cand->id }}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td>
                                 <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
                                     style="text-decoration: dotted;">

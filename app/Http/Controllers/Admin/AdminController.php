@@ -64,7 +64,7 @@ class AdminController extends Controller
             'educationDetails',
             'professionalDetails',
             'officeworkDetails'
-        ])->latest()->get();
+        ])->get();
 
         return view('applications', compact('candidates'));
     }

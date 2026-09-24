@@ -37,9 +37,9 @@
             </tr>
 
             <div class="recruiter-details">
-                @foreach ($recruiter as $rec)
+                @foreach ($recruiter as $index => $rec)
                     <tr>
-                        <td>{{ $rec->id }}</td>
+                        <td>{{ $index + 1 }}</td>
 
                         <td>{{ $rec->name }}</td>
 
@@ -142,9 +142,9 @@
             </tr>
 
             <div class="recruiter-details">
-                @foreach ($platforms as $plat)
+                @foreach ($platforms as $index => $plat)
                     <tr>
-                        <td>{{ $plat->id }}</td>
+                        <td>{{ $index + 1 }}</td>
 
                         <td>{{ $plat->platform_name }}</td>
 
@@ -231,9 +231,9 @@
             </tr>
 
             <div class="recruiter-details">
-                @foreach ($nations as $nat)
+                @foreach ($nations as $index => $nat)
                     <tr>
-                        <td>{{ $nat->id }}</td>
+                        <td>{{ $index + 1 }}</td>
 
                         <td>{{ $nat->nation }}</td>
 
@@ -322,9 +322,9 @@
             </tr>
 
             <div class="recruiter-details">
-                @foreach ($interview_status as $int_status)
+                @foreach ($interview_status as $index => $int_status)
                     <tr>
-                        <td>{{ $int_status->id }}</td>
+                        <td>{{ $index + 1 }}</td>
 
                         <td>{{ $int_status->interview_status }}</td>
 

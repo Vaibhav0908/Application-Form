@@ -40,6 +40,7 @@
 
     <div class="container main-container">
         <div class="header">
+            <img src={{ asset('storage\documents\logo.jpg') }} width="120px" height="100px" alt="logo" class="rounded-circle p-1 bg-primary">
             <h1 class="">
                 Girish Group of Companies <br>
                 Baramati and Pune <br />

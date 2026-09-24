@@ -13,12 +13,12 @@
                 <th>Hiring Date</th>
             </tr>
             <div class="candidate-details">
-                @foreach ($employee as $emp)
+                @foreach ($employee as $index => $emp)
                         @if ($emp->reference_name == "NA" ? optional($emp->officeworkDetails)->interviewed_by == session('recruiter_name') : $emp->reference_name == session('recruiter_name'))
                         
                             @if (optional($emp->officeworkDetails)->interview_status == 'Select')
                                 <tr>
-                                    <td>{{ $emp->id }}</td>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $emp->full_name }}</td>
                                     <td>{{ $emp->applicant_designation }}</td>
                                     <td>
@@ -32,7 +32,7 @@
                         @elseif(session('admin_username'))
                             @if (optional($emp->officeworkDetails)->interview_status == 'Select')
                                 <tr>
-                                    <td>{{ $emp->id }}</td>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $emp->full_name }}</td>
                                     <td>{{ $emp->applicant_designation }}</td>
                                     <td>

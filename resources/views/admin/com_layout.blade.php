@@ -41,7 +41,8 @@
         .dark_body .card,
         .dark_body .modal-content,
         .dark_body .table-box,
-        .dark_body .navbar {
+        .dark_body .navbar,
+        .dark_body .menu-toggle {
             background: #1f2937;
             color: white;
         }
@@ -129,25 +130,44 @@
                     <div class="navbar ">
                         <div class="profile d-flex align-items-center">
                             <div class="d-md-none d-flex align-items-center">
-                                <button class="menu-toggle text-dark" id="menuToggle">
+                                <button class="menu-toggle" id="menuToggle">
                                     <i class="bi bi-list"></i>
                                 </button>
                             </div>
 
                             <div class="d-flex align-items-center ms-auto">
                                 <span>
-                                    Welcome, {{ session('admin_username') ?: session('recruiter_name') }}
+                                    Welcome, <i>{{ session('admin_username') ?: session('recruiter_name') }}</i>
                                 </span>
 
                                 <div class="ms-2">
                                     @if (session('admin_username'))
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
-                                            <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="admin_logo"
-                                                class="rounded-circle p-1">
+                                        <!-- <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
+                                                        <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="admin_logo"
+                                                        class="rounded-circle p-1"><sup title="Active"><i class="bi bi-check-circle text-white bg-success rounded circle"></i></sup>
+                                                        </a> -->
+
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile"
+                                            class="position-relative d-inline-block">
+                                            <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="Admin Logo"
+                                                class="rounded-circle p-1"
+                                                style="width: 45px; height: 45px; object-fit: cover;">
+                                            <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color:rgb(16, 185, 16);" title="Active"></i>
+                                            <!-- <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
+                                                style="font-size: 14px; color:rgb(238, 112, 112);" title="Inactive"></i> -->
                                         </a>
+
                                     @elseif('recruiter_name')
-                                        <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                            alt="admin_logo" class="rounded-circle bg-dark p-1">
+                                        <a href="" title="Profile" class="position-relative d-inline-block">
+                                            <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                                alt="Recruiter Logo" class="rounded-circle "
+                                                style="width: 45px; height: 45px; object-fit: cover;">
+                                            <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
+                                                style="font-size: 14px; color:green;" title="Active"></i>
+                                            <!-- <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
+                                                style="font-size: 14px; color:rgb(238, 112, 112);" title="Inactive"></i> -->
+                                        </a>
                                     @endif
                                 </div>
                             </div>

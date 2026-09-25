@@ -34,6 +34,26 @@
         @endif
       </div>
 
+      <!-- <div class="card select-card">
+        <div class="icon bg-success"><i class="bi bi-clock-history"></i></div>
+        <h3>Selected</h3>
+        @if (session('recruiter_name'))
+          <h2 class="text-success">{{ $total_rec_pendings }}</h2>
+        @elseif(session('admin_username'))
+          <h2 class="text-success">{{ $total_adm_pendings }}</h2>
+        @endif
+      </div> -->
+
+      <!-- <div class="card reject-card">
+        <div class="icon bg-danger"><i class="bi bi-clock-history"></i></div>
+        <h3>Selected</h3>
+        @if (session('recruiter_name'))
+          <h2 class="text-danger">{{ $total_rec_pendings }}</h2>
+        @elseif(session('admin_username'))
+          <h2 class="text-danger">{{ $total_adm_pendings }}</h2>
+        @endif
+      </div> -->
+
       @foreach ($statuses as $status)
         <div class="card">
           <div class="icon bg-dark"><i class="bi bi-trophy-fill"></i></div>

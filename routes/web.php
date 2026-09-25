@@ -11,6 +11,7 @@ use App\Models\Interview_status;
 use App\Models\Nation;
 use App\Models\Platform;
 use App\Models\RecruiterDetail;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     $recruiters = RecruiterDetail::where('status', 'Active')->get();
@@ -149,4 +150,19 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::post('/admin/candidate/{id}/office-work', [OfficeworkController::class, 'store'])
         ->name('office.form');
+
+
+    Route::post('/recruiter/heartbeat', function (Request $request) {
+        if (session()->has('recruiter_id')) {
+            $recruiter = RecruiterDetail::find(session('recruiter_id'));
+            if ($recruiter) {
+                $recruiter->withoutTimestamps(function () use ($recruiter) {
+                    $recruiter->update([
+                        'last_seen' => now(),
+                    ]);
+                });
+            }
+        }
+    })->name('recruiter.heartbeat');
+
 });

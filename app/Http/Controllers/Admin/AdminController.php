@@ -26,13 +26,11 @@ class AdminController extends Controller
 
         $total_candi = Candidate::count();
 
-        $total_office_status = Office_useDetail::distinct('candidate_id')
-            ->count('candidate_id');
+        $total_office_status = Office_useDetail::distinct('candidate_id')->count('candidate_id');
 
         $total_adm_pendings = $total_candi - $total_office_status;
 
-        $statuses = Interview_status::where('status', 'Active')
-            ->get();
+        $statuses = Interview_status::where('status', 'Active')->get();
 
         if (session('admin_username')) {
             $statusCounts = Office_useDetail::selectRaw(

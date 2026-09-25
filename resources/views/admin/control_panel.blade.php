@@ -33,6 +33,7 @@
                 <th>Email</th>
                 <th>Password</th>
                 <th>Status</th>
+                <th>Last Seen</th>
                 <th>Action</th>
             </tr>
 
@@ -66,6 +67,7 @@
                                 <span class="">{{$rec->status}}</span>
                             @endif
                         </td>
+                        <td>{{ $rec->last_seen }}</td>
                         <td>
                             <a href="{{ route('recruiters.edit_panel', $rec->id) }}" class="btn btn-primary"><i
                                     class="bi bi-pencil"></i></a>

@@ -11,9 +11,14 @@ class RecruiterDetail extends Model
         'email',
         'password',
         'status',
+        'last_seen',
     ];
 
     protected $hidden = [
         'password',
+    ];
+
+    protected $casts = [
+        'last_seen' => 'datetime',
     ];
 }

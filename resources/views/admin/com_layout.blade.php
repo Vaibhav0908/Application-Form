@@ -143,19 +143,22 @@
                                 <div class="ms-2">
                                     @if (session('admin_username'))
                                         <!-- <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
-                                                        <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="admin_logo"
-                                                        class="rounded-circle p-1"><sup title="Active"><i class="bi bi-check-circle text-white bg-success rounded circle"></i></sup>
-                                                        </a> -->
+                                                                                <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="admin_logo"
+                                                                                class="rounded-circle p-1"><sup title="Active"><i class="bi bi-check-circle text-white bg-success rounded circle"></i></sup>
+                                                                                </a> -->
 
                                         <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile"
                                             class="position-relative d-inline-block">
                                             <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="Admin Logo"
                                                 class="rounded-circle p-1"
                                                 style="width: 45px; height: 45px; object-fit: cover;">
-                                            <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
-                                                    style="font-size: 14px; color:rgb(16, 185, 16);" title="Active"></i>
+
+                                            <!-- <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
+                                                style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i> -->
+
                                             <!-- <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
-                                                style="font-size: 14px; color:rgb(238, 112, 112);" title="Inactive"></i> -->
+                                                                        style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i> -->
+
                                         </a>
 
                                     @elseif('recruiter_name')
@@ -163,10 +166,21 @@
                                             <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                                                 alt="Recruiter Logo" class="rounded-circle "
                                                 style="width: 45px; height: 45px; object-fit: cover;">
-                                            <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
-                                                style="font-size: 14px; color:green;" title="Active"></i>
-                                            <!-- <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
-                                                style="font-size: 14px; color:rgb(238, 112, 112);" title="Inactive"></i> -->
+                                            @php
+                                                $recruiter = \App\Models\RecruiterDetail::find(session('recruiter_id'));
+
+                                                $isActive = $recruiter &&
+                                                    $recruiter->last_seen &&
+                                                    $recruiter->last_seen->greaterThan(now()->subMinutes(1));
+                                            @endphp
+
+                                            @if ($isActive)
+                                                <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i>
+                                            @else
+                                                <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i>
+                                            @endif
                                         </a>
                                     @endif
                                 </div>
@@ -351,6 +365,31 @@
             localStorage.setItem('darkMode', 'false');
             localStorage.setItem('lightMode', 'true');
         });
+
+        function sendHeartbeat() {
+
+            fetch("{{ route('recruiter.heartbeat') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    "Accept": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Heartbeat sent");
+                })
+                .catch(error => {
+                    console.error("Heartbeat failed:", error);
+                });
+        }
+
+        // Send immediately when page loads
+        sendHeartbeat();
+
+        // Send every 5 minutes
+        setInterval(sendHeartbeat, 5 * 60 * 1000);
+
 
     </script>
 </body>

@@ -30,6 +30,7 @@
 
         body {
             background: #f5f7fb;
+            /* background: #24417b; */
             display: flex;
         }
 
@@ -45,6 +46,15 @@
         .dark_body .menu-toggle {
             background: #1f2937;
             color: white;
+        }
+
+        .dark_body tr:nth-child(odd) {
+            color: #bbcbe2;
+        }
+
+        .dark_body tr:nth-child(even) {
+            background: #1b232e;
+            color: #bbcbe2;
         }
     </style>
 </head>
@@ -102,10 +112,12 @@
                                 <span>Applications</span>
                             </a>
                         </li>
+
                         <li>
-                            <a href="#">
+                            <a href="{{ route('resume_checker') }}"
+                                class="{{ request()->routeIs('resume_checker') ? 'active' : '' }}">
                                 <i class="bi bi-bar-chart"></i>
-                                <span>Reports</span>
+                                <span>Resume Checker</span>
                             </a>
                         </li>
                         <li>
@@ -143,9 +155,9 @@
                                 <div class="ms-2">
                                     @if (session('admin_username'))
                                         <!-- <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
-                                                                                <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="admin_logo"
-                                                                                class="rounded-circle p-1"><sup title="Active"><i class="bi bi-check-circle text-white bg-success rounded circle"></i></sup>
-                                                                                </a> -->
+                                                                                    <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="admin_logo"
+                                                                                    class="rounded-circle p-1"><sup title="Active"><i class="bi bi-check-circle text-white bg-success rounded circle"></i></sup>
+                                                                                    </a> -->
 
                                         <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile"
                                             class="position-relative d-inline-block">
@@ -154,10 +166,10 @@
                                                 style="width: 45px; height: 45px; object-fit: cover;">
 
                                             <!-- <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
-                                                style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i> -->
+                                                    style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i> -->
 
                                             <!-- <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
-                                                                        style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i> -->
+                                                                            style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i> -->
 
                                         </a>
 

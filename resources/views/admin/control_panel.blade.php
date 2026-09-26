@@ -27,7 +27,7 @@
     </div>
     <div class="table-box">
         <table>
-            <tr class="table-heading">
+            <tr class="table-heading text-dark">
                 <th>Sr No.</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -136,7 +136,7 @@
     </div>
     <div class="table-box">
         <table>
-            <tr class="table-heading">
+            <tr class="table-heading text-dark">
                 <th>Sr No.</th>
                 <th>Platforms</th>
                 <th>Status</th>
@@ -225,7 +225,7 @@
     </div>
     <div class="table-box">
         <table>
-            <tr class="table-heading">
+            <tr class="table-heading text-dark">
                 <th>Sr No.</th>
                 <th>Nation Name</th>
                 <th>Status</th>
@@ -316,7 +316,7 @@
     </div>
     <div class="table-box">
         <table>
-            <tr class="table-heading">
+            <tr class="table-heading text-dark">
                 <th>Sr No.</th>
                 <th>Interview Status</th>
                 <th>Status</th>

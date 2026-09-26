@@ -30,7 +30,7 @@
     <h2 class="text-primary mt-5 mx-5">Applications</h2>
     <div class="table-box">
         <table>
-            <tr class="table-heading">
+            <tr class="table-heading text-dark">
                 <th>Sr. No.</th>
                 <th>Name</th>
                 <th>Role/Position</th>

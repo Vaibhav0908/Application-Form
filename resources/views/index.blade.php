@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label>Reference<sup class="text-danger">*</sup></label>
+                        <label>HR Name<sup class="text-danger">*</sup></label>
                         <select name="refrence" class="form-control" required>
                             <option selected disabled>--Please Select--</option>
                             @foreach ($recruiters as $rec)

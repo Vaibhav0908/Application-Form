@@ -40,7 +40,7 @@
 
     <div class="container main-container">
         <div class="header">
-            <img src={{ asset('storage\documents\gils.png') }} width="180px" height="120px" alt="logo" class=" ">
+            <img src={{ asset('storage/documents/gils.png') }} width="180px" height="120px" alt="logo">
             <h1 class="">
                 Girish Group of Companies <br>
                 Baramati and Pune <br />
@@ -266,10 +266,16 @@
                                 oninput="this.value = this.value.replace(/[^a-zA-Z.{}[\]() ]/g, '')" required />
                         </div>
 
-                        <div class="col-md-6 mb-3">
+                        <!-- <div class="col-md-6 mb-3">
                             <label>Passing Year<sup class="text-danger">*</sup></label>
                             <input type="text" name="passing_year[]" class="form-control" pattern="[0-9]{4}"
                             maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>
+                        </div> -->
+
+                        <div class="col-md-6 mb-3">
+                            <label>Passing Year<sup class="text-danger">*</sup></label>
+                            <input type="text" name="passing_year[]" class="form-control" pattern="[0-9a-zA-Z]+"
+                            />
                         </div>
 
                         <div class="col-md-6 mb-3">

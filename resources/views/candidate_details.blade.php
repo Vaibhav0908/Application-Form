@@ -114,9 +114,9 @@
                                             class="status bg-success">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
                                     </td>
 
-                                @elseif (optional($candidate->officeworkDetails)->interview_status == 'Hold')
+                                @elseif (optional($candidate->officeworkDetails)->interview_status == 'Reject')
                                     <td><span
-                                            class="status bg-dark">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
+                                            class="status bg-danger">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
                                     </td>
                                 @else
                                     <td><span
@@ -463,7 +463,7 @@
                                     @endif
                                 @elseif(session('recruiter_name'))
                                     <!-- <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name}}</p> -->
-                                    <input class="form-control" type="text" name="interview_by" value="{{ $office?->interviewed_by }}" readonly>
+                                    <input class="form-control" type="text" name="interview_by" value="{{ $office?->interviewed_by ?? $candidate->reference_name }}" readonly>
                                 @endif
                             </div>
                         </div>

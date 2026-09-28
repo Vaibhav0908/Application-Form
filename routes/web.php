@@ -7,6 +7,7 @@ use App\Http\Controllers\Office\OfficeworkController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Recruiter\RecruiterAuthController;
 use App\Http\Controllers\Recruiter\recruiterController;
+use App\Http\Controllers\ResumeChecker\ResumeController;
 use App\Models\Interview_status;
 use App\Models\Nation;
 use App\Models\Platform;
@@ -44,8 +45,11 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/Applications', [AdminController::class, 'applications'])
         ->name('applications');
 
-    Route::get('/resume_checker', [AdminController::class, 'resume_checker'])
+    Route::get('/resume_checker', [ResumeController::class, 'resume_checker'])
         ->name('resume_checker');
+
+    Route::post('/resume_check', [ResumeController::class, 'resume_submission'])
+        ->name('resume_check');
 
     Route::get('/Employees', [AdminController::class, 'employees'])
         ->name('employee');

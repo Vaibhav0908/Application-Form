@@ -46,45 +46,40 @@
                     @if ($cand->reference_name == "NA" ? optional($cand->officeworkDetails)->interviewed_by == session('recruiter_name') : $cand->reference_name == session('recruiter_name'))
                         <tr>
                             <td>{{ $index + 1 }}</td>
+
                             <td>
                                 <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
                                     style="text-decoration: dotted;">
                                     {{ $cand->full_name }}
                                 </a>
                             </td>
+
                             <td>{{ $cand->applicant_designation }}</td>
 
-                            @if (optional($cand->officeworkDetails)->interview_status != '')
-                                @if (optional($cand->officeworkDetails)->interview_status == 'Pending')
-                                    <td><span class="status bg-warning">{{ optional($cand->officeworkDetails)->interview_status }}</span>
-                                    </td>
-                                @elseif (optional($cand->officeworkDetails)->interview_status == 'Select')
-                                    <td><span class="status bg-success">{{ optional($cand->officeworkDetails)->interview_status }}</span>
-                                    </td>
-                                @elseif (optional($cand->officeworkDetails)->interview_status == 'Hold')
-                                    <td><span class="status bg-dark">{{ optional($cand->officeworkDetails)->interview_status }}</span></td>
+                            <td>
+                                @if (optional($cand->officeworkDetails)->interview_status != '')
+                                    @if (optional($cand->officeworkDetails)->interview_status == 'Pending')
+                                        <span class="status bg-warning">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+
+                                    @elseif (optional($cand->officeworkDetails)->interview_status == 'Select')
+                                        <span class="status bg-success">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+
+                                    @elseif (optional($cand->officeworkDetails)->interview_status == 'Reject')
+                                        <span class="status bg-danger">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+
+                                    @else
+                                        <span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                    @endif
                                 @else
-                                    <td><span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
-                                    </td>
+                                    <span class="status bg-warning">Pending</span>
                                 @endif
-                            @else
-                                <td><span class="status bg-warning">Pending</span></td>
-                            @endif
+                            </td>
 
                             <td>
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")
-                                    <div style="
-                                        width: 300px;
-                                        max-height: 100px;
-                                        overflow-y: auto;
-                                        overflow-x: hidden;
-                                        border: 1px solid green;
-                                        border-radius: 5px;
-                                        padding: 8px;
-                                        font-size: 14px;
-                                        white-space: normal;
-                                        word-wrap: break-word;
-                                    ">{{ optional($cand->officeworkDetails)->interview_remarks }}
+                                    <div style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                            {{ optional($cand->officeworkDetails)->interview_remarks }}
                                     </div>
                                 @else
                                     <p>NA</p>
@@ -122,39 +117,30 @@
                             </td>
                             <td>{{ $cand->applicant_designation }}</td>
 
+                            <td>
+                                @if (optional($cand->officeworkDetails)->interview_status != '')
+                                    @if (optional($cand->officeworkDetails)->interview_status == 'Pending')
+                                        <span class="status bg-warning">{{ optional($cand->officeworkDetails)->interview_status }}</span>
 
-                            @if (optional($cand->officeworkDetails)->interview_status != '')
-                                @if (optional($cand->officeworkDetails)->interview_status == 'Pending')
-                                    <td><span class="status bg-warning">{{ optional($cand->officeworkDetails)->interview_status }}</span>
-                                    </td>
-                                @elseif (optional($cand->officeworkDetails)->interview_status == 'Select')
-                                    <td><span class="status bg-success">{{ optional($cand->officeworkDetails)->interview_status }}</span>
-                                    </td>
-                                @elseif (optional($cand->officeworkDetails)->interview_status == 'Hold')
-                                    <td><span class="status bg-dark">{{ optional($cand->officeworkDetails)->interview_status }}</span></td>
+                                    @elseif (optional($cand->officeworkDetails)->interview_status == 'Select')
+                                        <span class="status bg-success">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+
+                                    @elseif (optional($cand->officeworkDetails)->interview_status == 'Reject')
+                                        <span class="status bg-danger">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+
+                                    @else
+                                        <span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                    @endif
                                 @else
-                                    <td><span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
-                                    </td>
+                                    <span class="status bg-warning">Pending</span>
                                 @endif
-                            @else
-                                <td><span class="status bg-warning">Pending</span></td>
-                            @endif
-
+                            </td>
 
                             <td>
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")
-                                    <div style="
-                                        width: 300px;
-                                        max-height: 100px;
-                                        overflow-y: auto;
-                                        overflow-x: hidden;
-                                        border: 1px solid white;
-                                        border-radius: 5px;
-                                        padding: 8px;
-                                        font-size: 14px;
-                                        white-space: normal;
-                                        word-wrap: break-word;
-                                    ">{{ optional($cand->officeworkDetails)->interview_remarks }}
+                                    <div style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                            {{ optional($cand->officeworkDetails)->interview_remarks }}
                                     </div>
                                 @else
                                     <p>NA</p>

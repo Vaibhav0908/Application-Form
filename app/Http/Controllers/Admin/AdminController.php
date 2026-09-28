@@ -67,11 +67,6 @@ class AdminController extends Controller
         return view('applications', compact('candidates'));
     }
 
-    public function resume_checker()
-    {
-        return view('resume_checker');
-    }
-
     public function showCandidate($id)
     {
         $candidate = Candidate::with([

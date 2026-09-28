@@ -64,7 +64,7 @@
                                 @elseif (optional($cand->officeworkDetails)->interview_status == 'Hold')
                                     <td><span class="status bg-dark">{{ optional($cand->officeworkDetails)->interview_status }}</span></td>
                                 @else
-                                    <td><span class="status bg-danger">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                    <td><span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
                                     </td>
                                 @endif
                             @else
@@ -73,9 +73,19 @@
 
                             <td>
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")
-                                    <p class="border border-muted rounded p-1 small">
-                                        {{ optional($cand->officeworkDetails)->interview_remarks }}
-                                    </p>
+                                    <div style="
+                                        width: 300px;
+                                        max-height: 100px;
+                                        overflow-y: auto;
+                                        overflow-x: hidden;
+                                        border: 1px solid green;
+                                        border-radius: 5px;
+                                        padding: 8px;
+                                        font-size: 14px;
+                                        white-space: normal;
+                                        word-wrap: break-word;
+                                    ">{{ optional($cand->officeworkDetails)->interview_remarks }}
+                                    </div>
                                 @else
                                     <p>NA</p>
                                 @endif
@@ -123,7 +133,7 @@
                                 @elseif (optional($cand->officeworkDetails)->interview_status == 'Hold')
                                     <td><span class="status bg-dark">{{ optional($cand->officeworkDetails)->interview_status }}</span></td>
                                 @else
-                                    <td><span class="status bg-danger">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                    <td><span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
                                     </td>
                                 @endif
                             @else
@@ -133,9 +143,19 @@
 
                             <td>
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")
-                                    <p class="border border-muted rounded p-1 small">
-                                        {{ optional($cand->officeworkDetails)->interview_remarks }}
-                                    </p>
+                                    <div style="
+                                        width: 300px;
+                                        max-height: 100px;
+                                        overflow-y: auto;
+                                        overflow-x: hidden;
+                                        border: 1px solid white;
+                                        border-radius: 5px;
+                                        padding: 8px;
+                                        font-size: 14px;
+                                        white-space: normal;
+                                        word-wrap: break-word;
+                                    ">{{ optional($cand->officeworkDetails)->interview_remarks }}
+                                    </div>
                                 @else
                                     <p>NA</p>
                                 @endif

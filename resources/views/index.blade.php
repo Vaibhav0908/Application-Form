@@ -40,7 +40,7 @@
 
     <div class="container main-container">
         <div class="header">
-            <img src={{ asset('storage\documents\logo.jpg') }} width="120px" height="100px" alt="logo" class="rounded-circle p-1 bg-primary">
+            <img src={{ asset('storage\documents\gils.png') }} width="180px" height="120px" alt="logo" class=" ">
             <h1 class="">
                 Girish Group of Companies <br>
                 Baramati and Pune <br />
@@ -68,7 +68,7 @@
                     <div class="col-md-6 mb-3">
                         <label>HR Name<sup class="text-danger">*</sup></label>
                         <select name="refrence" class="form-control" required>
-                            <option selected disabled>--Please Select--</option>
+                            <option selected disabled value="">--Please Select--</option>
                             @foreach ($recruiters as $rec)
                                 <option value="{{ $rec->name }}">{{ $rec->name }}</option>
                             @endforeach
@@ -79,7 +79,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Where You Found Us<sup class="text-danger">*</sup></label><br>
                         <select class="form-control" name="platforms" required>
-                            <option selected disabled>--Please Select--</option>
+                            <option disabled selected value="">--Please Select--</option>
                             @foreach ($platforms as $plat)
                                 <option value="{{ $plat->platform_name }}">{{ $plat->platform_name }}</option>
                             @endforeach
@@ -131,7 +131,7 @@
                         <label>Gender<sup class="text-danger">*</sup></label>
 
                         <select class="form-select" name="gender" required>
-                            <option selected disabled>--Please Select--</option>
+                            <option selected disabled value="">--Please Select--</option>
                             <option>Male</option>
                             <option>Female</option>
                         </select>
@@ -140,7 +140,7 @@
                     <div class="col-md-4 mb-3">
                         <label>Marrital Status<sup class="text-danger">*</sup></label>
                         <select class="form-control" name="marrital_status" required>
-                            <option selected disabled>--Please Select--</option>
+                            <option selected disabled value="">--Please Select--</option>
                             <option>Married</option>
                             <option>Unmarried</option>
                             <option>Single</option>
@@ -170,7 +170,7 @@
                     <div class="col-md-2 mb-3">
                         <label>Nationality<sup class="text-danger">*</sup></label>
                         <select class="form-control" name="nationality" required>
-                            <option selected disabled>--Please Select--</option>nations
+                            <option selected disabled value="">--Please Select--</option>nations
                             @foreach ($nations as $nat)
                                 <option value="{{ $nat->nation }}">{{ $nat->nation }}</option>
                             @endforeach
@@ -211,7 +211,7 @@
                         <div class="col-md-6 mb-3">
                             <label>Relation<sup class="text-danger">*</sup></label>
                             <select name="relation[]" class="form-control" required>
-                                <option selected disabled>--Please Select--</option>
+                                <option selected disabled value="">--Please Select--</option>
                                 <option>Father</option>
                                 <option>Mother</option>
                                 <option>Brother</option>
@@ -330,7 +330,7 @@
                         <div class="col-lg-4 mb-3">
                             <label>Currently Working</label>
                             <select name="curr_working[]" class="form-control">
-                                <option selected disabled>--Please Select--</option>
+                                <option selected disabled value="">--Please Select--</option>
                                 <option>Serving Notice Period</option>
                                 <option>Yes</option>
                                 <option>No</option>
@@ -363,7 +363,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Will You Able To Relocate<sup class="text-danger">*</sup></label>
                         <select name="relocate" class="form-control" required>
-                            <option selected disabled>--Please Select--</option>
+                            <option selected disabled value="">--Please Select--</option>
                             <option>Yes</option>
                             <option>No</option>
                             <option>Planning To Relocate</option>
@@ -387,7 +387,7 @@
                     <div class="col-md-6 mb-3">
                         <label>Notice Period<sup class="text-danger">*</sup></label>
                         <select name="notice_period" class="form-control" required>
-                            <option selected disabled>--Please Select--</option>
+                            <option selected disabled value="">--Please Select--</option>
                             <option>Immadiate Joiner</option>
                             <option>15 Days</option>
                             <option>1 Month</option>

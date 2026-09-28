@@ -120,7 +120,7 @@
                                     </td>
                                 @else
                                     <td><span
-                                            class="status bg-danger">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
+                                            class="status bg-primary">{{ optional($candidate->officeworkDetails)->interview_status }}</span>
                                     </td>
                                 @endif
 

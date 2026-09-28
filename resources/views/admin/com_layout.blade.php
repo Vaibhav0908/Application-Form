@@ -48,6 +48,10 @@
             color: white;
         }
 
+        .dark_body .resume_checker{
+            color: white;
+        }
+
         .dark_body tr:nth-child(odd) {
             color: #bbcbe2;
         }
@@ -154,11 +158,6 @@
 
                                 <div class="ms-2">
                                     @if (session('admin_username'))
-                                        <!-- <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
-                                                                                    <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="admin_logo"
-                                                                                    class="rounded-circle p-1"><sup title="Active"><i class="bi bi-check-circle text-white bg-success rounded circle"></i></sup>
-                                                                                    </a> -->
-
                                         <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile"
                                             class="position-relative d-inline-block">
                                             <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="Admin Logo"
@@ -183,7 +182,7 @@
 
                                                 $isActive = $recruiter &&
                                                     $recruiter->last_seen &&
-                                                    $recruiter->last_seen->greaterThan(now()->subMinutes(1));
+                                                    $recruiter->last_seen->greaterThan(now()->subMinutes(30));
                                             @endphp
 
                                             @if ($isActive)
@@ -399,8 +398,8 @@
         // Send immediately when page loads
         sendHeartbeat();
 
-        // Send every 5 minutes
-        setInterval(sendHeartbeat, 5 * 60 * 1000);
+        // Send every 1 minutes
+        setInterval(sendHeartbeat, 1 * 60 * 1000);
 
 
     </script>

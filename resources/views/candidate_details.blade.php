@@ -438,7 +438,9 @@
                                     <input type="date" class="form-control" value="{{ $office?->interview_date }}"
                                         name="interview_date">
                                 @elseif(session('admin_username'))
-                                    <p class="form-control">{{ $office?->interview_date ?? '' }}</p>
+                                    <!-- <p class="form-control">{{ $office?->interview_date ?? '' }}</p> -->
+                                    <input type="date" class="form-control bg-light" value="{{ $office?->interview_date }}"
+                                        name="interview_date" readonly>
                                 @endif
                             </div>
 
@@ -460,17 +462,8 @@
                                         <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name }}</p>
                                     @endif
                                 @elseif(session('recruiter_name'))
-                                    <!-- <select class="form-select" name="interview_by">
-                                                                <option value="" disabled {{ !$office?->interviewed_by ? 'selected' : '' }}>
-                                                                    Select Interviewer
-                                                                </option>
-                                                                @foreach ($recruiters as $rec)
-                                                                    <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
-                                                                        {{ $rec->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select> -->
-                                    <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name}}</p>
+                                    <!-- <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name}}</p> -->
+                                    <input class="form-control" type="text" name="interview_by" value="{{ $office?->interviewed_by }}" readonly>
                                 @endif
                             </div>
                         </div>
@@ -506,7 +499,8 @@
                                             @endforeach
                                         </select>
                                     @else
-                                        <p class="form-control">{{ $office?->interview_status ?? '' }}</p>
+                                        <!-- <p class="form-control">{{ $office?->interview_status ?? '' }}</p> -->
+                                        <input type="text" class="form-control bg-light" value="{{ $office?->interview_status }}" readonly>
                                     @endif
                                 @endif
                             </div>
@@ -519,7 +513,8 @@
                                             placeholder="Enter Salary" value="{{ $office?->salary_offered }}">
                                     </div>
                                 @elseif(session('admin_username'))
-                                    <p class="form-control">{{ $office?->salary_offered ?? '' }}</p>
+                                    <!-- <p class="form-control">{{ $office?->salary_offered ?? '' }}</p> -->
+                                    <input type="text" class="form-control bg-light" value="{{ $office?->salary_offered }}" readonly>
                                 @endif
                             </div>
                         </div>
@@ -530,7 +525,8 @@
                                     <textarea class="form-control" rows="4" name="interview_remarks"
                                         placeholder="Enter interview remarks...">{{ $office?->interview_remarks }}</textarea>
                                 @elseif(session('admin_username'))
-                                    <p class="form-control">{{ $office?->interview_remarks ?? '' }}</p>
+                                    <!-- <p class="form-control">{{ $office?->interview_remarks ?? '' }}</p> -->
+                                    <input type="text" class="form-control bg-light" value="{{ $office?->interview_remarks }}" readonly>
                                 @endif
                             </div>
                         </div>

@@ -45,7 +45,7 @@
                 @foreach ($candidates as $index => $cand)
                     @if ($cand->reference_name == "NA" ? optional($cand->officeworkDetails)->interviewed_by == session('recruiter_name') : $cand->reference_name == session('recruiter_name'))
                         <tr>
-                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $cand->count() - $index }}</td>
 
                             <td>
                                 <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
@@ -77,9 +77,10 @@
 
                             <td>
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")
-                                    <div style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                                            {{ optional($cand->officeworkDetails)->interview_remarks }}
+                                    <div
+                                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                        {{ optional($cand->officeworkDetails)->interview_remarks }}
                                     </div>
                                 @else
                                     <p>NA</p>
@@ -108,7 +109,7 @@
                         </tr>
                     @elseif(session('admin_username'))
                         <tr>
-                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $cand->count() - $index }}</td>
                             <td>
                                 <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
                                     style="text-decoration: dotted;">
@@ -138,9 +139,10 @@
 
                             <td>
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")
-                                    <div style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                                            {{ optional($cand->officeworkDetails)->interview_remarks }}
+                                    <div
+                                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                        {{ optional($cand->officeworkDetails)->interview_remarks }}
                                     </div>
                                 @else
                                     <p>NA</p>

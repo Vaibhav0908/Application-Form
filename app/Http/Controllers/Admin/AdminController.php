@@ -62,8 +62,7 @@ class AdminController extends Controller
             'educationDetails',
             'professionalDetails',
             'officeworkDetails'
-        ])->get();
-
+        ])->latest()->get();
         return view('applications', compact('candidates'));
     }
 
@@ -77,9 +76,17 @@ class AdminController extends Controller
         ])->findOrFail($id);
 
         $recruiters = RecruiterDetail::where('status', 'Active')->get();
+        // $interviewedBy = optional($candidate->officeworkDetails)->interviewed_by;
+
+        // $inactiveInterviewer = RecruiterDetail::where('name', $interviewedBy)
+        //     ->where('status', 'Deactive')
+        //     ->exists();
+
+        $activeRecruiterNames = $recruiters->pluck('name')->toArray();
+
         $interview_status = Interview_status::where('status', 'Active')->get();
 
-        return view('candidate_details', compact('candidate', 'recruiters', 'interview_status'));
+        return view('candidate_details', compact('candidate', 'recruiters', 'interview_status', 'activeRecruiterNames'));
     }
 
     public function employees()

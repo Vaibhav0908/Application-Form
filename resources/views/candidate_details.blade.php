@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="logo/icon" href="{{ asset('storage/' . $candidate->passport_photo) }}">
     <title>{{ $candidate->full_name }}</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 </head>
@@ -438,13 +438,16 @@
                                     <input type="date" class="form-control" value="{{ $office?->interview_date }}"
                                         name="interview_date">
                                 @elseif(session('admin_username'))
-                                    <!-- <p class="form-control">{{ $office?->interview_date ?? '' }}</p> -->
                                     <input type="date" class="form-control bg-light" value="{{ $office?->interview_date }}"
                                         name="interview_date" readonly>
                                 @endif
                             </div>
 
                             <div class="">
+                                @php
+                                    $interviewedByoffice = optional($candidate->officeworkDetails)->interviewed_by;
+                                    $interviewedBycandidate = $candidate->reference_name;
+                                @endphp
                                 <label class="form-label fw-semibold">Interviewed By</label>
                                 @if(session('admin_username'))
                                     @if ($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null)
@@ -458,12 +461,40 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                    @elseif(optional($candidate->officeworkDetails)->interviewed_by != null)
+                                        @if (!in_array($interviewedByoffice, $activeRecruiterNames))
+                                            <select class="form-select" name="interview_by">
+                                                <option value="" disabled selected>
+                                                    Select Interviewer
+                                                </option>
+                                                @foreach ($recruiters as $rec)
+                                                    <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
+                                                        {{ $rec->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p class="form-control">{{ $office?->interviewed_by }}</p>
+                                        @endif
                                     @else
-                                        <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name }}</p>
+                                        @if (!in_array($interviewedBycandidate, $activeRecruiterNames))
+                                            <select class="form-select" name="interview_by">
+                                                <option value="" disabled selected>
+                                                    Select Interviewer
+                                                </option>
+                                                @foreach ($recruiters as $rec)
+                                                    <option value="{{ $rec->name }}" @selected($office?->interviewed_by == $rec->name)>
+                                                        {{ $rec->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p class="form-control">{{ $candidate->reference_name }}</p>
+                                        @endif
                                     @endif
                                 @elseif(session('recruiter_name'))
-                                    <!-- <p class="form-control">{{ $office?->interviewed_by ?? $candidate->reference_name}}</p> -->
-                                    <input class="form-control" type="text" name="interview_by" value="{{ $office?->interviewed_by ?? $candidate->reference_name }}" readonly>
+                                    <input class="form-control" type="text" name="interview_by"
+                                        value="{{ $office?->interviewed_by ?? $candidate->reference_name }}" readonly>
                                 @endif
                             </div>
                         </div>
@@ -498,9 +529,43 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                    @elseif(optional($candidate->officeworkDetails)->interviewed_by != null)
+                                        @if (!in_array($interviewedByoffice, $activeRecruiterNames))
+                                            <select class="form-select" name="interview_status" required>
+                                                <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
+                                                    Pending
+                                                </option>
+
+                                                @foreach ($interview_status as $int_status)
+                                                    <option value="{{ $int_status->interview_status }}"
+                                                        @selected($office?->interview_status == $int_status->interview_status)>
+                                                        {{ $int_status->interview_status }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p class="form-control">{{ $office?->interview_status }}</p>
+                                        @endif
+                                    @elseif($candidate->reference_name != 'NA')
+                                        @if (!in_array($interviewedBycandidate, $activeRecruiterNames))
+                                            <select class="form-select" name="interview_status" required>
+                                                <option value="" disabled {{ !$office?->interview_status ? 'selected' : '' }}>
+                                                    Pending
+                                                </option>
+
+                                                @foreach ($interview_status as $int_status)
+                                                    <option value="{{ $int_status->interview_status }}"
+                                                        @selected($office?->interview_status == $int_status->interview_status)>
+                                                        {{ $int_status->interview_status }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p class="form-control">Pending</p>
+                                        @endif
                                     @else
-                                        <!-- <p class="form-control">{{ $office?->interview_status ?? '' }}</p> -->
-                                        <input type="text" class="form-control bg-light" value="{{ $office?->interview_status }}" readonly>
+                                        <input type="text" class="form-control bg-light"
+                                            value="{{ $office?->interview_status }}" readonly>
                                     @endif
                                 @endif
                             </div>
@@ -513,8 +578,8 @@
                                             placeholder="Enter Salary" value="{{ $office?->salary_offered }}">
                                     </div>
                                 @elseif(session('admin_username'))
-                                    <!-- <p class="form-control">{{ $office?->salary_offered ?? '' }}</p> -->
-                                    <input type="text" class="form-control bg-light" value="{{ $office?->salary_offered }}" readonly>
+                                    <input type="text" class="form-control bg-light" value="{{ $office?->salary_offered }}"
+                                        readonly>
                                 @endif
                             </div>
                         </div>
@@ -525,8 +590,8 @@
                                     <textarea class="form-control" rows="4" name="interview_remarks"
                                         placeholder="Enter interview remarks...">{{ $office?->interview_remarks }}</textarea>
                                 @elseif(session('admin_username'))
-                                    <!-- <p class="form-control">{{ $office?->interview_remarks ?? '' }}</p> -->
-                                    <input type="text" class="form-control bg-light" value="{{ $office?->interview_remarks }}" readonly>
+                                    <input type="text" class="form-control bg-light"
+                                        value="{{ $office?->interview_remarks }}" readonly>
                                 @endif
                             </div>
                         </div>
@@ -543,6 +608,33 @@
                                         Save Evaluation
                                     </button>
                                 </div>
+                            @elseif($candidate->reference_name != "NA")
+                                @if (!in_array($interviewedBycandidate, $activeRecruiterNames))
+                                    <div class="text-end p-2">
+                                    <button type="reset" class="btn btn-outline-secondary px-4">
+                                        Reset
+                                    </button>
+
+                                    <button type="submit" class="btn btn-primary px-4 ms-2">
+                                        <i class="bi bi-check-circle me-1"></i>
+                                        Save Evaluation
+                                    </button>
+                                </div>
+                                @endif
+                            
+                            @elseif(optional($candidate->officeworkDetails)->interviewed_by != null)
+                                @if (!in_array($interviewedByoffice, $activeRecruiterNames))
+                                    <div class="text-end p-2">
+                                    <button type="reset" class="btn btn-outline-secondary px-4">
+                                        Reset
+                                    </button>
+
+                                    <button type="submit" class="btn btn-primary px-4 ms-2">
+                                        <i class="bi bi-check-circle me-1"></i>
+                                        Save Evaluation
+                                    </button>
+                                </div>
+                                @endif
                             @endif
 
                         @elseif(session('recruiter_name'))

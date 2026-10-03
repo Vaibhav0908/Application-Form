@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    @if (session('admin_username'))
+        <link rel="icon" type="image/png" href="{{ asset('storage/' . session('admin_logo')) }}">
+    @elseif(session('recruiter_name'))
+        <link rel="icon" type="image/png" href="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3">
+    @endif
+
     <title>
         @if (session('admin_username'))
             Admin Dashboard
@@ -172,7 +179,7 @@
 
                                         </a>
 
-                                    @elseif('recruiter_name')
+                                    @elseif(session('recruiter_name'))
                                         <a href="" title="Profile" class="position-relative d-inline-block">
                                             <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                                                 alt="Recruiter Logo" class="rounded-circle "

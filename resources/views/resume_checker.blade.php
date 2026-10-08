@@ -1,6 +1,11 @@
 @extends('admin.com_layout')
 
 @section('content')
+<style>
+    .card{
+        height: auto;
+    }
+</style>
     <div class="container-fluid">
         <div class="row m-0 resume_checker">
 
@@ -77,7 +82,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h5 class="mb-1">Resume Match Score</h5>
-                                    <small class="text-muted">
+                                    <small class="">
                                         Based on keywords found in the resume and job description
                                     </small>
                                 </div>
@@ -146,7 +151,7 @@
 
                             @else
 
-                                <p class="text-muted mb-0">
+                                <p class=" mb-0">
                                     No matching keywords found.
                                 </p>
 
@@ -211,13 +216,13 @@
                     <div class="card border-0 shadow-sm">
                         <div class="card-body text-center py-5">
 
-                            <i class="fa fa-file-text-o fa-3x text-muted mb-3"></i>
+                            <i class="fa fa-file-text-o fa-3x  mb-3"></i>
 
-                            <h5 class="text-muted">
+                            <h5 class="">
                                 No Resume Checked Yet
                             </h5>
 
-                            <p class="text-muted mb-0">
+                            <p class=" mb-0">
                                 Upload your resume and enter the job description
                                 to see the matching result.
                             </p>

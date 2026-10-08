@@ -47,7 +47,7 @@
                 Baramati and Pune <br />
                 <span class="h4"><i class="bi bi-person-workspace"></i> Job Application Form</span>
             </h1>
-            <p>Fill the details carefully</p>
+            <p>	Please fill in the details carefully.</p>
         </div>
 
         <div class="form-card">
@@ -57,7 +57,7 @@
                 <h4 class="section-title">Interview Application</h4>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <span>Interview for the position<sup class="text-danger">*</sup>
+                        <span>Position Applied For<sup class="text-danger">*</sup>
                             <input type="text" class="form-control" name="designation" pattern="[a-zA-Z. ]+"
                             oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '')" required>
                     </div>
@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label>Where You Found Us<sup class="text-danger">*</sup></label><br>
+                        <label>How Did You Hear About Us?<sup class="text-danger">*</sup></label><br>
                         <select class="form-control" name="platforms" required>
                             <option disabled selected value="">--Please Select--</option>
                             @foreach ($platforms as $plat)
@@ -123,7 +123,7 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label>Date Of Birth<sup class="text-danger">*</sup></label>
+                        <label>Date of Birth<sup class="text-danger">*</sup></label>
 
                         <input type="date" name="dob" class="form-control" required />
                     </div>
@@ -139,13 +139,13 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label>Marrital Status<sup class="text-danger">*</sup></label>
+                        <label>Marital Status<sup class="text-danger">*</sup></label>
                         <select class="form-control" name="marrital_status" required>
                             <option selected disabled value="">--Please Select--</option>
                             <option>Married</option>
                             <option>Unmarried</option>
                             <option>Single</option>
-                            <option>Divorsed</option>
+                            <option>Divorced</option>
                         </select>
                     </div>
 
@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="col-md-2 mb-3">
-                        <label>Pincode<sup class="text-danger">*</sup></label>
+                        <label>PIN Code<sup class="text-danger">*</sup></label>
                         <input type="text" name="pincode" class="form-control" pattern="[0-9]{6}" 
                             maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                             title="Please enter a valid 6-digit number." required />
@@ -274,7 +274,7 @@
                         </div> -->
 
                         <div class="col-md-6 mb-3">
-                            <label>Passing Year<sup class="text-danger">*</sup></label>
+                            <label>Year of Passing<sup class="text-danger">*</sup></label>
                             <input type="text" name="passing_year[]" class="form-control" pattern="[0-9a-zA-Z]+"
                             />
                         </div>
@@ -295,7 +295,7 @@
                     </button>
                 </div>
 
-                <p><sup class="text-danger">*</sup>Fresher's can skip</p>
+                <p><sup class="text-danger">*</sup>Freshers can skip this section.</p>
                 <h4 class="section-title">Professional Details</h4>
 
                 <div id="professionalContainer">
@@ -324,7 +324,7 @@
 
                         <div class="col-lg-4 mb-3">
                             <div class="d-flex justify-content-center">
-                                <label>Working Period</label>
+                                <label>Employment Period</label>
                             </div>
                             <span class="d-flex justify-content-center">
                                 <input type="date" name="sart_time[]" class="form-date" /> &nbsp; &nbsp; to &nbsp;
@@ -335,7 +335,7 @@
                         </div>
 
                         <div class="col-lg-4 mb-3">
-                            <label>Currently Working</label>
+                            <label>Currently Working?</label>
                             <select name="curr_working[]" class="form-control">
                                 <option selected disabled value="">--Please Select--</option>
                                 <option>Serving Notice Period</option>
@@ -368,24 +368,24 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label>Will You Able To Relocate<sup class="text-danger">*</sup></label>
+                        <label>Are You Willing to Relocate?<sup class="text-danger">*</sup></label>
                         <select name="relocate" class="form-control" required>
                             <option selected disabled value="">--Please Select--</option>
                             <option>Yes</option>
                             <option>No</option>
-                            <option>Planning To Relocate</option>
+                            <option>Planning to Relocate</option>
                         </select>
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <label>Last Salary/CTC<sup class="text-danger">*</sup></label>
+                        <label>Last Salary / CTC<sup class="text-danger">*</sup></label>
 
                         <input type="text" name="last_salary" class="form-control" pattern="[0-9.]+"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <label>Expected Salary/CTC<sup class="text-danger">*</sup></label>
+                        <label>Expected Salary / CTC<sup class="text-danger">*</sup></label>
 
                         <input type="text" name="expected_salary" class="form-control" pattern="[0-9.]+"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
@@ -395,10 +395,10 @@
                         <label>Notice Period<sup class="text-danger">*</sup></label>
                         <select name="notice_period" class="form-control" required>
                             <option selected disabled value="">--Please Select--</option>
-                            <option>Immadiate Joiner</option>
+                            <option>Immediate Joiner</option>
                             <option>15 Days</option>
                             <option>1 Month</option>
-                            <option>2 Month</option>
+                            <option>2 Months</option>
                         </select>
                     </div>
                 </div>
@@ -474,7 +474,7 @@
                     <input class="form-check-input" type="checkbox" required />
 
                     <label>
-                        I confirm that all information is correct.<sup class="text-danger">*</sup>
+                        I confirm that all the information provided is correct.<sup class="text-danger">*</sup>
                     </label>
                 </div>
 

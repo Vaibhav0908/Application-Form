@@ -76,11 +76,6 @@ class AdminController extends Controller
         ])->findOrFail($id);
 
         $recruiters = RecruiterDetail::where('status', 'Active')->get();
-        // $interviewedBy = optional($candidate->officeworkDetails)->interviewed_by;
-
-        // $inactiveInterviewer = RecruiterDetail::where('name', $interviewedBy)
-        //     ->where('status', 'Deactive')
-        //     ->exists();
 
         $activeRecruiterNames = $recruiters->pluck('name')->toArray();
 

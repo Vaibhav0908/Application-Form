@@ -5,6 +5,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Office\OfficeworkController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Employee\EmployeeContoller;
 use App\Http\Controllers\Recruiter\RecruiterAuthController;
 use App\Http\Controllers\Recruiter\recruiterController;
 use App\Http\Controllers\ResumeChecker\ResumeController;
@@ -74,6 +75,9 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::get('/admin/candidate/{id}', [AdminController::class, 'showCandidate'])
         ->name('admin.candidate.show');
+
+    Route::get('/employee_details/{id}', [EmployeeContoller::class, 'showemployeetorecruiters'])
+    ->name('employee_details');
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');

@@ -19,7 +19,7 @@
                             @if (optional($emp->officeworkDetails)->interview_status == 'Select')
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $emp->full_name }}</td>
+                                    <td><a href="{{ route('employee_details' , $emp->id) }}" style="text-decoration: dotted;">{{ $emp->full_name }}</a></td>
                                     <td>{{ $emp->applicant_designation }}</td>
                                     <td>
                                         <span class="bg-success status">{{ optional($emp->officeworkDetails)->interview_status }}</span>
@@ -33,7 +33,7 @@
                             @if (optional($emp->officeworkDetails)->interview_status == 'Select')
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $emp->full_name }}</td>
+                                    <td><a href="{{ route('employee_details' , $emp->id) }}" style="text-decoration: dotted;">{{ $emp->full_name }}</a></td>
                                     <td>{{ $emp->applicant_designation }}</td>
                                     <td>
                                         <span class="bg-success status">{{ optional($emp->officeworkDetails)->interview_status }}</span>

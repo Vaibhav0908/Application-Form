@@ -115,6 +115,25 @@
                     </div>
                 @endif
 
+                @if ($emp->calender)
+                    <div class="col-md-6 mb-2">
+                        <div class="border rounded p-3 d-flex justify-content-between align-items-center">
+                            <span class="fw-semibold">Leaves Calender</span>
+                            <div class="d-flex gap-2">
+                                <a href="{{ asset('storage/' . $emp->calender) }}"
+                                    class="btn btn-outline-primary btn-sm" target="_blank">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+
+                                <a href="{{ asset('storage/' . $emp->calender) }}" class="btn btn-success btn-sm"
+                                    download>
+                                    <i class="bi bi-download"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 @if ($can->aadhar_card)
                     <div class="col-md-6 mb-2">
                         <div class="border rounded p-3 d-flex justify-content-between align-items-center">

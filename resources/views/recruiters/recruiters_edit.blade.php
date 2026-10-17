@@ -37,7 +37,7 @@
                                     class="form-control form-control-lg"
                                     value="{{ $recruiter->name }}"
                                 >
-                            </div>
+                            </div> <br>
 
                             <input type="hidden" name="id" value="{{ $recruiter->email }}">
 
@@ -53,7 +53,7 @@
                                     value="{{ $recruiter->email }}"
                                     readonly
                                 >
-                            </div>
+                            </div> <br>
 
                             <input type="hidden" name="id" value="{{ $recruiter->password }}">
 

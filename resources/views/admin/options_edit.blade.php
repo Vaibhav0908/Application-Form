@@ -36,11 +36,11 @@
                                     class="form-control form-control-lg"
                                     value="{{ $platform->platform_name }}"
                                     placeholder="Enter platform name"
-                                >
+                                >   
                             </div>
 
                             <div class="form-group mt-4">
-                                <label class="font-weight-bold d-block mb-3">
+                                <label class="font-weight-bold d-block">
                                     Platform Status
                                 </label>
 
@@ -62,7 +62,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-success">
                                                     Platform is active
                                                 </small>
                                             </div>
@@ -86,7 +86,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-danger">
                                                     Platform is disabled
                                                 </small>
                                             </div>
@@ -107,7 +107,7 @@
                                     class="btn btn-outline-secondary mr-2 px-4"
                                 >
                                     Reset
-                                </button>
+                                </button> &nbsp;
 
                                 <button
                                     type="submit"
@@ -160,7 +160,7 @@
 
                             <div class="form-group mt-4">
 
-                                <label class="font-weight-bold d-block mb-3">
+                                <label class="font-weight-bold d-block ">
                                     Nation Status
                                 </label>
 
@@ -182,7 +182,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-success">
                                                     Nation is active
                                                 </small>
                                             </div>
@@ -206,7 +206,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-danger">
                                                     Nation is disabled
                                                 </small>
                                             </div>
@@ -228,7 +228,7 @@
                                     class="btn btn-outline-secondary mr-2 px-4"
                                 >
                                     Reset
-                                </button>
+                                </button> &nbsp;
 
                                 <button
                                     type="submit"
@@ -288,7 +288,7 @@
 
                             <div class="form-group mt-4">
 
-                                <label class="font-weight-bold d-block mb-3">
+                                <label class="font-weight-bold d-block">
                                     Interview Status
                                 </label>
 
@@ -311,7 +311,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-success">
                                                     Status is active
                                                 </small>
                                             </div>
@@ -337,7 +337,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-danger">
                                                     Status is disabled
                                                 </small>
                                             </div>
@@ -361,7 +361,7 @@
                                     class="btn btn-outline-secondary mr-2 px-4"
                                 >
                                     Reset
-                                </button>
+                                </button> &nbsp;
 
                                 <button
                                     type="submit"

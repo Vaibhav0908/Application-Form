@@ -31,6 +31,7 @@ class EmployeeContoller extends Controller
     {
         $request->validate([
             'emp_email' => 'required|email',
+            'emp_calender' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
         ]);
 
         Employee::updateOrCreate(
@@ -47,7 +48,7 @@ class EmployeeContoller extends Controller
                 'department' => $request->emp_department,
                 'salary' => $request->emp_salary,
                 'joing_date' => $request->emp_joining,
-                'calender' => $request->emp_calender,
+                'calender' => $request->file('emp_calender')?->store('documents', 'public'),
             ]
         );
 

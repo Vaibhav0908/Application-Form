@@ -102,14 +102,6 @@
                             @endif
                         </li>
                         @if (session('admin_username'))
-                            <!-- <li>
-                                                <a href="{{ route('options_control_panel') }}"
-                                                    class="{{ request()->routeIs('options_control_panel') ? 'active' : '' }}">
-                                                    <i class="bi bi-people"></i>
-                                                    <span>Control Panel</span>
-                                                </a>
-                                            </li> -->
-
                             <li>
                                 <div data-bs-toggle="collapse" data-bs-target="#controlPanelMenu" aria-expanded="false">
                                     <a>
@@ -209,13 +201,6 @@
                                             <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="Admin Logo"
                                                 class="rounded-circle p-1"
                                                 style="width: 45px; height: 45px; object-fit: cover;">
-
-                                            <!-- <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
-                                                                        style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i> -->
-
-                                            <!-- <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
-                                                                                                style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i> -->
-
                                         </a>
 
                                     @elseif(session('recruiter_name'))
@@ -457,11 +442,11 @@
             localStorage.setItem('darkMode', 'false');
             localStorage.setItem('lightMode', 'true');
         });
-        
+
 
         // Disable the right-click context menu
         document.addEventListener("contextmenu", function (event) {
-        event.preventDefault();
+            event.preventDefault();
         });
     </script>
 

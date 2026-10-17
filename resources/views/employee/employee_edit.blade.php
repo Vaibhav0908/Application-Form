@@ -19,7 +19,7 @@
                     </small>
                 </div>
 
-                <form action="{{ route("employee.edit_submit") }}" method="post">
+                <form action="{{ route("employee.edit_submit") }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mt-2 m-0 p-0">
                         <div class="col-6">
@@ -59,7 +59,7 @@
                         <div class="col-6">
                             <label class="d-block border border-success rounded p-3 text-center">
 
-                                <input type="radio" name="rec_status" value="Active" class="mr-2" {{ $employee->status == 'Active' ? 'checked' : '' }}>
+                                <input type="radio" name="emp_status" value="Active" class="mr-2" {{ $employee->status == 'Active' ? 'checked' : '' }}>
 
                                 <span class="text-success font-weight-bold">
                                     Active
@@ -77,7 +77,7 @@
                         <div class="col-6">
                             <label class="d-block border border-danger rounded p-3 text-center">
 
-                                <input type="radio" name="rec_status" value="Deactive" class="mr-2" {{ $employee->status == 'Deactive' ? 'checked' : '' }}>
+                                <input type="radio" name="emp_status" value="Deactive" class="mr-2" {{ $employee->status == 'Deactive' ? 'checked' : '' }}>
 
                                 <span class="text-danger font-weight-bold">
                                     Deactive

@@ -9,6 +9,7 @@ use App\Http\Controllers\Employee\EmployeeContoller;
 use App\Http\Controllers\Recruiter\RecruiterAuthController;
 use App\Http\Controllers\Recruiter\recruiterController;
 use App\Http\Controllers\ResumeChecker\ResumeController;
+use App\Models\Employee;
 use App\Models\Interview_status;
 use App\Models\Nation;
 use App\Models\Platform;
@@ -52,13 +53,24 @@ Route::middleware('admin.auth')->group(function () {
     Route::post('/resume_check', [ResumeController::class, 'resume_submission'])
         ->name('resume_check');
 
-    Route::get('/Employees', [AdminController::class, 'employees'])
+    Route::get('/Employees', [EmployeeContoller::class, 'employees'])
         ->name('employee');
 
-    Route::get('/control_panel', [AdminController::class, 'showControl'])
-        ->name('control_panel');
+    Route::post('/add_employee', [EmployeeContoller::class, 'addemployee'])
+        ->name('addemployee');
 
-    Route::post('/recruiter', [AdminController::class, 'recruiter'])
+    Route::get('/employee/edit/panel/{id}', function ($id) {
+        $employee = Employee::findOrFail($id);
+        return view('employee.employee_edit', compact('employee'));
+    })->name('employee.edit_panel');
+
+    Route::post('/employee/edit_submit', [EmployeeContoller::class, 'addemployee'])
+        ->name('employee.edit_submit');
+
+    Route::get('/options_control_panel', [AdminController::class, 'showControl'])
+        ->name('options_control_panel');
+
+    Route::post('/recruiter', [recruiterController::class, 'recruiter'])
         ->name('recruiter_save');
 
     Route::post('/nation', [AdminController::class, 'nation'])
@@ -76,28 +88,50 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/admin/candidate/{id}', [AdminController::class, 'showCandidate'])
         ->name('admin.candidate.show');
 
-    Route::get('/employee_details/{id}', [EmployeeContoller::class, 'showemployeetorecruiters'])
+    Route::get('/employee_details/{id}', [EmployeeContoller::class, 'showemployeedetails'])
     ->name('employee_details');
+
+
+    Route::get('/employee/delete/{id}', function ($id) {
+            Employee::where('id', $id)->delete();
+            return redirect(route('employee'))->with(
+                'success',
+                'Employee Data Deleted Successfully.'
+            );
+        }
+    )->name('employee.delete');
+
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');
 
+    Route::get('/recruiter_control_panel', [recruiterController::class, 'showrecruiterControl'])
+        ->name('recruiter_control_panel');
+
     Route::get('/recruiters/dashboard', [recruiterController::class, 'dashboard'])
         ->name('recruiters.dashboard');
+
+    Route::get('/task_management_panel', function(){
+        return view('admin.task_panel');
+    })->name('task_management_panel');
+
+    Route::get('/leaves_management_panel', function(){
+        return view('admin.leaves_panel');
+    })->name('leaves_management_panel');
 
     Route::get('/recruiters/edit/panel/{id}', function ($id) {
         $recruiter = RecruiterDetail::findOrFail($id);
         return view('recruiters.recruiters_edit', compact('recruiter'));
     })->name('recruiters.edit_panel');
 
-    Route::post('/recruiters/edit_submit', [AdminController::class, 'recruiter'])
+
+    Route::post('/recruiters/edit_submit', [recruiterController::class, 'recruiter'])
         ->name('recruiters.edit_submit');
 
-    Route::get(
-        '/recruiters/delete/{id}',
-        function ($id) {
+
+    Route::get('/recruiters/delete/{id}', function ($id) {
             RecruiterDetail::where('id', $id)->delete();
-            return redirect(route('control_panel'))->with(
+            return redirect(route('recruiter_control_panel'))->with(
                 'success',
                 'Recruiter Data Deleted Successfully.'
             );
@@ -132,35 +166,39 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/option/delete/{type}/{id}', function ($type, $id) {
         if ($type == 'platform') {
             Platform::where('id', $id)->delete();
-            return redirect(route('control_panel'))->with(
+            return redirect(route('options_control_panel'))->with(
                 'success',
                 'Platform Deleted Successfully.'
             );
         }
         if ($type == 'nation') {
             Nation::where('id', $id)->delete();
-            return redirect(route('control_panel'))->with(
+            return redirect(route('options_control_panel'))->with(
                 'success',
                 'Nation Deleted Successfully.'
             );
         }
         if ($type == 'int_status') {
             Interview_status::where('id', $id)->delete();
-            return redirect(route('control_panel'))->with(
+            return redirect(route('options_control_panel'))->with(
                 'success',
                 'Interview Status Deleted Successfully.'
             );
         }
     })->name('option.delete');
 
+
     Route::get('/admin/logout', [AdminAuthController::class, 'logout'])
         ->name('admin.logout');
+
 
     Route::get('/recruiter/logout', [RecruiterAuthController::class, 'logout'])
         ->name('recruiter.logout');
 
+
     Route::post('/admin/candidate/{id}/office-work', [OfficeworkController::class, 'store'])
         ->name('office.form');
+
 
 
     Route::post('/recruiter/heartbeat', function (Request $request) {

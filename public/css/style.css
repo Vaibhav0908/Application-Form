@@ -298,20 +298,21 @@ h2 {
     align-items: center;
     gap: 12px;
     padding: 12px 15px;
-    color: #adb5bd;
+    color: #adb5bd !important;
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .menu a:hover {
     background: #343a40;
-    color: #fff;
+    color: #fff !important ;
 }
 
 .menu a.active {
     background: #0d6efd;
-    color: #fff;
+    color: #fff !important;
 }
 
 .menu i {

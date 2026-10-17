@@ -1,27 +1,22 @@
 @extends('admin.com_layout')
 
 @section('content')
+<style>
+    .dark_body label{
+        color: white;
+    }
+</style>
         <div class="row m-0 py-5 justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="shadow border-0">
 
-                    <div class="card-header bg-primary text-white py-3">
-                        <div class="d-flex align-items-center">
-                            <div class="mr-3">
-                                <span class="badge badge-light p-2">
-                                    <i class="fa fa-building text-primary"></i>
-                                </span>
-                            </div>
-
-                            <div>
+                    <div class="card-header bg-primary text-white p-3">
                                 <h5 class="mb-0 font-weight-bold">
                                     Edit the HR Details
                                 </h5>
                                 <small class="text-white-50">
                                     Update HR Details
                                 </small>
-                            </div>
-                        </div>
                     </div>
 
                     <form action="{{ route("recruiters.edit_submit") }}" method="post">
@@ -98,7 +93,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-success">
                                                     Recruiter is active
                                                 </small>
                                             </div>
@@ -122,7 +117,7 @@
                                             </span>
 
                                             <div>
-                                                <small class="text-muted">
+                                                <small class="text-danger">
                                                     Recruiter is disabled
                                                 </small>
                                             </div>
@@ -143,7 +138,7 @@
                                     class="btn btn-outline-secondary mr-2 px-4"
                                 >
                                     Reset
-                                </button>
+                                </button> &nbsp;
 
                                 <button
                                     type="submit"

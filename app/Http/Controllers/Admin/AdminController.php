@@ -63,6 +63,7 @@ class AdminController extends Controller
             'professionalDetails',
             'officeworkDetails'
         ])->latest()->get();
+
         return view('applications', compact('candidates'));
     }
 
@@ -84,53 +85,13 @@ class AdminController extends Controller
         return view('candidate_details', compact('candidate', 'recruiters', 'interview_status', 'activeRecruiterNames'));
     }
 
-    public function employees()
-    {
-        $employee = Candidate::with([
-            'familyDetails',
-            'educationDetails',
-            'professionalDetails',
-            'officeworkDetails'
-        ])->get();
-
-        return view('employees', compact('employee'));
-    }
-
     public function showControl()
     {
-        $recruiter = RecruiterDetail::all();
         $platforms = Platform::all();
         $nations = Nation::all();
         $interview_status = Interview_status::all();
 
-        return view('admin.control_panel', compact('recruiter', 'platforms', 'nations', 'interview_status'));
-    }
-
-    public function recruiter(Request $request)
-    {
-        $request->validate([
-            'rec_name' => 'required|string|max:255',
-            'rec_email' => 'required|email',
-            'rec_password' => 'required',
-            'rec_status' => 'required|in:Active,Deactive',
-        ]);
-
-        RecruiterDetail::updateOrCreate(
-            [
-                'email' => $request->rec_email,
-            ],
-            [
-                'name' => $request->rec_name,
-                'password' => $request->rec_password,
-                'status' => $request->rec_status,
-                'email' => $request->rec_email,
-            ]
-        );
-
-        return redirect(route('control_panel'))->with(
-            'success',
-            'Recruiter Data Saved Successfully.'
-        );
+        return view('admin.options_control_panel', compact( 'platforms', 'nations', 'interview_status'));
     }
 
     public function nation(Request $request)
@@ -150,7 +111,7 @@ class AdminController extends Controller
             ]
         );
 
-        return redirect(route('control_panel'))->with(
+        return redirect(route('options_control_panel'))->with(
             'success',
             'Nation Data Saved Successfully.'
         );
@@ -173,7 +134,7 @@ class AdminController extends Controller
             ]
         );
 
-        return redirect(route('control_panel'))->with(
+        return redirect(route('options_control_panel'))->with(
             'success',
             'Platform Data Saved Successfully.'
         );
@@ -196,7 +157,7 @@ class AdminController extends Controller
             ]
         );
 
-        return redirect(route('control_panel'))->with(
+        return redirect(route('options_control_panel'))->with(
             'success',
             'Interview Status Data Saved Successfully.'
         );

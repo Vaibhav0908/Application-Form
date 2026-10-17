@@ -52,3 +52,30 @@ document.addEventListener("click", function (e) {
         btn.closest(".group-fam, .group-qua, .group-pro").remove();
     }
 });
+
+// Disable the right-click context menu
+document.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+});
+
+
+// // Block common DevTools shortcuts
+// document.addEventListener(
+//     "keydown",
+//     function (event) {
+//         const key = event.key.toLowerCase();
+
+//         if (
+//             event.key === "F12" ||
+//             (event.ctrlKey &&
+//                 event.shiftKey &&
+//                 ["i", "j", "c"].includes(key)) ||
+//             (event.ctrlKey && key === "u") ||
+//             (event.metaKey && event.altKey && ["i", "j", "c"].includes(key))
+//         ) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//         }
+//     },
+//     true,
+// );

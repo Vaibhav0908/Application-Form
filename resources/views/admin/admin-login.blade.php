@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 </head>
 
+
+
 <body>
     <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center bg-light">
 
@@ -54,6 +56,12 @@
             </div>
         </div>
     </div>
+    <script>
+        // Disable the right-click context menu
+        document.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+        });
+    </script>
 </body>
 
 </html>

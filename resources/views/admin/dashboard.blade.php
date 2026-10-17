@@ -5,7 +5,11 @@
   <div class="content">
 
     <h2 class="text-primary fw-bold py-1  mx-4 mx-md-5 ">
-      Overview
+      @if (session('admin_username'))
+        Admin Overview
+      @elseif (session('recruiter_name'))
+        Recruiter Overview
+      @endif
     </h2>
     <!-- <div class="row m-0 p-0"> -->
     <div class="cards">
@@ -35,24 +39,24 @@
       </div>
 
       <!-- <div class="card select-card">
-        <div class="icon bg-success"><i class="bi bi-clock-history"></i></div>
-        <h3>Selected</h3>
-        @if (session('recruiter_name'))
-          <h2 class="text-success">{{ $total_rec_pendings }}</h2>
-        @elseif(session('admin_username'))
-          <h2 class="text-success">{{ $total_adm_pendings }}</h2>
-        @endif
-      </div> -->
+          <div class="icon bg-success"><i class="bi bi-clock-history"></i></div>
+          <h3>Selected</h3>
+          @if (session('recruiter_name'))
+            <h2 class="text-success">{{ $total_rec_pendings }}</h2>
+          @elseif(session('admin_username'))
+            <h2 class="text-success">{{ $total_adm_pendings }}</h2>
+          @endif
+        </div> -->
 
       <!-- <div class="card reject-card">
-        <div class="icon bg-danger"><i class="bi bi-clock-history"></i></div>
-        <h3>Selected</h3>
-        @if (session('recruiter_name'))
-          <h2 class="text-danger">{{ $total_rec_pendings }}</h2>
-        @elseif(session('admin_username'))
-          <h2 class="text-danger">{{ $total_adm_pendings }}</h2>
-        @endif
-      </div> -->
+          <div class="icon bg-danger"><i class="bi bi-clock-history"></i></div>
+          <h3>Selected</h3>
+          @if (session('recruiter_name'))
+            <h2 class="text-danger">{{ $total_rec_pendings }}</h2>
+          @elseif(session('admin_username'))
+            <h2 class="text-danger">{{ $total_adm_pendings }}</h2>
+          @endif
+        </div> -->
 
       @foreach ($statuses as $status)
         <div class="card">
@@ -62,6 +66,6 @@
         </div>
       @endforeach
 
-    <!-- </div> -->
+      <!-- </div> -->
     </div>
 @endsection

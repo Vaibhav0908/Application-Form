@@ -27,7 +27,7 @@
         }
     </style>
 
-    <h2 class="text-primary mt-5 mx-5">Applications</h2>
+    <h2 class="text-primary mt-5 mx-5">Candidate Applications</h2>
     <div class="table-box">
         <table>
             <tr class="table-heading text-dark">
@@ -43,70 +43,78 @@
 
             <div class="candidate-details">
                 @foreach ($candidates as $index => $cand)
-                    @if ($cand->reference_name == "NA" ? optional($cand->officeworkDetails)->interviewed_by == session('recruiter_name') : $cand->reference_name == session('recruiter_name'))
-                        <tr>
-                            <td>{{ $cand->count() - $index }}</td>
+                    @if(session('recruiter_name'))
+                        @if ($cand->reference_name == "NA" ? optional($cand->officeworkDetails)->interviewed_by == session('recruiter_name') : $cand->reference_name == session('recruiter_name'))
+                            <tr>
+                                <td>{{ $cand->count() - $index }}</td>
 
-                            <td>
-                                <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
-                                    style="text-decoration: dotted;">
-                                    {{ $cand->full_name }}
-                                </a>
-                            </td>
+                                <td>
+                                    <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
+                                        style="text-decoration: dotted;">
+                                        {{ $cand->full_name }}
+                                    </a>
+                                </td>
 
-                            <td>{{ $cand->applicant_designation }}</td>
+                                <td>{{ $cand->applicant_designation }}</td>
 
-                            <td>
-                                @if (optional($cand->officeworkDetails)->interview_status != '')
-                                    @if (optional($cand->officeworkDetails)->interview_status == 'Pending')
-                                        <span class="status bg-warning">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                <td>
+                                    @if (optional($cand->officeworkDetails)->interview_status != '')
+                                        @if (optional($cand->officeworkDetails)->interview_status == 'Pending')
+                                            <span class="status bg-warning">{{ optional($cand->officeworkDetails)->interview_status }}</span>
 
-                                    @elseif (optional($cand->officeworkDetails)->interview_status == 'Select')
-                                        <span class="status bg-success">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                        @elseif (optional($cand->officeworkDetails)->interview_status == 'Select')
+                                            <span class="status bg-success">{{ optional($cand->officeworkDetails)->interview_status }}</span>
 
-                                    @elseif (optional($cand->officeworkDetails)->interview_status == 'Reject')
-                                        <span class="status bg-danger">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                        @elseif (optional($cand->officeworkDetails)->interview_status == 'Reject')
+                                            <span class="status bg-danger">{{ optional($cand->officeworkDetails)->interview_status }}</span>
 
+                                        @else
+                                            <span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                        @endif
                                     @else
-                                        <span class="status bg-primary">{{ optional($cand->officeworkDetails)->interview_status }}</span>
+                                        <span class="status bg-warning">Pending</span>
                                     @endif
-                                @else
-                                    <span class="status bg-warning">Pending</span>
-                                @endif
-                            </td>
+                                </td>
 
-                            <td>
-                                @if (optional($cand->officeworkDetails)->interview_remarks != "")
-                                    <div
-                                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                                        {{ optional($cand->officeworkDetails)->interview_remarks }}
-                                    </div>
-                                @else
-                                    <p>NA</p>
-                                @endif
-                            </td>
+                                <td>
+                                    @if (optional($cand->officeworkDetails)->interview_remarks != "")
+                                        <div
+                                            style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                                                                                                                                                                                                                                                                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                            {{ optional($cand->officeworkDetails)->interview_remarks }}
+                                        </div>
+                                    @else
+                                        <div class="d-flex align-items-center" style="height: 50px;">
+                                            <p class="mb-0">NA</p>
+                                        </div>
+                                    @endif
+                                </td>
 
-                            <td>
-                                @if ($cand->reference_name != "NA")
-                                    {{$cand->reference_name}}
-                                @elseif($cand->reference_name == "NA" && optional($cand->officeworkDetails)->interviewed_by != "")
-                                    {{ optional($cand->officeworkDetails)->interviewed_by }}
-                                @else
-                                    NA
-                                @endif
-                            </td>
+                                <td>
+                                    @if ($cand->reference_name != "NA")
+                                        {{$cand->reference_name}}
+                                    @elseif($cand->reference_name == "NA" && optional($cand->officeworkDetails)->interviewed_by != "")
+                                        {{ optional($cand->officeworkDetails)->interviewed_by }}
+                                    @else
+                                        <div class="d-flex align-items-center" style="height: 50px;">
+                                            <p class="mb-0">NA</p>
+                                        </div>
+                                    @endif
+                                </td>
 
-                            <td>{{$cand->created_at}}</td>
+                                <td>{{$cand->created_at}}</td>
 
-                            <td>
-                                @if (optional($cand->officeworkDetails)->updated_at != "")
-                                    {{ optional($cand->officeworkDetails)->updated_at }}
-                                @else
-                                    <p>NA</p>
-                                @endif
-                            </td>
-                        </tr>
+                                <td>
+                                    @if (optional($cand->officeworkDetails)->updated_at != "")
+                                        {{ optional($cand->officeworkDetails)->updated_at }}
+                                    @else
+                                        <div class="d-flex align-items-center" style="height: 50px;">
+                                            <p class="mb-0">NA</p>
+                                        </div>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endif
                     @elseif(session('admin_username'))
                         <tr>
                             <td>{{ $cand->count() - $index }}</td>
@@ -141,21 +149,27 @@
                                 @if (optional($cand->officeworkDetails)->interview_remarks != "")
                                     <div
                                         style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                                                                                                                                                                                                                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
                                         {{ optional($cand->officeworkDetails)->interview_remarks }}
                                     </div>
                                 @else
-                                    <p>NA</p>
+                                    <div class="d-flex align-items-center" style="height: 50px;">
+                                        <p class="mb-0">NA</p>
+                                    </div>
                                 @endif
                             </td>
 
                             <td>
-                                @if ($cand->reference_name != "NA")
-                                    {{$cand->reference_name}}
-                                @elseif($cand->reference_name == "NA" && optional($cand->officeworkDetails)->interviewed_by != "")
+                                @if ($cand->reference_name != "NA" && optional($cand->officeworkDetails)->interviewed_by != null)
                                     {{ optional($cand->officeworkDetails)->interviewed_by }}
+                                @elseif ($cand->reference_name == "NA" && optional($cand->officeworkDetails)->interviewed_by != null)
+                                    {{ optional($cand->officeworkDetails)->interviewed_by }}
+                                @elseif($cand->reference_name != "NA")
+                                    {{$cand->reference_name}}
                                 @else
-                                    NA
+                                    <div class="d-flex align-items-center" style="height: 50px;">
+                                        <p class="mb-0">NA</p>
+                                    </div>
                                 @endif
                             </td>
 
@@ -165,7 +179,9 @@
                                 @if (optional($cand->officeworkDetails)->updated_at != "")
                                     {{ optional($cand->officeworkDetails)->updated_at }}
                                 @else
-                                    <p>NA</p>
+                                    <div class="d-flex align-items-center" style="height: 50px;">
+                                        <p class="mb-0">NA</p>
+                                    </div>
                                 @endif
                             </td>
                         </tr>

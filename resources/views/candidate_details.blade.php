@@ -316,6 +316,64 @@
         </div>
     </div>
     <hr class="pb-5">
+    <div class="modal fade" id="addempModal" tabindex="-1" aria-labelledby="addempModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">
+                        Fill the Employee Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route("addemployee") }}" method="post">
+                        @csrf
+                        <div class="row m-0 p-0">
+                            <div class="col-6">
+                                <label for="">Name: </label>
+                                <input type="text" name="emp_name" value="{{ $candidate->full_name }}"
+                                    class="form-control mb-1" required>
+                                <label for="">ID: </label>
+                                <input type="text" name="candidate_id" value="{{ $candidate->id }}"
+                                    class="form-control mb-1" required>
+                                <label for="">Email: </label>
+                                <input type="email" name="emp_email" value="{{ $candidate->email }}"
+                                    class="form-control mb-1" required>
+                                <label for="">Password: </label>
+                                <input type="password" name="emp_password" class="form-control mb-1" required>
+                                <label for="">Designation: </label>
+                                <input type="text" name="emp_designation" class="form-control mb-2" required>
+                                <label for="">Status: </label>
+                                <input type="radio" name="emp_status" value="Active"><span
+                                    class="text-primary">Active</span>
+                                <input type="radio" name="emp_status" value="Deactive"><span
+                                    class="text-danger">Deactive</span>
+                            </div>
+                            <div class="col-6">
+                                <label for="">Salary: </label>
+                                <input type="text" name="emp_salary" class="form-control mb-1" required>
+                                <label for="">Joining Date: </label>
+                                <input type="date" name="emp_joining" class="form-control mb-1" required>
+                                <label for="">Leaves Calender: </label>
+                                <input type="file" name="emp_calender" class="form-control mb-1" required>
+                                <label for="">Department: </label>
+                                <input type="text" name="emp_department" class="form-control mb-1" required>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <span>Done</span>
+                    </button>
+                    <button type="reset" class="btn btn-danger">
+                        Reset
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
     <div class="container py-5">
@@ -608,33 +666,67 @@
                                         Save Evaluation
                                     </button>
                                 </div>
-                            @elseif($candidate->reference_name != "NA")
-                                @if (!in_array($interviewedBycandidate, $activeRecruiterNames))
-                                    <div class="text-end p-2">
-                                    <button type="reset" class="btn btn-outline-secondary px-4">
-                                        Reset
-                                    </button>
 
-                                    <button type="submit" class="btn btn-primary px-4 ms-2">
-                                        <i class="bi bi-check-circle me-1"></i>
-                                        Save Evaluation
-                                    </button>
-                                </div>
-                                @endif
-                            
-                            @elseif(optional($candidate->officeworkDetails)->interviewed_by != null)
+                            @elseif ($candidate->reference_name != 'NA' && optional($candidate->officeworkDetails)->interviewed_by != null)
                                 @if (!in_array($interviewedByoffice, $activeRecruiterNames))
                                     <div class="text-end p-2">
-                                    <button type="reset" class="btn btn-outline-secondary px-4">
-                                        Reset
-                                    </button>
+                                        <button type="reset" class="btn btn-outline-secondary px-4">
+                                            Reset
+                                        </button>
 
-                                    <button type="submit" class="btn btn-primary px-4 ms-2">
-                                        <i class="bi bi-check-circle me-1"></i>
-                                        Save Evaluation
-                                    </button>
-                                </div>
+                                        <button type="submit" class="btn btn-primary px-4 ms-2">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Save Evaluation
+                                        </button>
+                                    </div>
+
+                                @elseif (!in_array($interviewedBycandidate, $activeRecruiterNames))
+                                    <div class="text-end p-2">
+                                        <button type="reset" class="btn btn-outline-secondary px-4">
+                                            Reset
+                                        </button>
+
+                                        <button type="submit" class="btn btn-primary px-4 ms-2">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Save Evaluation
+                                        </button>
+                                    </div>
+                                @else
+
                                 @endif
+
+                            @elseif ($candidate->reference_name != 'NA' && optional($candidate->officeworkDetails)->interviewed_by == null)
+                                @if (!in_array($interviewedBycandidate, $activeRecruiterNames))
+                                    <div class="text-end p-2">
+                                        <button type="reset" class="btn btn-outline-secondary px-4">
+                                            Reset
+                                        </button>
+
+                                        <button type="submit" class="btn btn-primary px-4 ms-2">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Save Evaluation
+                                        </button>
+                                    </div>
+                                @else
+
+                                @endif
+
+                            @elseif($candidate->reference_name == 'NA' && optional($candidate->officeworkDetails)->interviewed_by != null)
+                                @if (!in_array($interviewedByoffice, $activeRecruiterNames))
+                                    <div class="text-end p-2">
+                                        <button type="reset" class="btn btn-outline-secondary px-4">
+                                            Reset
+                                        </button>
+
+                                        <button type="submit" class="btn btn-primary px-4 ms-2">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Save Evaluation
+                                        </button>
+                                    </div>
+                                @else
+
+                                @endif
+
                             @endif
 
                         @elseif(session('recruiter_name'))
@@ -653,13 +745,28 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> <br>
 
-        <div class="alert alert-info m-0" role="alert">
-            <i class="bi bi-info-circle me-2"></i>
-            Please fill in all evaluation details carefully before submitting the office work assessment form.
-        </div>
+        @if (session('admin_username'))
+            <div class="alert alert-info m-0 d-flex align-items-center flex-wrap gap-2" role="alert">
+                <div class="me-auto">
+                    <i class="bi bi-info-circle me-2"></i>
+                    If the candidate clears the interview and you want to add them as an employee.
+                </div>
 
+                <button data-bs-toggle="modal" data-bs-target="#addempModal" class="btn btn-outline-primary">
+                    <i class="bi bi-plus-lg"></i>
+                    Add Employee
+                </button>
+            </div>
+        @endif
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Disable the right-click context menu
+            document.addEventListener("contextmenu", function (event) {
+                event.preventDefault();
+            });
+        </script>
 </body>
 
 </html>

@@ -8,7 +8,8 @@
     @if (session('admin_username'))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . session('admin_logo')) }}">
     @elseif(session('recruiter_name'))
-        <link rel="icon" type="image/png" href="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3">
+        <link rel="icon" type="image/png"
+            href="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3">
     @endif
 
     <title>
@@ -55,7 +56,7 @@
             color: white;
         }
 
-        .dark_body .resume_checker{
+        .dark_body .resume_checker {
             color: white;
         }
 
@@ -101,12 +102,50 @@
                             @endif
                         </li>
                         @if (session('admin_username'))
+                            <!-- <li>
+                                                <a href="{{ route('options_control_panel') }}"
+                                                    class="{{ request()->routeIs('options_control_panel') ? 'active' : '' }}">
+                                                    <i class="bi bi-people"></i>
+                                                    <span>Control Panel</span>
+                                                </a>
+                                            </li> -->
+
                             <li>
-                                <a href="{{ route('control_panel') }}"
-                                    class="{{ request()->routeIs('control_panel') ? 'active' : '' }}">
-                                    <i class="bi bi-people"></i>
-                                    <span>Control Panel</span>
-                                </a>
+                                <div data-bs-toggle="collapse" data-bs-target="#controlPanelMenu" aria-expanded="false">
+                                    <a>
+                                        <i class="bi bi-people"></i>
+                                        <span>Control Panel</span>
+                                        <i class="bi bi-chevron-down ms-auto"></i>
+                                    </a>
+                                </div>
+
+                                <ul class="collapse list-unstyled ps-4" id="controlPanelMenu">
+                                    <li>
+                                        <a href="{{ route('recruiter_control_panel') }}"
+                                            class="{{ request()->routeIs('recruiter_control_panel') ? 'active' : '' }}">
+                                            <span>Recruiters Panel</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('options_control_panel') }}"
+                                            class="{{ request()->routeIs('options_control_panel') ? 'active' : '' }}">
+                                            <span>Options Panel</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('task_management_panel') }}"
+                                            class="{{ request()->routeIs('task_management_panel') ? 'active' : '' }}">
+                                            <span>Task Panel</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('leaves_management_panel') }}"
+                                            class="{{ request()->routeIs('leaves_management_panel') ? 'active' : '' }}">
+                                            <span>Leaves Panel</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         @endif
                         <li>
@@ -172,10 +211,10 @@
                                                 style="width: 45px; height: 45px; object-fit: cover;">
 
                                             <!-- <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
-                                                    style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i> -->
+                                                                        style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i> -->
 
                                             <!-- <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
-                                                                            style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i> -->
+                                                                                                style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i> -->
 
                                         </a>
 
@@ -219,6 +258,7 @@
                             }, 5000);
                         </script>
                     @endif
+
                     @yield('content')
                 </div>
             </div>
@@ -343,6 +383,40 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+
+    @if (session()->has('recruiter_name'))
+        <script>
+            function sendHeartbeat() {
+                fetch("{{ route('recruiter.heartbeat') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Accept": "application/json"
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Heartbeat sent");
+                    })
+                    .catch(error => {
+                        console.error("Heartbeat failed:", error);
+                    });
+            }
+
+            // Send immediately when the page loads
+            sendHeartbeat();
+
+            // Send every 1 minute
+            setInterval(sendHeartbeat, 60 * 1000);
+        </script>
+    @endif
+
+
     <script>
         const menuToggle = document.getElementById("menuToggle");
         const sidebar = document.getElementById("sidebar");
@@ -383,33 +457,14 @@
             localStorage.setItem('darkMode', 'false');
             localStorage.setItem('lightMode', 'true');
         });
+        
 
-        function sendHeartbeat() {
-
-            fetch("{{ route('recruiter.heartbeat') }}", {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                    "Accept": "application/json"
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Heartbeat sent");
-                })
-                .catch(error => {
-                    console.error("Heartbeat failed:", error);
-                });
-        }
-
-        // Send immediately when page loads
-        sendHeartbeat();
-
-        // Send every 1 minutes
-        setInterval(sendHeartbeat, 1 * 60 * 1000);
-
-
+        // Disable the right-click context menu
+        document.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+        });
     </script>
+
 </body>
 
 </html>

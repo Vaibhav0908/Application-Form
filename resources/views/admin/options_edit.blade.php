@@ -8,24 +8,14 @@
             @if(isset($platform))
 
                 <div class="shadow border-0">
+                    <div class="card-header bg-primary text-white p-3">
+                        <h5 class="mb-0 font-weight-bold">
+                            Edit Platform
+                        </h5>
 
-                    <div class="card-header bg-primary text-white py-3">
-                        <div class="d-flex align-items-center">
-                            <div class="mr-3">
-                                <span class="badge badge-light p-2">
-                                    <i class="fa fa-building text-primary"></i>
-                                </span>
-                            </div>
-
-                            <div>
-                                <h5 class="mb-0 font-weight-bold">
-                                    Edit Platform
-                                </h5>
-                                <small class="text-white-50">
-                                    Update platform details
-                                </small>
-                            </div>
-                        </div>
+                        <small class="text-white-50">
+                            Update platform details
+                        </small>
                     </div>
 
                     <form action="{{ route('platform.edit_submit') }}" method="post">
@@ -137,7 +127,7 @@
 
                 <div class="shadow border-0">
 
-                    <div class="card-header bg-primary text-white py-3">
+                    <div class="card-header bg-primary text-white p-3">
                         <h5 class="mb-0 font-weight-bold">
                             Edit Nation
                         </h5>

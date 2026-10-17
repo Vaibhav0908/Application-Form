@@ -108,4 +108,38 @@ class recruiterController extends Controller
             )
         );
     }
+
+    public function showrecruiterControl()
+    {
+        $recruiter = RecruiterDetail::all();
+
+        return view('recruiters.recruiters_panel', compact('recruiter'));
+    }
+
+    public function recruiter(Request $request)
+    {
+        $request->validate([
+            'rec_name' => 'required|string|max:255',
+            'rec_email' => 'required|email',
+            'rec_password' => 'required',
+            'rec_status' => 'required|in:Active,Deactive',
+        ]);
+
+        RecruiterDetail::updateOrCreate(
+            [
+                'email' => $request->rec_email,
+            ],
+            [
+                'name' => $request->rec_name,
+                'password' => $request->rec_password,
+                'status' => $request->rec_status,
+                'email' => $request->rec_email,
+            ]
+        );
+
+        return redirect(route('recruiter_control_panel'))->with(
+            'success',
+            'Recruiter Data Saved Successfully.'
+        );
+    }
 }

@@ -27,7 +27,7 @@
                             <input type="text" name="emp_name" value="{{ $employee->name }}"
                                 class="form-control form-control-lg mb-1" required>
                             <label for="">ID: </label>
-                            <input type="text" name="candidate_id" value="{{ $employee->id }}"
+                            <input type="text" name="candidate_id" value="{{ $employee->candidate_id }}"
                                 class="form-control form-control-lg mb-1" required readonly>
                             <label for="">Email: </label>
                             <input type="email" name="emp_email" value="{{ $employee->email }}"

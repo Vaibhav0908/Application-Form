@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Employee\EmployeeContoller;
 use App\Models\Admin;
 use App\Models\Candidate;
 use App\Models\Interview_status;
@@ -10,6 +11,7 @@ use App\Models\Nation;
 use App\Models\Office_useDetail;
 use App\Models\Platform;
 use App\Models\RecruiterDetail;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -82,7 +84,9 @@ class AdminController extends Controller
 
         $interview_status = Interview_status::where('status', 'Active')->get();
 
-        return view('candidate_details', compact('candidate', 'recruiters', 'interview_status', 'activeRecruiterNames'));
+        $emp = Employee::where('candidate_id', $candidate->id)->exists();
+
+        return view('candidate_details', compact('candidate', 'recruiters', 'interview_status', 'activeRecruiterNames', 'emp'));
     }
 
     public function showControl()

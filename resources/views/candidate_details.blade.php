@@ -343,7 +343,8 @@
                                 <label for="">Password: </label>
                                 <input type="password" name="emp_password" class="form-control mb-1" required>
                                 <label for="">Designation: </label>
-                                <input type="text" name="emp_designation" class="form-control mb-2" required>
+                                <input type="text" name="emp_designation"
+                                    value="{{ $candidate->applicant_designation }}" class="form-control mb-2" required>
                                 <label for="">Status: </label>
                                 <input type="radio" name="emp_status" value="Active"><span
                                     class="text-primary">Active</span>
@@ -748,17 +749,29 @@
         </div> <br>
 
         @if (session('admin_username'))
-            <div class="alert alert-info m-0 d-flex align-items-center flex-wrap gap-2" role="alert">
-                <div class="me-auto">
-                    <i class="bi bi-info-circle me-2"></i>
-                    If the candidate clears the interview and you want to add them as an employee.
-                </div>
+            @if (!$emp)
 
-                <button data-bs-toggle="modal" data-bs-target="#addempModal" class="btn btn-outline-primary">
-                    <i class="bi bi-plus-lg"></i>
-                    Add Employee
-                </button>
-            </div>
+                <div class="alert alert-info m-0 d-flex align-items-center flex-wrap gap-2" role="alert">
+                    <div class="me-auto">
+                        <i class="bi bi-info-circle me-2"></i>
+                        If the candidate clears the interview and you want to add them as an employee.
+                    </div>
+
+                    <button data-bs-toggle="modal" data-bs-target="#addempModal" class="btn btn-outline-primary">
+                        <i class="bi bi-plus-lg"></i>
+                        Add Employee
+                    </button>
+                </div>
+            @else
+                <div class="alert alert-danger m-0 d-flex align-items-center flex-wrap gap-2" role="alert">
+                    <div class="me-auto">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Candidate all ready selected as an Employee.
+                    </div>
+                </div>
+            @endif
+
+
         @endif
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script>

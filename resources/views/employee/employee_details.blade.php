@@ -115,7 +115,7 @@
                     </div>
                 @endif
 
-                @if ($emp->calender)
+                <!-- @if ($emp->calender)
                     <div class="col-md-6 mb-2">
                         <div class="border rounded p-3 d-flex justify-content-between align-items-center">
                             <span class="fw-semibold">Leaves Calender</span>
@@ -132,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-                @endif
+                @endif -->
 
                 @if ($can->aadhar_card)
                     <div class="col-md-6 mb-2">
@@ -172,7 +172,7 @@
                 @endif
             </div>
 
-            <hr>
+            <!-- <hr>
 
             <div class="row m-0 p-0">
                 <h4 class="text-primary mb-3"><strong>Employee Tasks</strong></h4>
@@ -194,7 +194,7 @@
                 <div class="col-md-12 mb-3">
                     
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

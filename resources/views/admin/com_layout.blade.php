@@ -13,10 +13,12 @@
     @endif
 
     <title>
-        @if (session('admin_username'))
+        @if (session('admin_id'))
             Admin Dashboard
-        @elseif(session('recruiter_name'))
+        @elseif(session('recruiter_id'))
             Recruiter Dashboard
+        @elseif(session('employee_id'))
+            Employee Dashboard
         @endif
     </title>
 
@@ -79,29 +81,37 @@
 
                 <div class="sidebar p-3" id="sidebar">
                     <div class="logo">
-                        @if (session('admin_username'))
+                        @if (session('admin_id'))
                             AdminPanel
-                        @else
+                        @elseif(session('recruiter_id'))
                             RecruiterPanel
+                        @elseif(session('employee_id'))
+                            EmployeePanel
                         @endif
                     </div>
                     <ul class="menu">
                         <li>
-                            @if (session('admin_username'))
+                            @if (session('admin_id'))
                                 <a href="{{ route('admin.dashboard') }}"
                                     class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                                     <i class="bi bi-grid"></i>
                                     <span>Dashboard</span>
                                 </a>
-                            @elseif(session('recruiter_name'))
+                            @elseif(session('recruiter_id'))
                                 <a href="{{ route('recruiters.dashboard') }}"
                                     class="{{ request()->routeIs('recruiters.dashboard') ? 'active' : '' }}">
                                     <i class="bi bi-grid"></i>
                                     <span>Dashboard</span>
                                 </a>
+                            @elseif(session('employee_id'))
+                                <a href="{{ route('employee.dashboard') }}"
+                                    class="{{ request()->routeIs('employee.dashboard') ? 'active' : '' }}">
+                                    <i class="bi bi-grid"></i>
+                                    <span>Dashboard</span>
+                                </a>
                             @endif
                         </li>
-                        @if (session('admin_username'))
+                        @if (session('admin_id'))
                             <li>
                                 <div data-bs-toggle="collapse" data-bs-target="#controlPanelMenu" aria-expanded="false">
                                     <a>
@@ -125,12 +135,12 @@
                                             <span>Options Panel</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="{{ route('task_management_panel') }}"
                                             class="{{ request()->routeIs('task_management_panel') ? 'active' : '' }}">
                                             <span>Task Panel</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="{{ route('leaves_management_panel') }}"
                                             class="{{ request()->routeIs('leaves_management_panel') ? 'active' : '' }}">
@@ -140,28 +150,41 @@
                                 </ul>
                             </li>
                         @endif
-                        <li>
-                            <a href="{{ route('employee') }}"
-                                class="{{ request()->routeIs('employee') ? 'active' : '' }}">
-                                <i class="bi bi-person-vcard"></i>
-                                <span>Employees</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('applications') }}"
-                                class="{{ request()->routeIs('applications') ? 'active' : '' }}">
-                                <i class="bi bi-file-earmark-text"></i>
-                                <span>Applications</span>
-                            </a>
-                        </li>
 
-                        <li>
-                            <a href="{{ route('resume_checker') }}"
-                                class="{{ request()->routeIs('resume_checker') ? 'active' : '' }}">
-                                <i class="bi bi-bar-chart"></i>
-                                <span>Resume Checker</span>
-                            </a>
-                        </li>
+                        @if (!session('employee_id'))
+                            <li>
+                                <a href="{{ route('employee') }}"
+                                    class="{{ request()->routeIs('employee') ? 'active' : '' }}">
+                                    <i class="bi bi-person-vcard"></i>
+                                    <span>Employees</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('applications') }}"
+                                    class="{{ request()->routeIs('applications') ? 'active' : '' }}">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                    <span>Applications</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('resume_checker') }}"
+                                    class="{{ request()->routeIs('resume_checker') ? 'active' : '' }}">
+                                    <i class="bi bi-bar-chart"></i>
+                                    <span>Resume Checker</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (session('employee_id'))
+                            <li>
+                                <a href="{{ route('employee.leaves') }}"
+                                    class="{{ request()->routeIs('employee.leaves') ? 'active' : '' }}">
+                                    <i class="bi bi-bar-chart"></i>
+                                    <span>Apply Leaves</span>
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <a href="" data-bs-toggle="modal" data-bs-target="#settingsModal">
                                 <i class="bi bi-gear"></i>
@@ -191,11 +214,12 @@
 
                             <div class="d-flex align-items-center ms-auto">
                                 <span>
-                                    Welcome, <i>{{ session('admin_username') ?: session('recruiter_name') }}</i>
+                                    Welcome,
+                                    <i>{{ session('admin_username') ?: session('recruiter_name') ?: session('employee_name') }}</i>
                                 </span>
 
                                 <div class="ms-2">
-                                    @if (session('admin_username'))
+                                    @if (session('admin_id'))
                                         <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile"
                                             class="position-relative d-inline-block">
                                             <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="Admin Logo"
@@ -203,7 +227,7 @@
                                                 style="width: 45px; height: 45px; object-fit: cover;">
                                         </a>
 
-                                    @elseif(session('recruiter_name'))
+                                    @elseif(session('recruiter_id'))
                                         <a href="" title="Profile" class="position-relative d-inline-block">
                                             <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                                                 alt="Recruiter Logo" class="rounded-circle "
@@ -214,6 +238,33 @@
                                                 $isActive = $recruiter &&
                                                     $recruiter->last_seen &&
                                                     $recruiter->last_seen->greaterThan(now()->subMinutes(30));
+                                            @endphp
+
+                                            @if ($isActive)
+                                                <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i>
+                                            @else
+                                                <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i>
+                                            @endif
+                                        </a>
+
+                                    @elseif(session('employee_id'))
+                                        <a href="" title="Profile" class="position-relative d-inline-block">
+                                            @foreach ($emp as $emp)
+                                                @if ($emp->full_name == session('employee_name'))
+                                                    <img src="{{asset('storage/' . $emp->passport_photo)}}" alt="Employee Logo"
+                                                        class="rounded-circle"
+                                                        style="width: 45px; height: 45px; object-fit: cover;">
+                                                @endif
+                                            @endforeach
+
+                                            @php
+                                                $emp = \App\Models\Employee::find(session('employee_id'));
+
+                                                $isActive = $emp &&
+                                                    $emp->last_seen &&
+                                                    $emp->last_seen->greaterThan(now()->subMinutes(30));
                                             @endphp
 
                                             @if ($isActive)
@@ -352,11 +403,19 @@
                     Are you sure, you want to Log Out?
                 </div>
                 <div class="modal-footer">
-
-                    <a href="{{ session()->has('recruiter_id') ? route('recruiter.logout') : route('admin.logout') }}"
-                        class="btn btn-success">
-                        <span>Yes</span>
-                    </a>
+                    @if (session('admin_id'))
+                        <a href="{{ route('admin.logout') }}" class="btn btn-success">
+                            <span>Yes</span>
+                        </a>
+                    @elseif(session('recruiter_id'))
+                        <a href="{{ route('recruiter.logout') }}" class="btn btn-success">
+                            <span>Yes</span>
+                        </a>
+                    @elseif(session('employee_id'))
+                        <a href="{{ route('employee.logout') }}" class="btn btn-success">
+                            <span>Yes</span>
+                        </a>
+                    @endif
 
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         No
@@ -369,10 +428,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
-    @if (session()->has('recruiter_name'))
+    @if (session()->has('recruiter_id'))
         <script>
             function sendHeartbeat() {
                 fetch("{{ route('recruiter.heartbeat') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Accept": "application/json"
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Heartbeat sent");
+                    })
+                    .catch(error => {
+                        console.error("Heartbeat failed:", error);
+                    });
+            }
+
+            // Send immediately when the page loads
+            sendHeartbeat();
+
+            // Send every 1 minute
+            setInterval(sendHeartbeat, 60 * 1000);
+        </script>
+    @elseif(session()->has('employee_id'))
+        <script>
+            function sendHeartbeat() {
+                fetch("{{ route('employee.heartbeat') }}", {
                     method: "POST",
                     headers: {
                         "X-CSRF-TOKEN": "{{ csrf_token() }}",

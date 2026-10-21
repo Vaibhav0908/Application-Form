@@ -20,6 +20,11 @@ class AdminAuth
                 return redirect()->route('recruiter.login');
             }
 
+        elseif (!session()->has('employee_id') && request()->routeIs('employee.dashboard'))
+            {
+                return redirect()->route('employee.login');
+            }
+
         return $next($request);
     }
 }

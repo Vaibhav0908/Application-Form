@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Office\OfficeworkController;
 use App\Http\Controllers\Admin\AdminAuthController;
-use App\Http\Controllers\Employee\EmployeeContoller;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Recruiter\RecruiterAuthController;
 use App\Http\Controllers\Recruiter\recruiterController;
+use App\Http\Controllers\Employee\EmployeeAuthcontroller;
+use App\Http\Controllers\Employee\EmployeeContoller;
+use App\Http\Controllers\Office\OfficeworkController;
 use App\Http\Controllers\ResumeChecker\ResumeController;
 use App\Models\Employee;
 use App\Models\Interview_status;
@@ -40,6 +41,15 @@ Route::get('/recruiters/login', [RecruiterAuthController::class, 'showLogin'])
 
 Route::post('/recruiters/login', [RecruiterAuthController::class, 'login'])
     ->name('recruiter.login.submit');
+
+
+// employee login logout
+Route::get('/employee/login', [EmployeeAuthcontroller::class, 'showLogin'])
+    ->name('employee.login');
+
+Route::post('/employee/login', [EmployeeAuthcontroller::class, 'login'])
+    ->name('employee.login');
+
 
 
 // admin dashboard candidate-details office work
@@ -89,10 +99,12 @@ Route::middleware('admin.auth')->group(function () {
         ->name('admin.candidate.show');
 
     Route::get('/employee_details/{id}', [EmployeeContoller::class, 'showemployeedetails'])
-    ->name('employee_details');
+        ->name('employee_details');
 
 
-    Route::get('/employee/delete/{id}', function ($id) {
+    Route::get(
+        '/employee/delete/{id}',
+        function ($id) {
             Employee::where('id', $id)->delete();
             return redirect(route('employee'))->with(
                 'success',
@@ -105,17 +117,32 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');
 
+    Route::get('/admin/logout', [AdminAuthController::class, 'logout'])
+        ->name('admin.logout');
+
     Route::get('/recruiter_control_panel', [recruiterController::class, 'showrecruiterControl'])
         ->name('recruiter_control_panel');
 
     Route::get('/recruiters/dashboard', [recruiterController::class, 'dashboard'])
         ->name('recruiters.dashboard');
+    
+    Route::get('/recruiter/logout', [RecruiterAuthController::class, 'logout'])
+        ->name('recruiter.logout');
 
-    Route::get('/task_management_panel', function(){
+    Route::get('/employee/dashboard', [EmployeeContoller::class, 'dashboard'])
+        ->name('employee.dashboard');
+
+    Route::get('/employee/leaves/', [EmployeeContoller::class, 'showleavesform'])
+        ->name('employee.leaves');
+
+    Route::get('/employee/logout', [EmployeeAuthcontroller::class, 'logout'])
+    ->name('employee.logout');
+
+    Route::get('/task_management_panel', function () {
         return view('admin.task_panel');
     })->name('task_management_panel');
 
-    Route::get('/leaves_management_panel', function(){
+    Route::get('/leaves_management_panel', function () {
         return view('admin.leaves_panel');
     })->name('leaves_management_panel');
 
@@ -129,7 +156,9 @@ Route::middleware('admin.auth')->group(function () {
         ->name('recruiters.edit_submit');
 
 
-    Route::get('/recruiters/delete/{id}', function ($id) {
+    Route::get(
+        '/recruiters/delete/{id}',
+        function ($id) {
             RecruiterDetail::where('id', $id)->delete();
             return redirect(route('recruiter_control_panel'))->with(
                 'success',
@@ -161,8 +190,6 @@ Route::middleware('admin.auth')->group(function () {
     Route::post('/nation/edit_submit', [AdminController::class, 'nation'])
         ->name('nation.edit_submit');
 
-
-
     Route::get('/option/delete/{type}/{id}', function ($type, $id) {
         if ($type == 'platform') {
             Platform::where('id', $id)->delete();
@@ -187,19 +214,8 @@ Route::middleware('admin.auth')->group(function () {
         }
     })->name('option.delete');
 
-
-    Route::get('/admin/logout', [AdminAuthController::class, 'logout'])
-        ->name('admin.logout');
-
-
-    Route::get('/recruiter/logout', [RecruiterAuthController::class, 'logout'])
-        ->name('recruiter.logout');
-
-
     Route::post('/admin/candidate/{id}/office-work', [OfficeworkController::class, 'store'])
         ->name('office.form');
-
-
 
     Route::post('/recruiter/heartbeat', function (Request $request) {
         if (session()->has('recruiter_id')) {
@@ -213,5 +229,18 @@ Route::middleware('admin.auth')->group(function () {
             }
         }
     })->name('recruiter.heartbeat');
+
+    Route::post('/employee/heartbeat', function (Request $request) {
+        if (session()->has('employee_id')) {
+            $emp = Employee::find(session('employee_id'));
+            if ($emp) {
+                $emp->withoutTimestamps(function () use ($emp) {
+                    $emp->update([
+                        'last_seen' => now(),
+                    ]);
+                });
+            }
+        }
+    })->name('employee.heartbeat');
 
 });

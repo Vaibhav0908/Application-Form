@@ -27,7 +27,7 @@
             white-space: nowrap;
         }
 
-        .input-group{
+        .input-group {
             width: 210px;
         }
     </style>
@@ -54,15 +54,15 @@
                 <th>Action</th>
             </tr>
             <div class="candidate-details">
-                @if (session('recruiter_name'))
+                @if (session('recruiter_id'))
                     @foreach ($employee as $index => $emp)
                         @if (optional($emp->candidate)->reference_name == 'NA' ? optional(optional($emp->candidate)->officeworkDetails)->interviewed_by == session('recruiter_name') : optional($emp->candidate)->reference_name == session('recruiter_name'))
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td><a href="{{ route('employee_details', $emp->id) }}"
                                         style="text-decoration: dotted;">{{ $emp->name }}</a></td>
-                                <td>{{ $emp->designation }}</td>
-                                <td>{{ $emp->email }}</td>
+                                <td>{{  $emp->designation }}</td>
+                                <td>{{  $emp->email }}</td>
                                 <td>
                                     <div class="input-group">
                                         <input type="password" id="password-{{ $emp->id }}" value="{{ $emp->password }}"
@@ -72,11 +72,10 @@
                                             onclick="togglePassword({{ $emp->id }}, this)">
                                             <i class="bi bi-eye"></i>
                                         </button>
+
                                     </div>
                                 </td>
-
                                 <td>{{ $emp->last_seen }}</td>
-
                                 <td>
                                     @if ($emp->status == 'Active')
                                         <span class="status bg-success">{{  $emp->status }}</span>
@@ -85,18 +84,17 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+                                    <a href="{{'/employee/edit/panel/' . $emp->id}}" class="btn btn-primary"><i
+                                            class="bi bi-pencil"></i></a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
                                         data-delete-url="{{ route('employee.delete', $emp->id) }}" class="btn btn-danger delete-btn"><i
                                             class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
-
                         @endif
-
                     @endforeach
 
-                @elseif(session('admin_username'))
+                @elseif(session('admin_id'))
                     @foreach ($employee as $index => $emp)
                         <tr>
                             <td>{{ $index + 1 }}</td>
@@ -125,7 +123,8 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{'/employee/edit/panel/' . $emp->id}}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
+                                <a href="{{'/employee/edit/panel/' . $emp->id}}" class="btn btn-primary"><i
+                                        class="bi bi-pencil"></i></a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
                                     data-delete-url="{{ route('employee.delete', $emp->id) }}" class="btn btn-danger delete-btn"><i
                                         class="bi bi-trash"></i></a>

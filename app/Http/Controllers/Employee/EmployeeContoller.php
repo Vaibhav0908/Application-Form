@@ -5,11 +5,24 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\Employee;
-use App\Models\Office_useDetail;
 use Illuminate\Http\Request;
 
 class EmployeeContoller extends Controller
 {
+    public function dashboard(){
+        $emp = Candidate::all();
+        return view("admin.dashboard"
+        , compact('emp')
+        );
+    }
+
+    public function showleavesform(){
+        $emp = Candidate::all();
+        $employee = Employee::all();
+        return view("employee.employee_leaves"
+        , compact('emp', 'employee')
+        );
+    }
 
     public function employees()
     {
@@ -25,7 +38,6 @@ class EmployeeContoller extends Controller
         $can = Candidate::findOrFail($emp->candidate_id);
         return view('employee.employee_details', compact('emp', 'can'));
     }
-
 
     public function addemployee(Request $request)
     {

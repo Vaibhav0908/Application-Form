@@ -20,7 +20,7 @@ class recruiterController extends Controller
             'educationDetails',
             'professionalDetails',
             'officeworkDetails'
-        ])->get();
+        ])->latest()->get();
 
         $statuses = Interview_status::where('status', 'Active')
             ->get();

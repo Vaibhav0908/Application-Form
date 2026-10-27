@@ -32,93 +32,97 @@
     <div class="table-box">
         <table>
             <tr class="table-heading text-dark">
-                <th>Sr.</th>
+                <th>Sr No.</th>
                 <th>Employee Name</th>
-                <th>Reason for Leave</th>
-                <th>Apply Date</th>
-                <th>From</th>
-                <th>To</th>
-                <th>status</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Vaibhav Raju Samarth</td>
-                <td>
-                    <div
-                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                               border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                        Take the screenshot of our wbsites whole pages and make the one folder for it.
-                    </div>
-                </td>
-                <td class="">2026-10-09</td>
-                <td class="text-primary">2026-10-09</td>
-                <td class="text-primary">2026-10-10</td>
-                <td><span class="status bg-warning">In-Progress</span></td>
+                <th>Leave Type</th>
+                <th>Days</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Response</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
 
-            <tr>
-                <td>2</td>
-                <td>Vaibhav Raju Samarth</td>
-                <td>
-                    <div
-                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                               border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                        Take the screenshot of our wbsites whole pages and make the one folder for it.
-                    </div>
-                </td>
-                <td class="">2026-10-09</td>
-                <td class="text-primary">2026-10-09</td>
-                <td class="text-primary">2026-10-10</td>
-                <td><span class="status bg-warning">In-Progress</span></td>
-            </tr>
+            <div>
+                @foreach ($leave as $index => $leav)
+                    <tr>
+                        <td>{{ $leav->count() - $index }}</td>
+                        <td>{{ $leav->name }}</td>
+                        <td>{{ $leav->leave_type }}</td>
 
-            <tr>
-                <td>3</td>
-                <td>Vaibhav Raju Samarth</td>
-                <td>
-                    <div
-                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                               border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                        Take the screenshot of our wbsites whole pages and make the one folder for it.
-                    </div>
-                </td>
-                <td class="">2026-10-09</td>
-                <td class="text-primary">2026-10-09</td>
-                <td class="text-primary">2026-10-10</td>
-                <td><span class="status bg-warning">In-Progress</span></td>
-            </tr>
+                        @if ($leav->leave_type == 'Half Day')
+                            <td>-</td>
+                            <td>{{ $leav->half_day_date->format('d-m-y') }}</td>
+                            <td>{{ $leav->time }}</td>
+                        @elseif ($leav->leave_type == 'Paid Leave')
+                            <td>-</td>
+                            <td>{{ $leav->paid_day_date->format('d-m-y') }}</td>
+                            <td>-</td>
+                        @elseif ($leav->leave_type == 'Full Day')
+                            <td>-</td>
+                            <td>{{ $leav->full_day_date->format('d-m-y') }}</td>
+                            <td>-</td>
+                        @elseif ($leav->leave_type == 'Multiple Days')
+                            <td>{{ $leav->days }}</td>
+                            <td>
+                                <div class="row m-0 p-0">
+                                    <div class="col-12 m-0 p-0">
+                                        <span class="text-primary">Start Date</span><br>{{ $leav->start_date->format('d-m-y') }}
+                                    </div> <span class="justify-content-center">to</span>
+                                    <div class="col-12 m-0 p-0">
+                                        <span class="text-warning">End Date</span><br>{{ $leav->end_date->format('d-m-y') }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>-</td>
+                        @endif
 
-            <tr>
-                <td>4</td>
-                <td>Vaibhav Raju Samarth</td>
-                <td>
-                    <div
-                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                               border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                        Take the screenshot of our wbsites whole pages and make the one folder for it.
-                    </div>
-                </td>
-                <td class="">2026-10-09</td>
-                <td class="text-primary">2026-10-09</td>
-                <td class="text-primary">2026-10-10</td>
-                <td><span class="status bg-warning">In-Progress</span></td>
-            </tr>
+                        <td>
+                            <div
+                                style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                  border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                {{ $leav->reason }}
+                            </div>
+                        </td>
+                        <td>
+                            @if ($leav->response)
+                                <div
+                                    style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                         border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                    {{ $leav->response }}
+                                </div>
+                            @else
+                                -
+                            @endif
+                        </td>
+                        <td>
+                            @if ($leav->status != '')
+                                @if ($leav->status == 'Aprove')
+                                    <span class="status bg-success">{{ $leav->status }}</span>
 
-            <tr>
-                <td>5</td>
-                <td>Vaibhav Raju Samarth</td>
-                <td>
-                    <div
-                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                               border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
-                        Take the screenshot of our wbsites whole pages and make the one folder for it.
-                    </div>
-                </td>
-                <td class="">2026-10-09</td>
-                <td class="text-primary">2026-10-09</td>
-                <td class="text-primary">2026-10-10</td>
-                <td><span class="status bg-warning">In-Progress</span></td>
-            </tr>
+                                @elseif ($leav->status == 'Reject')
+                                    <span class="status bg-danger">{{ $leav->status }}</span>
+                                @endif
+                            @else
+                                <span class="status bg-warning">Inprogress</span>
+                            @endif
+                        </td>
+                        <td>
+                            @foreach ($employee as $emp)
+                                @if ($leav->employee_id == $emp->id)
+                                    @if ($leav->status == 'Reject' || $leav->status == 'Aprove')
+                                        <a style="cursor: not-allowed;" class="btn btn-primary response">Response</a>
+                                    @else
+                                        <a href="{{ route('leaves_reponse_panel', ['id' => $leav->id]) }}"
+                                            class="btn btn-primary response">Response</a>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </td>
+                    </tr>
+                @endforeach
+            </div>
         </table>
     </div>
 @endsection

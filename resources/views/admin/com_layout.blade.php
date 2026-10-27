@@ -30,47 +30,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
 
-        body {
-            background: #f5f7fb;
-            /* background: #24417b; */
-            display: flex;
-        }
-
-        .dark_body {
-            background: #2f3950 !important;
-            color: #393a3a !important;
-        }
-
-        .dark_body .card,
-        .dark_body .modal-content,
-        .dark_body .table-box,
-        .dark_body .navbar,
-        .dark_body .menu-toggle {
-            background: #1f2937;
-            color: white;
-        }
-
-        .dark_body .resume_checker {
-            color: white;
-        }
-
-        .dark_body tr:nth-child(odd) {
-            color: #bbcbe2;
-        }
-
-        .dark_body tr:nth-child(even) {
-            background: #1b232e;
-            color: #bbcbe2;
-        }
-    </style>
 </head>
 
 <body class="">
@@ -136,14 +96,14 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                        <a href="{{ route('task_management_panel') }}"
+                                         <a href="{{ route('task_management_panel') }}"
                                             class="{{ request()->routeIs('task_management_panel') ? 'active' : '' }}">
-                                            <span>Task Panel</span>
-                                        </a>
-                                    </li> -->
+                                                <span>Task Panel</span>
+                                         </a>
+                                        </li> -->
                                     <li>
                                         <a href="{{ route('leaves_management_panel') }}"
-                                            class="{{ request()->routeIs('leaves_management_panel') ? 'active' : '' }}">
+                                            class="{{ request()->routeIs('leaves_management_panel') || request()->routeIs('leaves_reponse_panel') ? 'active' : '' }}">
                                             <span>Leaves Panel</span>
                                         </a>
                                     </li>
@@ -204,7 +164,7 @@
 
             <div class="col-md-10 m-0 p-0">
                 <div class="col-12 m-0 p-0 sticky-top">
-                    <div class="navbar ">
+                    <div class="navbar">
                         <div class="profile d-flex align-items-center">
                             <div class="d-md-none d-flex align-items-center">
                                 <button class="menu-toggle" id="menuToggle">
@@ -296,6 +256,46 @@
                     @endif
 
                     @yield('content')
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                            font-family: "Poppins", sans-serif;
+                        }
+
+                        body {
+                            background: #f5f7fb;
+                            display: flex;
+                        }
+
+                        .dark_body {
+                            background: #2f3950 !important;
+                            color: #393a3a !important;
+                        }
+
+                        .dark_body .card,
+                        .dark_body .modal-content,
+                        .dark_body .table-box,
+                        .dark_body .navbar,
+                        .dark_body .menu-toggle {
+                            background: #1f2937;
+                            color: white;
+                        }
+
+                        .dark_body .resume_checker {
+                            color: white;
+                        }
+
+                        .dark_body tr:nth-child(odd) {
+                            color: #bbcbe2;
+                        }
+
+                        .dark_body tr:nth-child(even) {
+                            background: #1b232e;
+                            color: #bbcbe2;
+                        }
+                    </style>
                 </div>
             </div>
         </div>

@@ -5,23 +5,30 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\Employee;
+use App\Models\Leaves;
 use Illuminate\Http\Request;
 
 class EmployeeContoller extends Controller
 {
-    public function dashboard(){
+    public function dashboard()
+    {
         $emp = Candidate::all();
-        return view("admin.dashboard"
-        , compact('emp')
+        return view(
+            "admin.dashboard",
+            compact('emp')
         );
     }
 
-    public function showleavesform(){
+    public function showleavespanel()
+    {
         $emp = Candidate::all();
         $employee = Employee::all();
-        return view("employee.employee_leaves"
-        , compact('emp', 'employee')
-        );
+        $leave = Leaves::all();
+        return view("employee.employee_leaves", compact(
+            'emp',
+            'employee',
+            'leave'
+        ));
     }
 
     public function employees()
@@ -69,4 +76,31 @@ class EmployeeContoller extends Controller
             'Employee Data Saved Successfully.'
         );
     }
+
+    public function applyleave(Request $request)
+    {
+        Leaves::Create(
+            [
+                'name' => $request->emp_name,
+                'employee_id' => $request->emp_id,
+                'designation' => $request->emp_designation,
+                'department' => $request->emp_department,
+                'leave_type' => $request->leave_type,
+                'days' => $request->days,
+                'half_day_date' => $request->half_day_date,
+                'full_day_date' => $request->full_day_date,
+                'paid_day_date' => $request->paid_day_date,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'time' => $request->time,
+                'reason' => $request->reason,
+            ]
+        );
+
+        return redirect(route('employee.leaves'))->with(
+            'success',
+            'Application send Successfully.'
+        );
+    }
+
 }

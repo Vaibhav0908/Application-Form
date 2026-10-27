@@ -12,6 +12,7 @@ use App\Models\Office_useDetail;
 use App\Models\Platform;
 use App\Models\RecruiterDetail;
 use App\Models\Employee;
+use App\Models\Leaves;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -89,13 +90,45 @@ class AdminController extends Controller
         return view('candidate_details', compact('candidate', 'recruiters', 'interview_status', 'activeRecruiterNames', 'emp'));
     }
 
+    public function leave_management()
+    {
+        $leave = Leaves::latest()->get();
+        $employee = Employee::all();
+        return view('admin.leaves_panel', compact('leave', 'employee'));
+    }
+
+    public function leave_response($id)
+    {
+        $leave = Leaves::findOrFail($id);
+        $employee = Employee::where('id', $leave->employee_id)->first();
+        return view('admin.leave_response', compact('leave', 'employee'));
+    }
+
+    public function leaveResponse(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:leaves,id',
+            'status' => 'required|string',
+        ]);
+
+        $leave = Leaves::findOrFail($request->id);
+
+        $leave->response = $request->response;
+        $leave->status = $request->status;
+        $leave->save();
+
+        return redirect()
+            ->route('leaves_management_panel')
+            ->with('success', 'Response Saved Successfully.');
+    }
+
     public function showControl()
     {
         $platforms = Platform::all();
         $nations = Nation::all();
         $interview_status = Interview_status::all();
 
-        return view('admin.options_control_panel', compact( 'platforms', 'nations', 'interview_status'));
+        return view('admin.options_control_panel', compact('platforms', 'nations', 'interview_status'));
     }
 
     public function nation(Request $request)

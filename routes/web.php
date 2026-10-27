@@ -51,8 +51,6 @@ Route::post('/employee/login', [EmployeeAuthcontroller::class, 'login'])
     ->name('employee.login');
 
 
-
-// admin dashboard candidate-details office work
 Route::middleware('admin.auth')->group(function () {
     Route::get('/Applications', [AdminController::class, 'applications'])
         ->name('applications');
@@ -132,8 +130,11 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/employee/dashboard', [EmployeeContoller::class, 'dashboard'])
         ->name('employee.dashboard');
 
-    Route::get('/employee/leaves/', [EmployeeContoller::class, 'showleavesform'])
+    Route::get('/employee/leaves/', [EmployeeContoller::class, 'showleavespanel'])
         ->name('employee.leaves');
+
+    Route::post('/employee/leaves_form/', [EmployeeContoller::class, 'applyleave'])
+        ->name('employee.apply_leaves');
 
     Route::get('/employee/logout', [EmployeeAuthcontroller::class, 'logout'])
     ->name('employee.logout');
@@ -142,9 +143,11 @@ Route::middleware('admin.auth')->group(function () {
         return view('admin.task_panel');
     })->name('task_management_panel');
 
-    Route::get('/leaves_management_panel', function () {
-        return view('admin.leaves_panel');
-    })->name('leaves_management_panel');
+    Route::get('/leaves_management_panel', [AdminController::class, 'leave_management'])->name('leaves_management_panel');
+
+    Route::get('/leaves_response_panel/{id}', [AdminController::class, 'leave_response'])->name('leaves_reponse_panel');
+
+    Route::post('/leaves_response', [AdminController::class, 'leaveResponse'])->name('leaves_response');
 
     Route::get('/recruiters/edit/panel/{id}', function ($id) {
         $recruiter = RecruiterDetail::findOrFail($id);

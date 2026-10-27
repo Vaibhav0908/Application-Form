@@ -49,7 +49,7 @@
                                 <td>{{ $cand->count() - $index }}</td>
 
                                 <td>
-                                    <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
+                                    <a href="{{ route('admin.candidate.show', $cand->id) }}"
                                         style="text-decoration: dotted;">
                                         {{ $cand->full_name }}
                                     </a>
@@ -80,7 +80,7 @@
                                     @if (optional($cand->officeworkDetails)->interview_remarks != "")
                                         <div
                                             style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
-                                                                                                                                                                                                                                                                                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                                border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
                                             {{ optional($cand->officeworkDetails)->interview_remarks }}
                                         </div>
                                     @else
@@ -119,7 +119,7 @@
                         <tr>
                             <td>{{ $cand->count() - $index }}</td>
                             <td>
-                                <a href="{{ route('admin.candidate.show', $cand->id) }}" target="_blank"
+                                <a href="{{ route('admin.candidate.show', $cand->id) }}"
                                     style="text-decoration: dotted;">
                                     {{ $cand->full_name }}
                                 </a>

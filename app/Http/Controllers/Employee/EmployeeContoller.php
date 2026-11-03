@@ -31,6 +31,11 @@ class EmployeeContoller extends Controller
         ));
     }
 
+    public function employee_panel(){
+        $emp = Candidate::all();
+        return view('employee.employee_panel', compact('emp'));
+    }
+
     public function employees()
     {
         $employee = Employee::with([

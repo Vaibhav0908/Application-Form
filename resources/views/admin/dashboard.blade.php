@@ -8,36 +8,36 @@
       color: white;
     }
 
-  .polly-con{
-    font-size: smaller;
-  }
+    .polly-con {
+      font-size: smaller;
+    }
   </style>
 
   <div class="content">
 
     <h2 class="text-primary fw-bold py-1  mx-4 mx-md-5 ">
-      @if (session('admin_username'))
+      @if (session('admin_id'))
         Admin Overview
-      @elseif (session('recruiter_name'))
+      @elseif (session('recruiter_id'))
         Recruiter Overview
-      @elseif (session('employee_name'))
+      @elseif (session('employee_id'))
         Employee Overview
       @endif
     </h2>
 
-    @if (!session('employee_name'))
+    @if (!session('employee_id'))
       <div class="cards">
 
         <div class="card appl_card">
           <div class="icon bg-primary"><i class="bi bi-people"></i></div>
           <h3>Total Applications</h3>
-          @if (session('admin_username'))
+          @if (session('admin_id'))
             <h2 class="text-primary">
-              3
+              {{ $total_candi }}
             </h2>
-          @elseif (session('recruiter_name'))
+          @elseif (session('recruiter_id'))
             <h2 class="text-primary">
-              6
+              {{$total_rec_appl}}
             </h2>
           @endif
         </div>
@@ -45,9 +45,9 @@
         <div class="card pending-card">
           <div class="icon bg-warning"><i class="bi bi-clock-history"></i></div>
           <h3>Pending</h3>
-          @if (session('recruiter_name'))
+          @if (session('recruiter_id'))
             <h2 class="text-warning">{{ $total_rec_pendings }}</h2>
-          @elseif(session('admin_username'))
+          @elseif(session('admin_id'))
             <h2 class="text-warning">{{ $total_adm_pendings }}</h2>
           @endif
         </div>
@@ -65,7 +65,8 @@
 
     @if (session('employee_id'))
       <h3 class="text-warning fs-5">Company Policies</h3>
-      <p class='polly-con'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit nemo id possimus perspiciatis, mollitia sunt
+      <p class='polly-con'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit nemo id possimus perspiciatis,
+        mollitia sunt
         commodi iste molestias consectetur repudiandae quo. Commodi labore vero nesciunt rerum expedita dolorem, similique
         obcaecati!
         Sequi asperiores accusantium nam maxime repudiandae, debitis unde. Consequuntur dolorem quasi debitis accusamus!
@@ -86,7 +87,8 @@
       </p>
 
       <h3 class="text-warning fs-5">Rules & Regulations</h3>
-      <p class='polly-con'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit nemo id possimus perspiciatis, mollitia sunt
+      <p class='polly-con'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit nemo id possimus perspiciatis,
+        mollitia sunt
         commodi iste molestias consectetur repudiandae quo. Commodi labore vero nesciunt rerum expedita dolorem, similique
         obcaecati!
         Sequi asperiores accusantium nam maxime repudiandae, debitis unde. Consequuntur dolorem quasi debitis accusamus!
@@ -101,7 +103,8 @@
       </p>
 
       <h3 class="text-warning fs-5">About Company</h3>
-      <p class='polly-con'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit nemo id possimus perspiciatis, mollitia sunt
+      <p class='polly-con'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit nemo id possimus perspiciatis,
+        mollitia sunt
         commodi iste molestias consectetur repudiandae quo. Commodi labore vero nesciunt rerum expedita dolorem, similique
         obcaecati!
         Sequi asperiores accusantium nam maxime repudiandae, debitis unde. Consequuntur dolorem quasi debitis accusamus!

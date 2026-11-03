@@ -96,11 +96,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                         <a href="{{ route('task_management_panel') }}"
-                                            class="{{ request()->routeIs('task_management_panel') ? 'active' : '' }}">
-                                                <span>Task Panel</span>
-                                         </a>
-                                        </li> -->
+                                                     <a href="{{ route('task_management_panel') }}"
+                                                        class="{{ request()->routeIs('task_management_panel') ? 'active' : '' }}">
+                                                            <span>Task Panel</span>
+                                                     </a>
+                                                    </li> -->
                                     <li>
                                         <a href="{{ route('leaves_management_panel') }}"
                                             class="{{ request()->routeIs('leaves_management_panel') || request()->routeIs('leaves_reponse_panel') ? 'active' : '' }}">
@@ -111,7 +111,7 @@
                             </li>
                         @endif
 
-                        @if (!session('employee_id'))
+                        @if (session('admin_id') || session('recruiter_id'))
                             <li>
                                 <a href="{{ route('employee') }}"
                                     class="{{ request()->routeIs('employee') ? 'active' : '' }}">
@@ -137,6 +137,14 @@
                         @endif
 
                         @if (session('employee_id'))
+                            <li>
+                                <a href="{{ route('employee_panel') }}"
+                                    class="{{ request()->routeIs('employee_panel') ? 'active' : '' }}">
+                                    <i class="bi bi-bar-chart"></i>
+                                    <span>Employee Panel</span>
+                                </a>
+                            </li>
+
                             <li>
                                 <a href="{{ route('employee.leaves') }}"
                                     class="{{ request()->routeIs('employee.leaves') ? 'active' : '' }}">

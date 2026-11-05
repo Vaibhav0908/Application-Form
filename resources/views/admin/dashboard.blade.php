@@ -21,7 +21,7 @@
       @elseif (session('recruiter_id'))
         Recruiter Overview
       @elseif (session('employee_id'))
-        Employee Overview
+        Overview
       @endif
     </h2>
 

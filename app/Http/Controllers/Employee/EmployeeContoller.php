@@ -7,6 +7,7 @@ use App\Models\Candidate;
 use App\Models\Employee;
 use App\Models\Leaves;
 use Illuminate\Http\Request;
+use PhpOffice\PhpWord\Shared\Validate;
 
 class EmployeeContoller extends Controller
 {
@@ -31,10 +32,60 @@ class EmployeeContoller extends Controller
         ));
     }
 
-    public function employee_panel(){
+    public function employee_panel()
+    {
         $emp = Candidate::all();
-        return view('employee.employee_panel', compact('emp'));
+        $employee = Employee::all();
+        return view('employee.employee_panel', compact('emp', 'employee'));
     }
+
+    public function add_documents(Request $request)
+    {
+        $request->validate([
+            'resume' => 'nullable|mimes:pdf|max:2048',
+            'passport' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
+            'aadhar' => 'nullable|mimes:pdf|max:2048',
+            'degree' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
+            'passbook' => 'nullable|mimes:jpg,jpeg,pdf|max:2048',
+        ]);
+
+        // Find the candidate record
+        $candidate = Candidate::find($request->id);
+
+        if (!$candidate) {
+            return back()->with('error', 'Candidate not found.');
+        }
+
+        $data = [];
+
+        if ($request->hasFile('resume')) {
+            $data['resume'] = $request->file('resume')->store('documents', 'public');
+        }
+
+        if ($request->hasFile('aadhar')) {
+            $data['aadhar_card'] = $request->file('aadhar')->store('documents', 'public');
+        }
+
+        if ($request->hasFile('passport')) {
+            $data['passport_photo'] = $request->file('passport')->store('documents', 'public');
+        }
+
+        if ($request->hasFile('degree')) {
+            $data['degree_certificate'] = $request->file('degree')->store('documents', 'public');
+        }
+
+        if ($request->hasFile('passbook')) {
+            $data['passbook'] = $request->file('passbook')->store('documents', 'public');
+        }
+
+        $candidate->update($data);
+
+        return redirect()->route('employee_panel')->with(
+            'success',
+            'Document Saved Successfully.'
+        );
+    }
+
 
     public function employees()
     {

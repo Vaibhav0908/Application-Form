@@ -77,6 +77,8 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::get('employee_panel', [EmployeeContoller::class, 'employee_panel'])->name('employee_panel');
 
+    Route::post('employee_documents', [EmployeeContoller::class, 'add_documents'])->name('add_documents');
+
     Route::get('/options_control_panel', [AdminController::class, 'showControl'])
         ->name('options_control_panel');
 

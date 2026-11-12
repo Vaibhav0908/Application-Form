@@ -162,7 +162,7 @@
                                                     <div class="d-flex gap-2">
                                                         <a href="{{ asset('storage/' . $can->passbook) }}" class="btn btn-outline-primary btn-sm"
                                                             target="_blank">
-                                                            <i class="bi bi-eye"></i> View
+                                                            <i class="bi bi-eye"></i> Views
                                                         </a>
 
                                                         <a href="{{ asset('storage/' . $can->passbook) }}" class="btn btn-success btn-sm" download>
@@ -171,21 +171,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         @else
-                                                <div class="col-md-6 mb-5">
-                                                    <span class="fw-semibold">Passbook</span>
-                                                    <input type="file" name="passbook" accept=".pdf,.jpg,.jpeg">
-                                                </div>
+                                            <div class="col-md-6 mb-5">
+                                                <span class="fw-semibold">Passbook</span>
+                                                <input type="file" name="passbook" accept=".pdf,.jpg,.jpeg">
                                             </div>
                                         @endif
-                                    <div class="row">
-                                        <div class="col-3 my-3">
-                                            @if (!$can->resume || !$can->passbook || !$can->aadhar_card || !$can->degree_certificate || !$can->passport_photo)
-                                                <button class="btn btn-primary" type="submit">Submit</button>
-                                            @endif
+                                        <div class="row">
+                                            <div class="col-3 my-3">
+                                                @if (!$can->resume || !$can->passbook || !$can->aadhar_card || !$can->degree_certificate || !$can->passport_photo)
+                                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
                                 </form>
 
                                 <hr>

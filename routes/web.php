@@ -24,6 +24,14 @@ Route::get('/', function () {
     return view('index', compact('recruiters', 'platforms', 'nations'));
 })->name('form');
 
+Route::get('/interview_records', [CandidateController::class, 'interview_shedule_panel'])
+    ->name('interview_records');
+
+Route::get('/export_all_records', [CandidateController::class, 'exportAll'])
+    ->name('export_all_records');
+
+Route::post('/export_selected_records', [CandidateController::class, 'exportSelected'])
+    ->name('export_selected_records');
 
 Route::post('/Applicant_details', [CandidateController::class, 'store'])
     ->name('candidate.store');
@@ -49,7 +57,6 @@ Route::get('/employee/login', [EmployeeAuthcontroller::class, 'showLogin'])
 
 Route::post('/employee/login', [EmployeeAuthcontroller::class, 'login'])
     ->name('employee.login');
-
 
 Route::middleware('admin.auth')->group(function () {
     Route::get('/Applications', [AdminController::class, 'applications'])
@@ -115,7 +122,6 @@ Route::middleware('admin.auth')->group(function () {
         }
     )->name('employee.delete');
 
-
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');
 
@@ -127,7 +133,7 @@ Route::middleware('admin.auth')->group(function () {
 
     Route::get('/recruiters/dashboard', [recruiterController::class, 'dashboard'])
         ->name('recruiters.dashboard');
-    
+
     Route::get('/recruiter/logout', [RecruiterAuthController::class, 'logout'])
         ->name('recruiter.logout');
 
@@ -141,7 +147,7 @@ Route::middleware('admin.auth')->group(function () {
         ->name('employee.apply_leaves');
 
     Route::get('/employee/logout', [EmployeeAuthcontroller::class, 'logout'])
-    ->name('employee.logout');
+        ->name('employee.logout');
 
     Route::get('/task_management_panel', function () {
         return view('admin.task_panel');

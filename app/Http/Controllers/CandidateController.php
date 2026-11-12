@@ -8,6 +8,9 @@ use App\Models\ProfessionalDetail;
 use App\Models\RecruiterDetail;
 use Illuminate\Http\Request;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\InterviewCandExport;
+
 class CandidateController extends Controller
 {
     public function store(Request $request)
@@ -90,4 +93,31 @@ class CandidateController extends Controller
 
         return back()->with('success', 'Application submitted successfully');
     }
+
+    public function interview_shedule_panel()
+    {
+        $candidate = Candidate::latest()->get();
+        return view('interview_schedule', compact('candidate'));
+    }
+
+    public function exportAll()
+    {
+        return Excel::download(
+            new InterviewCandExport(),
+            'all_candidates.xlsx'
+        );
+    }
+
+    public function exportSelected(Request $request)
+    {
+        $ids = $request->input('ids', []);
+
+        $candidates = Candidate::whereIn('id', $ids)->get();
+
+        return Excel::download(
+            new InterviewCandExport($candidates),
+            'selected_candidates.xlsx'
+        );
+    }
+
 }

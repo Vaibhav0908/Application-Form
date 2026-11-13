@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    @if (session('admin_username'))
+    @if (session('admin_id'))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . session('admin_logo')) }}">
-    @elseif(session('recruiter_name'))
+    @elseif(session('recruiter_id'))
         <link rel="icon" type="image/png"
             href="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3">
     @endif
@@ -30,12 +30,10 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-
 </head>
 
 <body class="">
     <div class="container-fluid m-0 p-0">
-        @if (!request()->routeIs('interview_records'))
             <div class="row m-0 p-0">
                 <div class="col-md-2 m-0 p-0">
                     <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -114,6 +112,16 @@
                                 </li>
                             @endif
 
+                            @if (session('recruiter_id'))
+                                <li>
+                                    <a href="{{ route('interview_records') }}"
+                                        class="{{ request()->routeIs('interview_records') ? 'active' : '' }}">
+                                        <i class="bi bi-card-list"></i>
+                                        <span>Interview Shedule</span>
+                                    </a>
+                                </li>
+                            @endif
+
                             @if (session('admin_id') || session('recruiter_id'))
                                 <li>
                                     <a href="{{ route('employee') }}"
@@ -172,7 +180,6 @@
                     </div>
 
                 </div>
-
 
 
                 <div class="col-md-10 m-0 p-0">
@@ -255,7 +262,7 @@
                         </div>
                     </div>
 
-        @endif
+      
                 <div class="col-12 m-0 p-0">
                     @if (session('success'))
                         <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">

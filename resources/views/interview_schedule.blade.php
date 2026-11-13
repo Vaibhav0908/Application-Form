@@ -8,7 +8,7 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            height: 575px;
+            height: 590px;
             width: 100%;
             overflow-x: auto;
             overflow-y: auto;
@@ -27,84 +27,106 @@
         }
     </style>
 
-    <div class="row align-items-center py-1 mt-5 mx-4 mx-md-5">
-        <div class="col-12 col-md-6">
-            <h2 class="text-primary fw-bold mb-0">
-                Candidate Records
-            </h2>
+    @if (session('recruiter_id'))
+        <div class="row align-items-center py-1 mt-5 mx-4 mx-md-5">
+            <div class="col-12 col-md-6">
+                <h2 class="text-primary fw-bold mb-0">
+                    Candidate Records
+                </h2>
+            </div>
+
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addrecordsModal" class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i>
+                    Add Records
+                </a>
+
+                <!-- <a href="{{ route('export_all_records') }}" class="btn btn-primary export_all">
+                                    <i class="bi bi-cloud-download"></i>
+                                    Export All
+                                </a> -->
+
+                <a href="{{ route('export_selected_records') }}" class="btn btn-primary export_selected">
+                    <i class="bi bi-cloud-download"></i>
+                    Export Selected
+                </a>
+            </div>
         </div>
 
-        <div class="col-12 col-md-6 text-md-end mt-3 mt-md-0">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#addrecordsModal" class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i>
-                Add Records
-            </a>
-
-            <a href="{{ route('export_all_records') }}" class="btn btn-primary export_all">
-                <i class="bi bi-cloud-download"></i>
-                Export All
-            </a>
-
-            <a href="{{ route('export_selected_records') }}" class="btn btn-primary export_selected">
-                <i class="bi bi-cloud-download"></i>
-                Export Selected
-            </a>
-        </div>
-    </div>
-
-    <div class="row m-0 p-0 d-flex">
-        <div class="col-12 m-0 p-0 table-box">
-            <table class="justify-content-center">
-                <tr>
-                    <th></th>
-                    <th>Sr. No.</th>
-                    <th>Candidate Name</th>
-                    <th>Email</th>
-                    <th>Contact No.</th>
-                    <th>Interview Date</th>
-                    <th>Interview Time</th>
-                    <th>Designation</th>
-                    <th>Address</th>
-                    <th>Prefered Job Location</th>
-                    <th>Last Salary</th>
-                    <th>Expected Salary</th>
-                    <th>Experience</th>
-                    <th>Recruiter Name</th>
-                    <th>Response</th>
-                    <th>Actions</th>
-                </tr>
-                @foreach($candidate as $item)
-                    <tr>
-                        <td><input type="checkbox" class="candidate_checkbox" name="" id="" value="{{ $item->id }}"></td>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->full_name }}</td>
-                        <td>vaibhav@gmail.com</td>
-                        <td>7387278870</td>
-                        <td>12/11/2026</td>
-                        <td>12pm</td>
-                        <td>Frontend Developer</td>
-                        <td>Pune</td>
-                        <td>Pune</td>
-                        <td>18000</td>
-                        <td>25000</td>
-                        <td>2</td>
-                        <td>Snehal Mam</td>
-                        <td>Intrested</td>
-                        <td>
-                            <a href="https://wa.me/7387278870?text={{ urlencode('RHello, this is a reminder about your scheduled interview. Please be on time. Thank you.') }}"
-                                class="btn btn-success btn-sm" target="_blank">
-                                <i class="bi bi-whatsapp"></i> Reminder
-                            </a>
-                        </td>
-
+        <div class="row m-0 p-0 d-flex">
+            <div class="col-12 m-0 p-0 table-box">
+                <table class="">
+                    <tr class="sticky-top text-dark">
+                        <th><input type="checkbox" class="check_all" name="" id="" value=""></th>
+                        <th>Sr. No.</th>
+                        <th>Candidate Name</th>
+                        <th>Email</th>
+                        <th>Contact No.</th>
+                        <th>Interview Date</th>
+                        <th>Interview Time</th>
+                        <th>Designation</th>
+                        <th>Address</th>
+                        <th>Prefered Job Location</th>
+                        <th>Last Salary</th>
+                        <th>Expected Salary</th>
+                        <th>Experience</th>
+                        <th>Recruiter Name</th>
+                        <th>Response</th>
+                        <th>Actions</th>
                     </tr>
-                @endforeach
+                    @foreach($candidate as $item)
+                        @if ($item->reference_name == session('recruiter_name'))
+                            <tr>
+                                <td><input type="checkbox" class="candidate_checkbox" name="" id="" value="{{ $item->id }}"></td>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->full_name }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->contact_no }}</td>
+                                <td>12/11/2026</td>
+                                <td>12pm</td>
+                                <td>{{ $item->applicant_designation }}</td>
+                                <td>Pune</td>
+                                <td>Pune</td>
+                                <td>{{ $item->current_salary }}</td>
+                                <td>{{ $item->expected_salary }}</td>
+                                <td>{{ $item->total_experience }}</td>
+                                <td>{{ $item->reference_name }}</td>
+                                <td>Intrested</td>
+                                <td>
+                                 <!-- @if ($item->reference_name == session('recruiter_name')) -->
+                                    <a href="whatsapp://send?phone={{ $item->contact_no }}&text={{ urlencode(
+                                "Dear " . $item->full_name . ",\n\n" .
+                                "Greetings from our recruitment team!\n\n" .
+                                "This is a gentle reminder regarding your scheduled interview for the " .
+                                $item->applicant_designation . " position.\n\n" .
+                                "Kindly ensure that you are available on time for the interview.\n\n" .
+                                "Reference: " . $item->reference_name . "\n\n" .
+                                "We look forward to speaking with you.\n\n" .
+                                "Best Regards,\nHR & Recruitment Team"
+                            ) }}" class="btn btn-success btn-sm" target="_blank">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
 
-               
-
-            </table>
+                                        <i class="bi bi-envelope"></i>
+                            
+                                    <!-- @else
+                                       <a class="btn btn-success btn-sm" style="cursor: not-allowed;">
+                                         <i class="bi bi-whatsapp"></i> Reminder
+                                      </a>
+                                        @endif -->
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </table>
+            </div>
         </div>
-    </div>
+
+    @else
+
+        {{ abort(404) }}
+
+    @endif
 
     <form action="{{ route('export_selected_records') }}" method="POST" id="exportForm" style="display:none;">
 
@@ -184,17 +206,26 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Select All / Unselect All Checkbox
+            document.querySelector('.check_all').addEventListener('change', function () {
+                let isChecked = this.checked;
+                document.querySelectorAll('.candidate_checkbox').forEach(function (checkbox) {
+                    checkbox.checked = isChecked;
+                });
+            });
+
 
             // Export All
-            document.querySelector('.export_all').addEventListener('click', function (e) {
-                e.preventDefault();
+            // document.querySelector('.export_all').addEventListener('click', function (e) {
+            //     e.preventDefault();
 
-                document.querySelectorAll('.candidate_checkbox').forEach(function (checkbox) {
-                    checkbox.checked = true;
-                });
+            //     document.querySelectorAll('.candidate_checkbox').forEach(function (checkbox) {
+            //         checkbox.checked = true;
+            //     });
 
-                window.location.href = this.href;
-            });
+            //     window.location.href = this.href;
+            // });
+
 
             // Export Selected
             document.querySelector('.export_selected').addEventListener('click', function (e) {

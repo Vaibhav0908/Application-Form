@@ -24,15 +24,6 @@ Route::get('/', function () {
     return view('index', compact('recruiters', 'platforms', 'nations'));
 })->name('form');
 
-Route::get('/interview_records', [CandidateController::class, 'interview_shedule_panel'])
-    ->name('interview_records');
-
-Route::get('/export_all_records', [CandidateController::class, 'exportAll'])
-    ->name('export_all_records');
-
-Route::post('/export_selected_records', [CandidateController::class, 'exportSelected'])
-    ->name('export_selected_records');
-
 Route::post('/Applicant_details', [CandidateController::class, 'store'])
     ->name('candidate.store');
 
@@ -49,6 +40,15 @@ Route::get('/recruiters/login', [RecruiterAuthController::class, 'showLogin'])
 
 Route::post('/recruiters/login', [RecruiterAuthController::class, 'login'])
     ->name('recruiter.login.submit');
+
+Route::get('/interview_records', [CandidateController::class, 'interview_shedule_panel'])
+    ->name('interview_records');
+
+Route::get('/export_all_records', [CandidateController::class, 'exportAll'])
+    ->name('export_all_records');
+
+Route::post('/export_selected_records', [CandidateController::class, 'exportSelected'])
+    ->name('export_selected_records');
 
 
 // employee login logout

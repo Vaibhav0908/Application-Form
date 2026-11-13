@@ -100,13 +100,13 @@ class CandidateController extends Controller
         return view('interview_schedule', compact('candidate'));
     }
 
-    public function exportAll()
-    {
-        return Excel::download(
-            new InterviewCandExport(),
-            'all_candidates.xlsx'
-        );
-    }
+    // public function exportAll()
+    // {
+    //     return Excel::download(
+    //         new InterviewCandExport(),
+    //         'all_candidates.xlsx'
+    //     );
+    // }
 
     public function exportSelected(Request $request)
     {

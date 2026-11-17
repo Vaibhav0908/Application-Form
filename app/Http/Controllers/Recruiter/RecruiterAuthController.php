@@ -40,6 +40,13 @@ class RecruiterAuthController extends Controller
                 'recruiter_email' => $recruiter->email,
             ]);
 
+            app(\App\Services\AttendanceService::class)
+                ->recordLogin(
+                    $recruiter->id,
+                    'recruiter',
+                    $recruiter->name
+                );
+
             return redirect()->route('recruiters.dashboard');
         }
 
@@ -52,6 +59,13 @@ class RecruiterAuthController extends Controller
 
     public function logout(Request $request)
     {
+        $recruiterId = session('recruiter_id');
+
+        if ($recruiterId && $request->routeIs('recruiter.logout')) {
+            app(\App\Services\AttendanceService::class)
+                ->recordLogout($recruiterId, 'recruiter');
+        }
+
         $request->session()->forget([
             'recruiter_id',
             'recruiter_name',

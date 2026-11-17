@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
 use App\Models\Candidate;
 use App\Models\Employee;
 use App\Models\Leaves;
@@ -14,9 +15,10 @@ class EmployeeContoller extends Controller
     public function dashboard()
     {
         $emp = Candidate::all();
+        $attendance = Attendance::latest()->get();
         return view(
             "admin.dashboard",
-            compact('emp')
+            compact('emp', 'attendance')
         );
     }
 

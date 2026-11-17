@@ -42,9 +42,9 @@
                 </a>
 
                 <!-- <a href="{{ route('export_all_records') }}" class="btn btn-primary export_all">
-                                    <i class="bi bi-cloud-download"></i>
-                                    Export All
-                                </a> -->
+                                                    <i class="bi bi-cloud-download"></i>
+                                                    Export All
+                                                </a> -->
 
                 <a href="{{ route('export_selected_records') }}" class="btn btn-primary export_selected">
                     <i class="bi bi-cloud-download"></i>
@@ -93,8 +93,14 @@
                                 <td>{{ $item->reference_name }}</td>
                                 <td>Intrested</td>
                                 <td>
-                                 <!-- @if ($item->reference_name == session('recruiter_name')) -->
-                                    <a href="whatsapp://send?phone={{ $item->contact_no }}&text={{ urlencode(
+                                    <!-- @if ($item->reference_name == session('recruiter_name')) -->
+
+                                <a href="#" class="btn btn-warning text-white btn-sm">
+                                        <i class="bi bi-pencil"></i> Response
+                                    </a>
+
+
+                                <a href="whatsapp://send?phone={{ $item->contact_no }}&text={{ urlencode(
                                 "Dear " . $item->full_name . ",\n\n" .
                                 "Greetings from our recruitment team!\n\n" .
                                 "This is a gentle reminder regarding your scheduled interview for the " .
@@ -104,16 +110,16 @@
                                 "We look forward to speaking with you.\n\n" .
                                 "Best Regards,\nHR & Recruitment Team"
                             ) }}" class="btn btn-success btn-sm" target="_blank">
-                                        <i class="bi bi-whatsapp"></i>
+                                        <i class="bi bi-whatsapp"></i> Reminder
                                     </a>
 
-                                        <i class="bi bi-envelope"></i>
-                            
+                                    <!-- <i class="bi bi-envelope"></i> -->
+
                                     <!-- @else
-                                       <a class="btn btn-success btn-sm" style="cursor: not-allowed;">
-                                         <i class="bi bi-whatsapp"></i> Reminder
-                                      </a>
-                                        @endif -->
+                                         <a class="btn btn-success btn-sm" style="cursor: not-allowed;">
+                                           <i class="bi bi-whatsapp"></i> Reminder
+                                         </a>
+                                         @endif -->
                                 </td>
                             </tr>
                         @endif
@@ -162,6 +168,9 @@
 
                                 <label for="">Designation: </label>
                                 <input type="text" name="can_designation" class="form-control" required>
+
+                                <label for="">Prefered Job Location: </label>
+                                <textarea name="can_exp" class="form-control" required></textarea>
                             </div>
 
                             <div class="col-md-6">
@@ -174,7 +183,8 @@
                                 <label for="">Experience: </label>
                                 <input type="text" name="can_exp" class="form-control" required>
 
-
+                                <label for="">Address: </label>
+                                <textarea name="can_exp" class="form-control" required></textarea>
                             </div>
 
                             <div class="col-md-6">
@@ -187,7 +197,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="">HR Name: </label>
-                                <input type="text" name="hr_name" class="form-control" required>
+                                <input type="text" name="hr_name" class="form-control" value="{{ $item->reference_name }}" readonly>
                             </div>
                         </div>
                 </div>

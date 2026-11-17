@@ -34,235 +34,253 @@
 
 <body class="">
     <div class="container-fluid m-0 p-0">
-            <div class="row m-0 p-0">
-                <div class="col-md-2 m-0 p-0">
-                    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <div class="row m-0 p-0">
+            <div class="col-md-2 m-0 p-0">
+                <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-                    <div class="sidebar p-3" id="sidebar">
-                        <div class="logo">
-                            @if (session('admin_id'))
-                                AdminPanel
-                            @elseif(session('recruiter_id'))
-                                RecruiterPanel
-                            @elseif(session('employee_id'))
-                                EmployeePanel
-                            @elseif(request()->routeIs('interview_records'))
-                                Interview Schedule
-                            @endif
-                        </div>
-                        <ul class="menu">
-                            <li>
-                                @if (session('admin_id'))
-                                    <a href="{{ route('admin.dashboard') }}"
-                                        class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                                        <i class="bi bi-grid"></i>
-                                        <span>Dashboard</span>
-                                    </a>
-                                @elseif(session('recruiter_id'))
-                                    <a href="{{ route('recruiters.dashboard') }}"
-                                        class="{{ request()->routeIs('recruiters.dashboard') ? 'active' : '' }}">
-                                        <i class="bi bi-grid"></i>
-                                        <span>Dashboard</span>
-                                    </a>
-                                @elseif(session('employee_id'))
-                                    <a href="{{ route('employee.dashboard') }}"
-                                        class="{{ request()->routeIs('employee.dashboard') ? 'active' : '' }}">
-                                        <i class="bi bi-grid"></i>
-                                        <span>Dashboard</span>
-                                    </a>
-                                @endif
-                            </li>
-                            @if (session('admin_id'))
-                                <li>
-                                    <div data-bs-toggle="collapse" data-bs-target="#controlPanelMenu" aria-expanded="false">
-                                        <a>
-                                            <i class="bi bi-people"></i>
-                                            <span>Control Panel</span>
-                                            <i class="bi bi-chevron-down ms-auto"></i>
-                                        </a>
-                                    </div>
-
-                                    <ul class="collapse list-unstyled ps-4" id="controlPanelMenu">
-                                        <li>
-                                            <a href="{{ route('recruiter_control_panel') }}"
-                                                class="{{ request()->routeIs('recruiter_control_panel') ? 'active' : '' }}">
-                                                <span>Recruiters Panel</span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="{{ route('options_control_panel') }}"
-                                                class="{{ request()->routeIs('options_control_panel') ? 'active' : '' }}">
-                                                <span>Options Panel</span>
-                                            </a>
-                                        </li>
-                                        <!-- <li>
-                                        a href="{{ route('task_management_panel') }}"
-                                          class="{{ request()->routeIs('task_management_panel') ? 'active' : '' }}">
-                                            <span>Task Panel</span>
-                                                </a>
-                                        </li> -->
-                                        <li>
-                                            <a href="{{ route('leaves_management_panel') }}"
-                                                class="{{ request()->routeIs('leaves_management_panel') || request()->routeIs('leaves_reponse_panel') ? 'active' : '' }}">
-                                                <span>Leaves Panel</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            @endif
-
-                            @if (session('recruiter_id'))
-                                <li>
-                                    <a href="{{ route('interview_records') }}"
-                                        class="{{ request()->routeIs('interview_records') ? 'active' : '' }}">
-                                        <i class="bi bi-card-list"></i>
-                                        <span>Interview Shedule</span>
-                                    </a>
-                                </li>
-                            @endif
-
-                            @if (session('admin_id') || session('recruiter_id'))
-                                <li>
-                                    <a href="{{ route('employee') }}"
-                                        class="{{ request()->routeIs('employee') ? 'active' : '' }}">
-                                        <i class="bi bi-person-vcard"></i>
-                                        <span>Employees</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('applications') }}"
-                                        class="{{ request()->routeIs('applications') ? 'active' : '' }}">
-                                        <i class="bi bi-file-earmark-text"></i>
-                                        <span>Applications</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('resume_checker') }}"
-                                        class="{{ request()->routeIs('resume_checker') ? 'active' : '' }}">
-                                        <i class="bi bi-bar-chart"></i>
-                                        <span>Resume Checker</span>
-                                    </a>
-                                </li>
-                            @endif
-
-                            @if (session('employee_id'))
-                                <li>
-                                    <a href="{{ route('employee_panel') }}"
-                                        class="{{ request()->routeIs('employee_panel') ? 'active' : '' }}">
-                                        <i class="bi bi-bar-chart"></i>
-                                        <span>Employee Panel</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('employee.leaves') }}"
-                                        class="{{ request()->routeIs('employee.leaves') ? 'active' : '' }}">
-                                        <i class="bi bi-bar-chart"></i>
-                                        <span>Apply Leaves</span>
-                                    </a>
-                                </li>
-                            @endif
-                            <li>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#settingsModal">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Settings</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <span>Logout</span>
-                                </a>
-                            </li>
-                        </ul>
+                <div class="sidebar p-3" id="sidebar">
+                    <div class="logo">
+                        @if (session('admin_id'))
+                            AdminPanel
+                        @elseif(session('recruiter_id'))
+                            RecruiterPanel
+                        @elseif(session('employee_id'))
+                            EmployeePanel
+                        @elseif(request()->routeIs('interview_records'))
+                            Interview Schedule
+                        @endif
                     </div>
-
-                </div>
-
-
-                <div class="col-md-10 m-0 p-0">
-                    <div class="col-12 m-0 p-0 sticky-top">
-                        <div class="navbar">
-                            <div class="profile d-flex align-items-center">
-                                <div class="d-md-none d-flex align-items-center">
-                                    <button class="menu-toggle" id="menuToggle">
-                                        <i class="bi bi-list"></i>
-                                    </button>
+                    <ul class="menu">
+                        <li>
+                            @if (session('admin_id'))
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                                    <i class="bi bi-grid"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            @elseif(session('recruiter_id'))
+                                <a href="{{ route('recruiters.dashboard') }}"
+                                    class="{{ request()->routeIs('recruiters.dashboard') ? 'active' : '' }}">
+                                    <i class="bi bi-grid"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            @elseif(session('employee_id'))
+                                <a href="{{ route('employee.dashboard') }}"
+                                    class="{{ request()->routeIs('employee.dashboard') ? 'active' : '' }}">
+                                    <i class="bi bi-grid"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            @endif
+                        </li>
+                        @if (session('admin_id'))
+                            <li>
+                                <div data-bs-toggle="collapse" data-bs-target="#controlPanelMenu" aria-expanded="false">
+                                    <a>
+                                        <i class="bi bi-people"></i>
+                                        <span>Control Panel</span>
+                                        <i class="bi bi-chevron-down ms-auto"></i>
+                                    </a>
                                 </div>
 
-                                <div class="d-flex align-items-center ms-auto">
-                                    <span>
-                                        Welcome,
-                                        <i>{{ session('admin_username') ?: session('recruiter_name') ?: session('employee_name') }}</i>
-                                    </span>
+                                <ul class="collapse list-unstyled ps-4" id="controlPanelMenu">
+                                    <li>
+                                        <a href="{{ route('recruiter_control_panel') }}"
+                                            class="{{ request()->routeIs('recruiter_control_panel') ? 'active' : '' }}">
+                                            <span>Recruiters Panel</span>
+                                        </a>
+                                    </li>
 
-                                    <div class="ms-2">
-                                        @if (session('admin_id'))
-                                            <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile"
-                                                class="position-relative d-inline-block">
-                                                <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="Admin Logo"
-                                                    class="rounded-circle p-1"
-                                                    style="width: 45px; height: 45px; object-fit: cover;">
-                                            </a>
+                                    <li>
+                                        <a href="{{ route('options_control_panel') }}"
+                                            class="{{ request()->routeIs('options_control_panel') ? 'active' : '' }}">
+                                            <span>Options Panel</span>
+                                        </a>
+                                    </li>
 
-                                        @elseif(session('recruiter_id'))
-                                            <a href="" title="Profile" class="position-relative d-inline-block">
-                                                <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                                    alt="Recruiter Logo" class="rounded-circle "
-                                                    style="width: 45px; height: 45px; object-fit: cover;">
-                                                @php
-                                                    $recruiter = \App\Models\RecruiterDetail::find(session('recruiter_id'));
+                                    <li>
+                                        <a href="{{ route('attendance_sheets') }}"
+                                            class="{{ request()->routeIs('attendance_sheets') ? 'active' : '' }}">
+                                            <span>Attendance Panel</span>
+                                        </a>
+                                    </li>
+                                    <!-- <li>
+                                            a href="{{ route('task_management_panel') }}"
+                                              class="{{ request()->routeIs('task_management_panel') ? 'active' : '' }}">
+                                                <span>Task Panel</span>
+                                                    </a>
+                                            </li> -->
+                                    <li>
+                                        <a href="{{ route('leaves_management_panel') }}"
+                                            class="{{ request()->routeIs('leaves_management_panel') || request()->routeIs('leaves_reponse_panel') ? 'active' : '' }}">
+                                            <span>Leaves Panel</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
 
-                                                    $isActive = $recruiter &&
-                                                        $recruiter->last_seen &&
-                                                        $recruiter->last_seen->greaterThan(now()->subMinutes(30));
-                                                @endphp
+                        @if (session('recruiter_id'))
+                            <li>
+                                <a href="{{ route('interview_records') }}"
+                                    class="{{ request()->routeIs('interview_records') ? 'active' : '' }}">
+                                    <i class="bi bi-card-list"></i>
+                                    <span>Interview Shedule</span>
+                                </a>
+                            </li>
+                        @endif
 
-                                                @if ($isActive)
-                                                    <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
-                                                        style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i>
-                                                @else
-                                                    <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
-                                                        style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i>
+                        @if (session('recruiter_id') || session('employee_id'))
+                            <li>
+                                <a href="{{ route('attendance_sheets') }}"
+                                    class="{{ request()->routeIs('attendance_sheets') ? 'active' : '' }}">
+                                    <i class="bi bi-clipboard-data"></i>
+                                    <span>My Attendance</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('employee.leaves') }}"
+                                    class="{{ request()->routeIs('employee.leaves') ? 'active' : '' }}">
+                                    <i class="bi bi-bar-chart"></i>
+                                    <span>Apply Leaves</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (session('admin_id') || session('recruiter_id'))
+                            <li>
+                                <a href="{{ route('employee') }}"
+                                    class="{{ request()->routeIs('employee') ? 'active' : '' }}">
+                                    <i class="bi bi-person-vcard"></i>
+                                    <span>Employees</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('applications') }}"
+                                    class="{{ request()->routeIs('applications') ? 'active' : '' }}">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                    <span>Applications</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('resume_checker') }}"
+                                    class="{{ request()->routeIs('resume_checker') ? 'active' : '' }}">
+                                    <i class="bi bi-bar-chart"></i>
+                                    <span>Resume Checker</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (session('employee_id'))
+                            <li>
+                                <a href="{{ route('employee_panel') }}"
+                                    class="{{ request()->routeIs('employee_panel') ? 'active' : '' }}">
+                                    <i class="bi bi-bar-chart"></i>
+                                    <span>Employee Panel</span>
+                                </a>
+                            </li>
+
+                        @endif
+                        <li>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                                <i class="bi bi-gear"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-10 m-0 p-0">
+                <div class="col-12 m-0 p-0 sticky-top">
+                    <div class="navbar">
+                        <div class="profile d-flex align-items-center">
+                            <div class="d-md-none d-flex align-items-center">
+                                <button class="menu-toggle" id="menuToggle">
+                                    <i class="bi bi-list"></i>
+                                </button>
+                            </div>
+
+                            <div class="d-flex align-items-center ms-auto">
+                                <span>
+                                    Welcome,
+                                    <i>{{ session('admin_username') ?: session('recruiter_name') ?: session('employee_name') }}</i>
+                                </span>
+
+                                <div class="ms-2">
+                                    @if (session('admin_id'))
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile"
+                                            class="position-relative d-inline-block">
+                                            <img src="{{ asset('storage/' . session('admin_logo')) }}" alt="Admin Logo"
+                                                class="rounded-circle p-1"
+                                                style="width: 45px; height: 45px; object-fit: cover;">
+                                        </a>
+
+                                    @elseif(session('recruiter_id'))
+                                        <a href="" title="Profile" class="position-relative d-inline-block">
+                                            <img src="https://tse4.mm.bing.net/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                                alt="Recruiter Logo" class="rounded-circle "
+                                                style="width: 45px; height: 45px; object-fit: cover;">
+                                            @php
+                                                $recruiter = \App\Models\RecruiterDetail::find(session('recruiter_id'));
+
+                                                $isActive = $recruiter &&
+                                                    $recruiter->last_seen &&
+                                                    $recruiter->last_seen->greaterThan(now()->subMinutes(2));
+                                            @endphp
+
+                                            @if ($isActive)
+                                                <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i>
+                                            @else
+                                                <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i>
+                                            @endif
+                                        </a>
+
+                                    @elseif(session('employee_id'))
+                                        <a href="" title="Profile" class="position-relative d-inline-block">
+                                            @foreach ($emp as $emp)
+                                                @if ($emp->full_name == session('employee_name'))
+                                                    <img src="{{asset('storage/' . $emp->passport_photo)}}" alt="Employee Logo"
+                                                        class="rounded-circle"
+                                                        style="width: 45px; height: 45px; object-fit: cover;">
                                                 @endif
-                                            </a>
+                                            @endforeach
 
-                                        @elseif(session('employee_id'))
-                                            <a href="" title="Profile" class="position-relative d-inline-block">
-                                                @foreach ($emp as $emp)
-                                                    @if ($emp->full_name == session('employee_name'))
-                                                        <img src="{{asset('storage/' . $emp->passport_photo)}}" alt="Employee Logo"
-                                                            class="rounded-circle"
-                                                            style="width: 45px; height: 45px; object-fit: cover;">
-                                                    @endif
-                                                @endforeach
+                                            @php
+                                                $emp = \App\Models\Employee::find(session('employee_id'));
 
-                                                @php
-                                                    $emp = \App\Models\Employee::find(session('employee_id'));
+                                                $isActive = $emp &&
+                                                    $emp->last_seen &&
+                                                    $emp->last_seen->greaterThan(now()->subMinutes(30));
+                                            @endphp
 
-                                                    $isActive = $emp &&
-                                                        $emp->last_seen &&
-                                                        $emp->last_seen->greaterThan(now()->subMinutes(30));
-                                                @endphp
-
-                                                @if ($isActive)
-                                                    <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
-                                                        style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i>
-                                                @else
-                                                    <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
-                                                        style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i>
-                                                @endif
-                                            </a>
-                                        @endif
-                                    </div>
+                                            @if ($isActive)
+                                                <i class="bi bi-check-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(16, 185, 16);" title="Active"></i>
+                                            @else
+                                                <i class="bi bi-dash-circle-fill position-absolute top-0 end-0"
+                                                    style="font-size: 14px; color: rgb(238, 112, 112);" title="Inactive"></i>
+                                            @endif
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-      
+
                 <div class="col-12 m-0 p-0">
                     @if (session('success'))
                         <div id="successAlert" class="alert alert-success position-fixed top-1 end-0 z-3 ">

@@ -48,10 +48,14 @@
                 <th>Name</th>
                 <th>Role/Position</th>
                 <th>Email</th>
+                @if (session('admin_id'))
                 <th>Password</th>
+                @endif
                 <th>Last Seen</th>
                 <th>Status</th>
-                <th>Action</th>
+                @if (session('admin_id'))
+                    <th>Action</th>
+                @endif
             </tr>
             <div class="candidate-details">
                 @if (session('recruiter_id'))
@@ -63,18 +67,7 @@
                                         style="text-decoration: dotted;">{{ $emp->name }}</a></td>
                                 <td>{{  $emp->designation }}</td>
                                 <td>{{  $emp->email }}</td>
-                                <td>
-                                    <div class="input-group">
-                                        <input type="password" id="password-{{ $emp->id }}" value="{{ $emp->password }}"
-                                            class="form-control" readonly>
-
-                                        <button type="button" class="btn btn-outline-secondary"
-                                            onclick="togglePassword({{ $emp->id }}, this)">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-
-                                    </div>
-                                </td>
+                                
                                 <td>{{ $emp->last_seen }}</td>
                                 <td>
                                     @if ($emp->status == 'Active')
@@ -82,13 +75,6 @@
                                     @elseif($emp->status == 'Deactive')
                                         <span class="status bg-danger">{{  $emp->status }}</span>
                                     @endif
-                                </td>
-                                <td>
-                                    <a href="{{'/employee/edit/panel/' . $emp->id}}" class="btn btn-primary"><i
-                                            class="bi bi-pencil"></i></a>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                        data-delete-url="{{ route('employee.delete', $emp->id) }}" class="btn btn-danger delete-btn"><i
-                                            class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                         @endif

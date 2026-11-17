@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InterviewCandExport;
+use App\Models\Attendance;
 
 class CandidateController extends Controller
 {
@@ -120,4 +121,10 @@ class CandidateController extends Controller
         );
     }
 
+    public function attendance_panel()
+    {
+        $emp = Candidate::all();
+        $attendance = Attendance::latest()->get();
+        return view('attendance_panel', compact("attendance", 'emp'));
+    }
 }

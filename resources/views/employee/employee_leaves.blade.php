@@ -53,7 +53,7 @@
     <div class="table-box">
         <table>
             <tr class="table-heading text-dark">
-                <th>Sr No.</th>
+                <!-- <th>Sr No.</th> -->
                 <th>Leave Type</th>
                 <th>Days</th>
                 <th>Date</th>
@@ -65,9 +65,9 @@
 
             <div>
                 @foreach ($leave as $index => $leav)
-                    @if ($leav->employee_id == session('employee_id'))
+                    @if ($leav->name == session('employee_name'))
                         <tr>
-                            <td>{{ $index + 1 }}</td>
+                            <!-- <td>{{ $index + 1 }}</td> -->
                             <td>{{ $leav->leave_type }}</td>
 
                             @if ($leav->leave_type == 'Half Day')
@@ -129,6 +129,69 @@
                             </td>
                         </tr>
 
+                    @elseif (($leav->name == session('recruiter_name')))
+                        <tr>
+                            <!-- <td>{{ $index + 1 }}</td> -->
+                            <td>{{ $leav->leave_type }}</td>
+
+                            @if ($leav->leave_type == 'Half Day')
+                                <td>-</td>
+                                <td>{{ $leav->half_day_date->format('d-m-y') }}</td>
+                                <td>{{ $leav->time }}</td>
+                            @elseif ($leav->leave_type == 'Paid Leave')
+                                <td>-</td>
+                                <td>{{ $leav->paid_day_date->format('d-m-y') }}</td>
+                                <td>-</td>
+                            @elseif ($leav->leave_type == 'Full Day')
+                                <td>-</td>
+                                <td>{{ $leav->full_day_date->format('d-m-y') }}</td>
+                                <td>-</td>
+                            @elseif ($leav->leave_type == 'Multiple Days')
+                                <td>{{ $leav->days }}</td>
+                                <td>
+                                    <div class="row m-0 p-0">
+                                        <div class="col-12 m-0 p-0">
+                                            <span class="text-primary">Start Date</span><br>{{ $leav->start_date->format('d-m-y') }}
+                                        </div> <span class="justify-content-center">to</span>
+                                        <div class="col-12 m-0 p-0">
+                                            <span class="text-warning">End Date</span><br>{{ $leav->end_date->format('d-m-y') }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>-</td>
+                            @endif
+
+                            <td>
+                                <div
+                                    style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                                            border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                    {{ $leav->reason }}
+                                </div>
+                            </td>
+                            <td>
+                                @if ($leav->response)
+                                    <div
+                                        style="width: 300px; max-height: 100px; overflow-y: auto; overflow-x: hidden; border: 1px solid white;
+                                                                border-radius: 5px; padding: 8px; font-size: 14px; white-space: normal; word-wrap: break-word;">
+                                        {{ $leav->response }}
+                                    </div>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td>
+                                @if ($leav->status != '')
+                                    @if ($leav->status == 'Aprove')
+                                        <span class="status bg-success">{{ $leav->status }}</span>
+
+                                    @elseif ($leav->status == 'Reject')
+                                        <span class="status bg-danger">{{ $leav->status }}</span>
+                                    @endif
+                                @else
+                                    <span class="status bg-warning">Inprogress</span>
+                                @endif
+                            </td>
+                        </tr>
                     @endif
                 @endforeach
             </div>

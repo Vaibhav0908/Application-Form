@@ -34,6 +34,13 @@ class AdminAuthController extends Controller
                 'admin_logo' => $admin->admin_logo,
             ]);
 
+            app(\App\Services\AttendanceService::class)
+                ->recordLogin(
+                    $admin->id,
+                    'admin',
+                    $admin->username
+                );
+
             return redirect()->route('admin.dashboard');
         }
 
@@ -44,6 +51,13 @@ class AdminAuthController extends Controller
 
     public function logout(Request $request)
     {
+        $adminId = session('admin_id');
+
+        if ($adminId && $request->routeIs('admin.logout')) {
+            app(\App\Services\AttendanceService::class)
+                ->recordLogout($adminId, 'admin');
+        }
+
         $request->session()->forget([
             'admin_id',
             'admin_username',

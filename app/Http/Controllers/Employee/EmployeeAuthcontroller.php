@@ -39,6 +39,13 @@ class EmployeeAuthcontroller extends Controller
                 'employee_email' => $emp->email,
             ]);
 
+            app(\App\Services\AttendanceService::class)
+                ->recordLogin(
+                    $emp->id,
+                    'employee',
+                    $emp->name
+                );
+
             return redirect()->route('employee.dashboard');
         }
 
@@ -51,6 +58,13 @@ class EmployeeAuthcontroller extends Controller
 
     public function logout(Request $request)
     {
+        $empId = session('employee_id');
+
+        if ($empId && $request->routeIs('employee.logout')) {
+            app(\App\Services\AttendanceService::class)
+                ->recordLogout($empId, 'employee');
+        }
+
         $request->session()->forget([
             'employee_id',
             'employee_name',

@@ -34,7 +34,7 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
 Route::post('/admin/login', [AdminAuthController::class, 'login'])
     ->name('admin.login.submit');
 
-// recruiter login logout
+// recruiter login
 Route::get('/recruiters/login', [RecruiterAuthController::class, 'showLogin'])
     ->name('recruiter.login');
 
@@ -51,7 +51,7 @@ Route::post('/export_selected_records', [CandidateController::class, 'exportSele
     ->name('export_selected_records');
 
 
-// employee login logout
+// employee login
 Route::get('/employee/login', [EmployeeAuthcontroller::class, 'showLogin'])
     ->name('employee.login');
 
@@ -61,6 +61,9 @@ Route::post('/employee/login', [EmployeeAuthcontroller::class, 'login'])
 Route::middleware('admin.auth')->group(function () {
     Route::get('/Applications', [AdminController::class, 'applications'])
         ->name('applications');
+
+    Route::get('/attendance_panel', [CandidateController::class, 'attendance_panel'])
+        ->name('attendance_sheets');
 
     Route::get('/resume_checker', [ResumeController::class, 'resume_checker'])
         ->name('resume_checker');
@@ -140,7 +143,7 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/employee/dashboard', [EmployeeContoller::class, 'dashboard'])
         ->name('employee.dashboard');
 
-    Route::get('/employee/leaves/', [EmployeeContoller::class, 'showleavespanel'])
+    Route::get('Leaves_Panel/', [EmployeeContoller::class, 'showleavespanel'])
         ->name('employee.leaves');
 
     Route::post('/employee/leaves_form/', [EmployeeContoller::class, 'applyleave'])

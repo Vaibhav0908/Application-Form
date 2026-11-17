@@ -12,6 +12,7 @@ use App\Models\Office_useDetail;
 use App\Models\Platform;
 use App\Models\RecruiterDetail;
 use App\Models\Employee;
+use App\Models\Attendance;
 use App\Models\Leaves;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,6 +36,8 @@ class AdminController extends Controller
 
         $statuses = Interview_status::where('status', 'Active')->get();
 
+        $attendance = Attendance::latest()->get();
+
         if (session('admin_username')) {
             $statusCounts = Office_useDetail::selectRaw(
                 'interview_status, COUNT(DISTINCT candidate_id) as total'
@@ -53,7 +56,8 @@ class AdminController extends Controller
                 'total_office_status',
                 'total_adm_pendings',
                 'statuses',
-                'statusCounts'
+                'statusCounts',
+                'attendance'
             )
         );
     }

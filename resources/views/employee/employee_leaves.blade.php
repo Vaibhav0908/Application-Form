@@ -52,7 +52,7 @@
 
     <div class="table-box">
         <table>
-            <tr class="table-heading text-dark">
+            <tr class="table-heading text-dark text-center">
                 <!-- <th>Sr No.</th> -->
                 <th>Leave Type</th>
                 <th>Days</th>
@@ -66,7 +66,7 @@
             <div>
                 @foreach ($leave as $index => $leav)
                     @if ($leav->name == session('employee_name'))
-                        <tr>
+                        <tr class="text-center">
                             <!-- <td>{{ $index + 1 }}</td> -->
                             <td>{{ $leav->leave_type }}</td>
 
@@ -130,7 +130,7 @@
                         </tr>
 
                     @elseif (($leav->name == session('recruiter_name')))
-                        <tr>
+                        <tr class="text-center">
                             <!-- <td>{{ $index + 1 }}</td> -->
                             <td>{{ $leav->leave_type }}</td>
 

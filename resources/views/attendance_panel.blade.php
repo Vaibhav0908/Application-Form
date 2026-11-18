@@ -27,7 +27,7 @@
         }
     </style>
 
-    <h2 class="text-primary mt-5 mx-5">Attendance</h2>
+    <h2 class="text-primary mt-5 mx-5">Attendance Panel</h2>
     <div class="table-box">
         <table>
             <tr class="text-dark text-center">
@@ -39,37 +39,54 @@
                 <th>Status</th>
             </tr>
             @foreach ($attendance as $index => $atte)
-                @if ($atte->name == session('recruiter_name') || $atte->name == session('employee_name'))
-                    <tr class="text-center">
-                        <td>{{ $atte->date->format('d/m/Y') }}</td>
-                        <td>{{ $atte->name }}</td>
-                        <td>
-                            {{ \Carbon\Carbon::parse($atte->login_time)->format('h:i:s A') }}
-                        </td>
-                        <td>
-                            {{ $atte->logout_time ? \Carbon\Carbon::parse($atte->logout_time)->format('h:i:s A') : '--' }}
-                        </td>
-                        <td>{{ $atte->overtime }}</td>
-                        <td>
-                            <span class="bg-success status">{{ ucfirst($atte->status) }}</span>
-                        </td>
-                    </tr>
-                @elseif ($atte->name == session('admin_username'))
-                    @if ($atte->name == session('admin_username'))
+                @if (session('recruiter_id') || session('employee_id'))
 
-                    @else
+                    @if ($atte->name == session('recruiter_name') || $atte->name == session('employee_name'))
                         <tr class="text-center">
                             <td>{{ $atte->date->format('d/m/Y') }}</td>
                             <td>{{ $atte->name }}</td>
                             <td>
-                                {{ \Carbon\Carbon::parse($atte->login_time)->format('h:i:s A') }}
+                                {{ $atte->login_time ? \Carbon\Carbon::parse($atte->login_time)->format('h:i:s A') : '--' }}
                             </td>
                             <td>
                                 {{ $atte->logout_time ? \Carbon\Carbon::parse($atte->logout_time)->format('h:i:s A') : '--' }}
                             </td>
                             <td>{{ $atte->overtime }}</td>
                             <td>
-                                {{ ucfirst($atte->status) }}
+                                @if ($atte->status == 'Half Day')
+                                    <span class="bg-warning status">{{ ucfirst($atte->status) }}</span>
+                                @elseif($atte->status == 'Present')
+                                    <span class="bg-success status">{{ ucfirst($atte->status) }}</span>
+                                @elseif($atte->status == 'Absent')
+                                    <span class="bg-danger status">{{ ucfirst($atte->status) }}</span>
+                                @endif
+                            </td>
+                        </tr>
+
+                    @endif
+
+                @elseif(session('admin_id'))
+                    @if ($atte->name == session('admin_username'))
+                        @continue
+                    @else
+                        <tr class="text-center">
+                            <td>{{ $atte->date->format('d/m/Y') }}</td>
+                            <td>{{ $atte->name }}</td>
+                            <td>
+                                {{ $atte->login_time ? \Carbon\Carbon::parse($atte->login_time)->format('h:i:s A') : '--' }}
+                            </td>
+                            <td>
+                                {{ $atte->logout_time ? \Carbon\Carbon::parse($atte->logout_time)->format('h:i:s A') : '--' }}
+                            </td>
+                            <td>{{ $atte->overtime }}</td>
+                            <td>
+                                @if ($atte->status == 'Half Day')
+                                    <span class="bg-warning status">{{ ucfirst($atte->status) }}</span>
+                                @elseif($atte->status == 'Present')
+                                    <span class="bg-success status">{{ ucfirst($atte->status) }}</span>
+                                @elseif($atte->status == 'Absent')
+                                    <span class="bg-danger status">{{ ucfirst($atte->status) }}</span>
+                                @endif
                             </td>
                         </tr>
                     @endif

@@ -141,7 +141,7 @@
                             <li>
                                 <a href="{{ route('employee.leaves') }}"
                                     class="{{ request()->routeIs('employee.leaves') ? 'active' : '' }}">
-                                    <i class="bi bi-bar-chart"></i>
+                                    <i class="bi bi-ui-checks"></i>
                                     <span>Apply Leaves</span>
                                 </a>
                             </li>
@@ -235,7 +235,7 @@
 
                                                 $isActive = $recruiter &&
                                                     $recruiter->last_seen &&
-                                                    $recruiter->last_seen->greaterThan(now()->subMinutes(2));
+                                                    $recruiter->last_seen->greaterThan(now()->subMinutes(60));
                                             @endphp
 
                                             @if ($isActive)
@@ -262,7 +262,7 @@
 
                                                 $isActive = $emp &&
                                                     $emp->last_seen &&
-                                                    $emp->last_seen->greaterThan(now()->subMinutes(30));
+                                                    $emp->last_seen->greaterThan(now()->subMinutes(60));
                                             @endphp
 
                                             @if ($isActive)

@@ -23,7 +23,7 @@
                     </p>
                 </div>
 
-                <form action="#" method="POST">
+                <form action="{{ route('employee.login.submit') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label fw-semibold">

@@ -27,6 +27,23 @@ Route::get('/', function () {
 Route::post('/Applicant_details', [CandidateController::class, 'store'])
     ->name('candidate.store');
 
+
+Route::middleware('office.network')->group(function () {
+    // recruiter login
+    Route::get('/recruiters/login', [RecruiterAuthController::class, 'showLogin'])
+        ->name('recruiter.login');
+
+    Route::post('/recruiters/login', [RecruiterAuthController::class, 'login'])
+        ->name('recruiter.login.submit');
+
+    // employee login
+    Route::get('/employee/login', [EmployeeAuthcontroller::class, 'showLogin'])
+        ->name('employee.login');
+
+    Route::post('/employee/login', [EmployeeAuthcontroller::class, 'login'])
+        ->name('employee.login.submit');
+});
+
 // admin login logout
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
     ->name('admin.login');
@@ -34,12 +51,6 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
 Route::post('/admin/login', [AdminAuthController::class, 'login'])
     ->name('admin.login.submit');
 
-// recruiter login
-Route::get('/recruiters/login', [RecruiterAuthController::class, 'showLogin'])
-    ->name('recruiter.login');
-
-Route::post('/recruiters/login', [RecruiterAuthController::class, 'login'])
-    ->name('recruiter.login.submit');
 
 Route::get('/interview_records', [CandidateController::class, 'interview_shedule_panel'])
     ->name('interview_records');
@@ -50,13 +61,6 @@ Route::get('/export_all_records', [CandidateController::class, 'exportAll'])
 Route::post('/export_selected_records', [CandidateController::class, 'exportSelected'])
     ->name('export_selected_records');
 
-
-// employee login
-Route::get('/employee/login', [EmployeeAuthcontroller::class, 'showLogin'])
-    ->name('employee.login');
-
-Route::post('/employee/login', [EmployeeAuthcontroller::class, 'login'])
-    ->name('employee.login');
 
 Route::middleware('admin.auth')->group(function () {
     Route::get('/Applications', [AdminController::class, 'applications'])

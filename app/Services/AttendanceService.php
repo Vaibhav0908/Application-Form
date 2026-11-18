@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Attendance;
+use Carbon\Carbon;
 
 class AttendanceService
 {
@@ -28,6 +29,9 @@ class AttendanceService
 
     public function recordLogout($userId, $userType)
     {
+        $officeStart = Carbon::parse('09:00:00');
+        $officeEnd = Carbon::parse('18:00:00');
+
         $attendance = Attendance::where('user_id', $userId)
             ->where('user_type', $userType)
             ->whereDate('date', today())
@@ -40,19 +44,18 @@ class AttendanceService
             $attendance->logout_time = $logoutTime;
 
             // Calculate attendance status
-            if (
-                empty($attendance->login_time) &&
-                empty($logoutTime)
-            ) {
+            if (empty($attendance->login_time) && empty($logoutTime)) {
                 $attendance->status = 'Absent';
-            }
-            elseif (
-                $attendance->login_time > '09:30:00' ||
-                $logoutTime < '17:50:00'
-            ) {
+            } elseif ($attendance->login_time > '09:30:00' || $logoutTime < '17:50:00') {
                 $attendance->status = 'Half Day';
-            }
-            else {
+            } elseif ($attendance->status == 'Present' || $attendance->status == 'Half Day') {
+                $attendance->overtime = 0;
+                if ($attendance->login_time->greaterThan('09:00:00')) {
+                    $attendance->overtime = $officeStart->diffInMinutes($attendance->login_time);
+                } elseif ($attendance->login_time->lessThan($officeStart)) {
+                    $attendance->overtime = $attendance->login_time->diffInMinutes($officeStart);
+                }
+            } else {
                 $attendance->status = 'Present';
             }
 
